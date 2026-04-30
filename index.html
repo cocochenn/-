@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My GitHub Pages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --accent: #2d6a4f;
+      --accent-light: #e8f5ee;
+      --border: #e4e2dc;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(248, 247, 244, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    nav .inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav ul a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+    .hero-badge::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.65rem 1.4rem;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+    }
+    .btn-primary:hover { background: #235c41; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--text-muted); color: var(--text); }
+
+    /* HERO VISUAL */
+    .hero-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #f2f0eb;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f56; }
+    .dot-y { background: #ffbd2e; }
+    .dot-g { background: #27c93f; }
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 2;
+      color: #3d3d3d;
+    }
+    .t-comment { color: #9b9b9b; }
+    .t-cmd { color: var(--accent); font-weight: bold; }
+    .t-string { color: #c0612b; }
+    .t-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--accent);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* FEATURES */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      max-width: 520px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+    .card-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    /* STATS */
+    .stats {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .stat {
+      background: var(--surface);
+      padding: 2rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: var(--text);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 300;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 4rem; }
+      .hero-visual { display: none; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="#" class="logo">YourName</a>
+      <ul>
+        <li><a href="#features">功能</a></li>
+        <li><a href="#about">關於</a></li>
+        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="hero-badge">GitHub Pages 示範</div>
+      <h1>靜態網站<br/>輕鬆部署</h1>
+      <p>這是一個使用純 HTML + CSS 建立的靜態頁面，<br/>透過 GitHub Pages 免費托管，零後端需求。</p>
+      <div class="btn-group">
+        <a href="https://github.com" target="_blank" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+          查看原始碼
+        </a>
+        <a href="#features" class="btn btn-ghost">了解更多 ↓</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="terminal-body">
+        <span class="t-comment"># 部署到 GitHub Pages</span><br/>
+        $ <span class="t-cmd">git init</span><br/>
+        $ <span class="t-cmd">git add</span> <span class="t-string">index.html</span><br/>
+        $ <span class="t-cmd">git commit</span> -m <span class="t-string">"first commit"</span><br/>
+        $ <span class="t-cmd">git push</span> origin main<br/>
+        <br/>
+        <span class="t-comment"># 設定 Pages → main branch</span><br/>
+        ✓ 網站已上線！<span class="t-cursor"></span>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+
+  <section class="section" id="features">
+    <div class="section-label">為什麼選擇</div>
+    <h2>GitHub Pages</h2>
+    <p class="section-sub">免費、快速、可靠。直接從你的 repository 部署，每次 push 自動更新。</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>零成本托管</h3>
+        <p>公開 repository 完全免費，無需信用卡，沒有隱藏費用。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>自動部署</h3>
+        <p>每次 git push 後，GitHub 自動重新建置並更新你的網站。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>自訂網域</h3>
+        <p>支援綁定自己的 .com / .tw 網域，並自動提供 HTTPS 憑證。</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="max-width: 960px; margin: 0 auto; padding: 0 2rem 4rem;">
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">靜態 · 無需後端</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">&#60; 1min</span>
+        <span class="stat-label">部署時間</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">免費</span>
+        <span class="stat-label">公開 repo 完全免費</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Built with HTML + CSS &nbsp;·&nbsp; Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+  </footer>
+
+</body>
+</html>
