@@ -34,50 +34,72 @@
   .masthead{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;}
   .brandline{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);}
   .stamp{font-family:var(--num);font-size:.9rem;letter-spacing:.06em;color:var(--amber);}
-  .lede{margin:20px 0 0;max-width:46em;color:#ddd9e4;font-size:.95rem;}
+  .lede{margin:18px 0 0;max-width:48em;color:#ddd9e4;font-size:.95rem;}
   .lede b{font-weight:500;color:var(--paper);}
 
-  /* persona switch */
-  .switch{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center;}
+  .switch{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;align-items:center;}
   .switch span.lbl{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-right:4px;}
 
-  .deck{margin-top:22px;display:grid;grid-template-columns:minmax(0,1fr) 256px;gap:26px;align-items:start;}
-  @media (max-width:860px){.deck{grid-template-columns:1fr;}}
+  .deck{margin-top:20px;display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:26px;align-items:start;}
+  @media (max-width:880px){.deck{grid-template-columns:1fr;}}
 
   .stage{position:relative;border:1px solid var(--line);border-radius:6px;
     background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
-    padding:28px 26px 24px;min-height:470px;display:flex;flex-direction:column;overflow:hidden;}
+    padding:26px 24px 22px;min-height:490px;display:flex;flex-direction:column;overflow:hidden;}
   .stage::before{content:'';position:absolute;inset:0;pointer-events:none;
     background:radial-gradient(70% 55% at 86% 6%,rgba(245,165,36,.15),transparent 70%);}
-  .card{position:relative;flex:1;display:flex;flex-direction:column;gap:16px;animation:rise .45s ease both;}
-  @keyframes rise{from{opacity:.3;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .card{position:relative;flex:1;display:flex;flex-direction:column;gap:15px;animation:rise .4s ease both;}
+  @keyframes rise{from{opacity:.35;transform:translateY(7px);}to{opacity:1;transform:none;}}
   @media (prefers-reduced-motion:reduce){.card{animation:none;}}
 
-  .tagrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-  .eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);}
-  .flag{font-size:.68rem;letter-spacing:.1em;padding:2px 9px;border-radius:100px;border:1px solid currentColor;}
+  .tagrow{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+  .eyebrow{font-size:.71rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);}
+  .flag{font-size:.67rem;letter-spacing:.1em;padding:2px 9px;border-radius:100px;border:1px solid currentColor;white-space:nowrap;}
   .flag.keep{color:var(--dim);}
-  .flag.add{color:var(--mint);}
-  .card h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.4rem,4.2vw,2rem);line-height:1.4;text-wrap:balance;margin:0;}
-  .card p{margin:0;color:#ddd9e4;max-width:34em;font-size:.98rem;}
+  .flag.l1{color:var(--amber);}
+  .flag.l2{color:var(--mint);}
+  .flag.l3{color:var(--rose);}
+  .card h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.34rem,4vw,1.92rem);line-height:1.4;text-wrap:balance;margin:0;}
+  .card p{margin:0;color:#ddd9e4;max-width:34em;font-size:.97rem;}
   .card p b{font-weight:500;color:var(--paper);}
-  .fine{font-size:.82rem;color:var(--dim);}
-  .bignum{font-family:var(--num);font-weight:700;font-size:clamp(2.8rem,12vw,5rem);line-height:.92;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
-  .bignum small{font-family:var(--sans);font-size:.95rem;font-weight:400;letter-spacing:.08em;margin-left:10px;color:var(--dim);}
-  .facts{display:flex;flex-wrap:wrap;gap:9px;margin-top:auto;}
-  .fact{border:1px solid var(--line);border-radius:100px;padding:5px 14px;font-size:.83rem;color:#e6e2ec;background:var(--veil);}
+  .fine{font-size:.81rem;color:var(--dim);}
+  .bignum{font-family:var(--num);font-weight:700;font-size:clamp(2.6rem,11vw,4.6rem);line-height:.92;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .bignum small{font-family:var(--sans);font-size:.93rem;font-weight:400;letter-spacing:.08em;margin-left:9px;color:var(--dim);}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;}
+  .fact{border:1px solid var(--line);border-radius:100px;padding:5px 13px;font-size:.82rem;color:#e6e2ec;background:var(--veil);}
   .fact b{font-family:var(--num);font-weight:700;}
+
+  /* guess widget */
+  .guess{display:flex;flex-direction:column;gap:9px;max-width:520px;}
+  .guess-val{font-family:var(--num);font-weight:700;font-size:2.1rem;font-variant-numeric:tabular-nums;color:var(--amber);}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer;}
+  input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:linear-gradient(90deg,var(--violet),var(--rose),var(--amber));}
+  input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:linear-gradient(90deg,#6d63ff,#e8557f,#f5a524);}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--paper);border:0;margin-top:-7px;}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#f2efe9;border:0;}
+  input[type=range]:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
+  .guess-scale{display:flex;justify-content:space-between;font-size:.72rem;color:var(--dim);font-variant-numeric:tabular-nums;}
+  .verdict{border-left:2px solid var(--amber);padding-left:13px;}
+  .verdict strong{display:block;font-family:var(--serif);font-size:1.2rem;font-weight:600;}
+
+  /* histogram */
+  .hist{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:112px;max-width:540px;}
+  .hist i{display:block;background:#3c4166;border-radius:2px 2px 0 0;position:relative;}
+  .hist i.me{background:linear-gradient(180deg,var(--amber),var(--rose));}
+  .hist i.me::after{content:'你';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.74rem;color:var(--paper);font-family:var(--sans);}
+  .hist i.guess{background:#5a5f8c;outline:1px dashed rgba(255,255,255,.5);}
+  .hist-scale{display:flex;justify-content:space-between;max-width:540px;font-size:.71rem;color:var(--dim);margin-top:5px;font-variant-numeric:tabular-nums;}
 
   .ruler{margin:2px 0 4px;}
   .ruler-track{position:relative;height:10px;border-radius:100px;background:linear-gradient(90deg,#2a2f4d,#6d63ff 62%,#e8557f 88%,#f5a524);}
   .ruler-me{position:absolute;top:-9px;width:2px;height:28px;background:var(--paper);}
-  .ruler-me span{position:absolute;top:-25px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;letter-spacing:.05em;}
+  .ruler-me span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.73rem;}
   .ruler-gate{position:absolute;top:-4px;width:2px;height:18px;background:var(--mint);}
-  .ruler-gate span{position:absolute;top:18px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.7rem;color:var(--mint);}
-  .ruler-scale{display:flex;justify-content:space-between;margin-top:30px;font-size:.72rem;color:var(--dim);font-variant-numeric:tabular-nums;}
+  .ruler-gate span{position:absolute;top:18px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.69rem;color:var(--mint);}
+  .ruler-scale{display:flex;justify-content:space-between;margin-top:30px;font-size:.71rem;color:var(--dim);}
 
-  .bars{display:flex;flex-direction:column;gap:10px;}
-  .bar-row{display:grid;grid-template-columns:118px minmax(0,1fr) 86px;gap:10px;align-items:center;font-size:.86rem;}
+  .bars{display:flex;flex-direction:column;gap:9px;max-width:540px;}
+  .bar-row{display:grid;grid-template-columns:120px minmax(0,1fr) 84px;gap:10px;align-items:center;font-size:.85rem;}
   .bar-row .who{color:var(--dim);}
   .bar-row.me .who{color:var(--paper);font-weight:500;}
   .bar-shell{height:13px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;}
@@ -85,78 +107,116 @@
   .bar-row.me .bar-fill{background:linear-gradient(90deg,var(--rose),var(--amber));}
   .bar-val{text-align:right;font-family:var(--num);font-weight:700;font-variant-numeric:tabular-nums;}
 
-  .mix{display:flex;height:16px;border-radius:3px;overflow:hidden;}
-  .mix i{display:block;}
-  .mix-key{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.83rem;color:#ddd9e4;}
-  .mix-key span{display:inline-flex;align-items:center;gap:7px;}
-  .dot{width:9px;height:9px;border-radius:2px;display:block;}
-
-  .clock{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;align-items:end;height:74px;max-width:520px;}
+  /* clock */
+  .clock{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;align-items:end;height:80px;max-width:520px;position:relative;}
   .clock i{display:block;background:var(--violet);border-radius:1px 1px 0 0;}
   .clock i.peak{background:var(--amber);}
+  .clock-ref{max-width:520px;height:1px;background:var(--mint);position:relative;margin-top:-1px;}
+  .clock-ref span{position:absolute;right:0;top:-19px;font-size:.7rem;color:var(--mint);}
   .clock-scale{display:flex;justify-content:space-between;max-width:520px;font-size:.7rem;color:var(--dim);margin-top:6px;font-variant-numeric:tabular-nums;}
 
-  .yoy{display:flex;flex-direction:column;gap:14px;}
-  .yoy-row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center;}
-  .yoy-row span{font-size:.84rem;color:var(--dim);}
+  /* collection grid (領域圖鑑) */
+  .dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;max-width:560px;}
+  .dex div{border:1px solid var(--line);border-radius:4px;padding:9px 10px;font-size:.82rem;background:rgba(255,255,255,.03);color:var(--dim);}
+  .dex div.own{border-color:rgba(245,165,36,.55);background:rgba(245,165,36,.12);color:var(--paper);}
+  .dex div.gap{border-style:dashed;border-color:rgba(61,220,151,.5);color:var(--mint);}
+  .dex b{display:block;font-family:var(--num);font-weight:700;font-size:1.05rem;}
+
+  /* course list */
+  .courses{display:flex;flex-direction:column;gap:8px;max-width:520px;}
+  .courses div{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:4px;padding:9px 12px;font-size:.87rem;background:rgba(255,255,255,.03);}
+  .courses span.meta{font-size:.78rem;color:var(--dim);display:block;}
+  .courses em{font-style:normal;font-size:.76rem;letter-spacing:.06em;color:var(--mint);border:1px solid currentColor;border-radius:100px;padding:2px 9px;white-space:nowrap;}
+
+  .yoy{display:flex;flex-direction:column;gap:12px;max-width:480px;}
+  .yoy-row{display:grid;grid-template-columns:70px minmax(0,1fr);gap:11px;align-items:center;}
+  .yoy-row span{font-size:.83rem;color:var(--dim);}
   .yoy-row.now span{color:var(--paper);}
-  .yoy-bar{height:26px;border-radius:3px;background:rgba(255,255,255,.08);position:relative;}
-  .yoy-bar i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:#4a4f78;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--num);font-weight:700;font-size:.85rem;}
+  .yoy-bar{height:25px;border-radius:3px;background:rgba(255,255,255,.08);position:relative;}
+  .yoy-bar i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:#4a4f78;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--num);font-weight:700;font-size:.84rem;}
   .yoy-row.now .yoy-bar i{background:linear-gradient(90deg,var(--violet),var(--mint));color:#0c1020;}
 
-  .tiers{display:grid;gap:9px;}
-  .tier{border-left:2px solid var(--line);padding:1px 0 1px 13px;}
-  .tier b{display:block;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:500;}
+  .tiers{display:grid;gap:8px;}
+  .tier{border-left:2px solid var(--line);padding:1px 0 1px 12px;}
+  .tier b{display:block;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:500;}
   .tier.mid b{color:var(--violet);}
   .tier.low b{color:var(--mint);}
-  .tier em{font-style:normal;color:#e6e2ec;font-size:.92rem;}
+  .tier em{font-style:normal;color:#e6e2ec;font-size:.91rem;}
 
-  .clip{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:14px;background:var(--veil);max-width:420px;}
-  .clip .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));flex:none;}
+  .clip{display:flex;gap:15px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:13px;background:var(--veil);max-width:420px;}
+  .clip .av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));flex:none;}
   .clip div strong{display:block;font-weight:500;}
-  .clip div span{font-size:.82rem;color:var(--dim);}
+  .clip div span{font-size:.81rem;color:var(--dim);}
 
-  .controls{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
-  button{font-family:inherit;font-size:.88rem;color:var(--paper);background:var(--veil);border:1px solid var(--line);border-radius:100px;padding:7px 17px;cursor:pointer;transition:background .18s,border-color .18s;}
+  /* pk card */
+  .pk{border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:rgba(255,255,255,.04);max-width:480px;display:flex;flex-direction:column;gap:10px;}
+  .pk-row{display:grid;grid-template-columns:1fr 78px 1fr;align-items:center;gap:8px;font-size:.86rem;}
+  .pk-row .l{text-align:right;font-family:var(--num);font-weight:700;font-size:1.05rem;}
+  .pk-row .r{font-family:var(--num);font-weight:700;font-size:1.05rem;color:var(--dim);}
+  .pk-row .k{text-align:center;font-size:.74rem;color:var(--dim);letter-spacing:.08em;}
+  .pk-row.win .l{color:var(--mint);}
+  .opts{display:flex;flex-wrap:wrap;gap:7px;}
+  .opt{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:#ddd9e4;border:1px solid var(--line);border-radius:100px;padding:4px 12px;cursor:pointer;}
+  .opt input{accent-color:var(--amber);}
+
+  /* wall */
+  .wall{display:flex;flex-direction:column;gap:7px;max-width:520px;}
+  .wall div{border-left:2px solid var(--violet);padding:2px 0 2px 11px;font-size:.87rem;}
+  .wall div span{display:block;font-size:.75rem;color:var(--dim);}
+  .wall div.mine{border-color:var(--amber);}
+  .compose{display:flex;gap:8px;max-width:520px;flex-wrap:wrap;}
+  .compose input[type=text]{flex:1;min-width:200px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:100px;padding:8px 15px;color:var(--paper);font-family:inherit;font-size:.88rem;}
+  .compose input[type=text]:focus-visible{outline:2px solid var(--amber);outline-offset:1px;}
+
+  .controls{display:flex;align-items:center;gap:11px;margin-top:18px;flex-wrap:wrap;}
+  button{font-family:inherit;font-size:.87rem;color:var(--paper);background:var(--veil);border:1px solid var(--line);border-radius:100px;padding:7px 16px;cursor:pointer;transition:background .18s,border-color .18s;}
   button:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);}
   button:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
   button[aria-pressed="true"]{background:rgba(245,165,36,.18);border-color:var(--amber);}
-  .counter{font-family:var(--num);font-weight:700;font-size:.88rem;color:var(--dim);font-variant-numeric:tabular-nums;}
+  button.primary{background:rgba(245,165,36,.2);border-color:rgba(245,165,36,.6);}
+  .counter{font-family:var(--num);font-weight:700;font-size:.87rem;color:var(--dim);font-variant-numeric:tabular-nums;}
   .pips{display:flex;gap:4px;margin-left:auto;}
-  .pips i{width:16px;height:3px;border-radius:2px;background:rgba(255,255,255,.18);display:block;}
+  .pips i{width:13px;height:3px;border-radius:2px;background:rgba(255,255,255,.18);display:block;}
   .pips i.on{background:var(--amber);}
 
-  .rail{border:1px solid var(--line);border-radius:6px;padding:18px 16px;background:rgba(255,255,255,.03);}
-  .rail h3{font-family:var(--serif);font-size:.98rem;font-weight:600;margin:0 0 4px;}
-  .rail .hint{font-size:.78rem;color:var(--dim);margin:0 0 12px;line-height:1.6;}
+  .rail{border:1px solid var(--line);border-radius:6px;padding:17px 15px;background:rgba(255,255,255,.03);}
+  .rail h3{font-family:var(--serif);font-size:.96rem;font-weight:600;margin:0 0 4px;}
+  .rail .hint{font-size:.77rem;color:var(--dim);margin:0 0 11px;line-height:1.6;}
   .rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;counter-reset:s;}
   .rail li{counter-increment:s;}
-  .rail li button{display:flex;gap:9px;width:100%;text-align:left;border:0;background:transparent;border-radius:4px;padding:6px 9px;font-size:.84rem;color:var(--dim);}
+  .rail li button{display:flex;gap:8px;width:100%;text-align:left;border:0;background:transparent;border-radius:4px;padding:5px 8px;font-size:.83rem;color:var(--dim);align-items:center;}
   .rail li button::before{content:counter(s);font-family:var(--num);font-weight:700;color:rgba(255,255,255,.35);}
   .rail li button:hover{background:var(--veil);color:var(--paper);}
   .rail li button[aria-current="true"]{background:rgba(245,165,36,.14);color:var(--paper);}
   .rail li button[aria-current="true"]::before{color:var(--amber);}
-  .rail .newmark{color:var(--mint);margin-left:auto;font-size:.72rem;}
+  .rail .lv{margin-left:auto;font-size:.7rem;font-family:var(--num);font-weight:700;}
+  .rail .lv.l1{color:var(--amber);}
+  .rail .lv.l2{color:var(--mint);}
+  .rail .lv.l3{color:var(--rose);}
+  .legend{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);font-size:.75rem;color:var(--dim);display:flex;flex-direction:column;gap:3px;}
+  .legend b{font-family:var(--num);}
+  .legend b.l1{color:var(--amber);}
+  .legend b.l2{color:var(--mint);}
+  .legend b.l3{color:var(--rose);}
 
-  .spec{margin-top:56px;border-top:1px solid var(--line);padding-top:32px;}
-  .spec h2{font-family:var(--serif);font-size:1.32rem;font-weight:600;margin:0 0 6px;}
-  .spec > p{color:var(--dim);font-size:.9rem;margin:0 0 20px;max-width:52em;}
+  .spec{margin-top:54px;border-top:1px solid var(--line);padding-top:30px;}
+  .spec h2{font-family:var(--serif);font-size:1.3rem;font-weight:600;margin:0 0 6px;}
+  .spec > p{color:var(--dim);font-size:.89rem;margin:0 0 18px;max-width:52em;}
   .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;}
-  table{border-collapse:collapse;width:100%;min-width:680px;font-size:.86rem;}
+  table{border-collapse:collapse;width:100%;min-width:720px;font-size:.85rem;}
   th,td{text-align:left;padding:10px 13px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;}
-  th{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:500;background:rgba(255,255,255,.04);}
+  th{font-size:.71rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:500;background:rgba(255,255,255,.04);}
   tbody tr:last-child td{border-bottom:0;}
   td b{font-weight:500;color:var(--paper);}
-  td.new{color:var(--mint);}
-  .guard{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+  td.l1{color:var(--amber);}td.l2{color:var(--mint);}td.l3{color:var(--rose);}
+  .guard{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:18px;}
   .guard div{border-top:2px solid var(--rose);padding-top:11px;}
-  .guard h4{margin:0 0 3px;font-size:.9rem;font-weight:500;}
-  .guard p{margin:0;font-size:.83rem;color:var(--dim);}
-  .asks{margin-top:30px;display:grid;gap:8px;}
-  .asks h2{margin-bottom:8px;}
-  .ask{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.88rem;color:#ddd9e4;}
+  .guard h4{margin:0 0 3px;font-size:.89rem;font-weight:500;}
+  .guard p{margin:0;font-size:.82rem;color:var(--dim);}
+  .asks{margin-top:28px;display:grid;gap:7px;}
+  .ask{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.87rem;color:#ddd9e4;}
   .ask i{font-family:var(--num);font-weight:700;color:var(--amber);font-style:normal;}
-  .foot{margin-top:40px;font-size:.79rem;color:var(--dim);border-top:1px solid var(--line);padding-top:14px;}
+  .foot{margin-top:36px;font-size:.78rem;color:var(--dim);border-top:1px solid var(--line);padding-top:14px;}
 </style>
 
 </head>
@@ -166,14 +226,14 @@
     <div class="brandline">PPA 2025 年度回顧 · 互動原型</div>
     <div class="stamp">假數據示意 · 手機直式為主</div>
   </header>
-  <p class="lede">沿用企劃書的三標籤稱號卡架構，接上<b>比較與門檻模組</b>：排名之後一定給得到的下一階，並補上企劃書尚未覆蓋的<b>中長尾用戶版本</b>與<b>去年的自己</b>。標了 <span style="color:var(--mint)">新增</span> 的是這次提出的，其餘沿用企劃書。</p>
+  <p class="lede">沿用企劃書的三標籤稱號卡架構，四個面向<b>花費、學習時間、追蹤老師、買課領域</b>各配一組互動。滑桿、猜測、選項都可以實際操作。右側標示每張卡的社交強度：<b>L1</b> 頁內互動、<b>L2</b> 弱社交（只用彙總數據）、<b>L3</b> 強社交（需隱私設計，建議第二期）。</p>
 
   <div class="switch" role="group" aria-label="切換標籤">
     <span class="lbl">標籤</span>
     <button type="button" data-p="buy" aria-pressed="true">愛買課 · 知識投資家</button>
     <button type="button" data-p="learn" aria-pressed="false">愛學習 · 圖書館裡的那個人</button>
     <button type="button" data-p="social" aria-pressed="false">愛互動 · 平台存在感代表</button>
-    <button type="button" data-p="tail" aria-pressed="false">中長尾 · 潛力股（新增）</button>
+    <button type="button" data-p="tail" aria-pressed="false">中長尾 · 潛力股</button>
   </div>
 
   <div class="deck">
@@ -189,56 +249,83 @@
 
     <aside class="rail">
       <h3>卡片動線</h3>
-      <p class="hint">先給稱號與肯定，第 6 張才進排名，第 7 張立刻給門檻。焦慮只放在這兩張之間，且一定有出口。</p>
+      <p class="hint">先給稱號與肯定，中段用猜測與比較製造落差，排名後面一定緊接得到的下一階。</p>
       <ol id="nav"></ol>
+      <div class="legend">
+        <span><b class="l1">L1</b> 頁內互動 · 必做</span>
+        <span><b class="l2">L2</b> 弱社交 · 這次主打</span>
+        <span><b class="l3">L3</b> 強社交 · 第二期</span>
+      </div>
     </aside>
   </div>
 
   <section class="spec">
-    <h2>沿用 × 新增對照</h2>
-    <p>企劃書已完成的部分照用，包含三標籤稱號、時段文案、TOP 榜、老師 Clips 接通、2026 小承諾。以下是這次補的四塊，以及對應要備的欄位。</p>
+    <h2>互動機制 × 四個面向</h2>
+    <p>同一個機制套在不同面向上效果差很多。花費適合「猜了再揭曉」但不適合跟其他用戶比；學習時間和領域則是社交比較的主場。</p>
     <div class="tablewrap">
       <table>
         <thead>
-          <tr><th>模組</th><th>狀態</th><th>做法</th><th>需要的數據欄位</th></tr>
+          <tr><th>面向</th><th>L1 頁內互動</th><th>L2 弱社交</th><th>L3 強社交</th><th>需要的欄位</th></tr>
         </thead>
         <tbody>
-          <tr><td><b>全站百分位</b></td><td>沿用</td><td>「打敗全站 X% 會員」＋小字「這種打敗別人的方式很健康」</td><td>消費／點擊／互動百分位</td></tr>
-          <tr><td><b>排名具體化</b></td><td class="new">新增</td><td>百分位加上名次與分母：前 12%＝12.4 萬人中第 14,880 名。抽象比例沒有名次有感</td><td>rank、當期活躍會員總數</td></tr>
-          <tr><td><b>下一階門檻</b></td><td class="new">新增</td><td>排名卡後緊接「再 X 就進前 Y%」，並換算成每週可執行量。焦慮沒有出口只會轉成退訂</td><td>各百分位級距的門檻值</td></tr>
-          <tr><td><b>去年的自己</b></td><td class="new">新增</td><td>同比成長率，是唯一對所有分群都安全的比較對象</td><td>2024 同欄位數據</td></tr>
-          <tr><td><b>中長尾版本</b></td><td class="new">新增</td><td>企劃書三標籤只覆蓋前 10%／30%，其餘多數人沒有版本。給第四種稱號「潛力股」，不顯示任何排名，只跟去年的自己比＋最小承諾</td><td>是否具備任一標籤的判定邏輯</td></tr>
-          <tr><td><b>參照群體</b></td><td class="new">新增</td><td>比較對象從全站改為同標籤群體，參照群體越近動力越強</td><td>標籤內百分位</td></tr>
-          <tr><td><b>分享卡</b></td><td>沿用（調整）</td><td>上次分享成效差，因為分享的是戰績。改成只分享稱號與人格，數字預設不進圖</td><td>稱號、人格類型</td></tr>
+          <tr>
+            <td><b>花費</b></td>
+            <td class="l1">猜猜你今年花多少 → 揭曉落差</td>
+            <td class="l2">全站分佈直方圖標出你的級距（不顯示排名）</td>
+            <td class="l3">不建議做 PK</td>
+            <td>年度總金額、金額分佈直方圖</td>
+          </tr>
+          <tr>
+            <td><b>學習時間</b></td>
+            <td class="l1">猜自己的排名 → 揭曉＋名次</td>
+            <td class="l2">同標籤中位疊圖、同班同學數、時段分佈對照</td>
+            <td class="l3">時數 PK 連結</td>
+            <td>總時數、百分位、時段分佈、同標籤中位</td>
+          </tr>
+          <tr>
+            <td><b>追蹤老師</b></td>
+            <td class="l1">刮開「你最麻吉的老師」＋接通 Clips</td>
+            <td class="l2">你在他學生中排前 X%、他還有幾堂你沒上</td>
+            <td class="l3">老師端回顧：讓老師看到 Top 學生</td>
+            <td>老師觀看時數、學生內排名、該老師未購課程</td>
+          </tr>
+          <tr>
+            <td><b>買課領域</b></td>
+            <td class="l1">領域圖鑑解鎖格</td>
+            <td class="l2">同類人也在學、品味重疊度推薦</td>
+            <td class="l3">品味雙胞胎（匿名）</td>
+            <td>子分類購買分佈、協同過濾清單</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
     <div class="guard">
       <div>
-        <h4>永遠不顯示負向排名</h4>
-        <p>沒有「你落後 70% 的人」。低使用量用戶一律改用同比與最小承諾，這是避免回顧變成羞辱的底線。</p>
+        <h4>花費不做用戶間比較</h4>
+        <p>「你比 88% 的人更願意花錢」對高消費者是肯定，對中間層是罪惡感，而且會讓人重新檢視自己刷了多少。花費只做猜測揭曉、同比與價值換算。</p>
       </div>
       <div>
         <h4>排名後面必接門檻</h4>
         <p>第 6、7 張是一組，不可拆開投放。只給排名不給下一階，等於製造無處可去的焦慮。</p>
       </div>
       <div>
-        <h4>門檻要可達</h4>
-        <p>下一階設定在用戶當前水準往上一級，並換算成每週執行量（每週 1 小時、每月 1 堂），不要跳級。</p>
+        <h4>永遠不顯示負向排名</h4>
+        <p>沒有「你落後 70% 的人」。中長尾用戶一律改用同比與最小承諾，切標籤到「潛力股」可以看到那一版。</p>
       </div>
       <div>
-        <h4>金額類比要留台階</h4>
-        <p>「少買 X 件衣服」對高消費用戶有後悔風險，文案要收在「學到的拿去賺回來」，不能停在花費本身。</p>
+        <h4>PK 項目要用戶自選</h4>
+        <p>金額預設關閉，且對方只看到自選項目。匿名的品味雙胞胎也要確認樣本足夠大，避免被反推身分。</p>
       </div>
     </div>
 
     <div class="asks">
       <h2>需要先確認的事</h2>
-      <div class="ask"><i>1</i><span>百分位級距的實際分佈：前 5%／10%／30% 的門檻值各是多少，才寫得出「再 X 就到」。這題要跟數據負責人一起拉。</span></div>
-      <div class="ask"><i>2</i><span>2024 同欄位資料是否可取得，決定「去年的自己」這張卡能不能做。</span></div>
-      <div class="ask"><i>3</i><span>沒有任何標籤的用戶佔比多少。若超過六成，中長尾版本就不是備案而是主版本。</span></div>
-      <div class="ask"><i>4</i><span>裝置取向：原型以手機直式為主、桌機為輔。90 支 Clips 的套版自動化要另外評估。</span></div>
+      <div class="ask"><i>1</i><span>各百分位級距門檻值（前 5／10／30% 各是多少），沒有這個寫不出「再 X 就到」。</span></div>
+      <div class="ask"><i>2</i><span>2024 同欄位是否可取得，決定「去年的自己」與所有同比卡能不能做。</span></div>
+      <div class="ask"><i>3</i><span>協同過濾清單（買了 A 的人也買 B）是否已有現成模型，或這次要簡化成同子分類熱銷。</span></div>
+      <div class="ask"><i>4</i><span>老師端回顧要不要一起做。老師會主動分享，對 BD 的效益可能高於用戶端分享卡。</span></div>
+      <div class="ask"><i>5</i><span>無標籤用戶佔比。若超過六成，潛力股版本就是主版本而非備案。</span></div>
     </div>
 
     <p class="foot">原型數據為假資料。企劃來源：2025 用戶年度回顧頁面企劃。</p>
@@ -248,72 +335,74 @@
 <script>
   var P = {
     buy: {
-      name: '知識投資家',
-      title: '2025，你的 PPA 頭銜是：知識投資家',
-      sub: '成為自己腦袋最大的股東',
-      persona: '半夜焦慮派',
-      days: 187, peakHour: 23, peakLabel: '23:00–01:59',
-      hero: { n: '38,400', unit: '元', line: '今年，你為自己的腦袋砸了 NT$38,400。如果腦袋可以上市，你就是最大股東。' },
-      unitName: '消費金額',
+      title: '2025，你的 PPA 頭銜是：知識投資家', sub: '成為自己腦袋最大的股東',
+      persona: '半夜焦慮派', days: 187, peakHour: 23, peakLabel: '23:00–01:59',
+      spend: 38400, spendMax: 60000, spendBin: 9,
+      unitName: '消費金額', metric: '學習時數', hours: 96,
       pct: 88, gatePct: 95, rank: '14,880', pool: '124,000',
       gateLine: '再買 1 堂 4,200 元的課，你就進全站前 5%',
       gateWeek: '或是把訂閱續到明年 3 月，一樣到。',
       peers: [
-        { who: '你', v: 38400, me: true },
-        { who: '知識投資家中位', v: 21000 },
-        { who: '全站中位', v: 3600 },
-        { who: '去年的你', v: 24600 }
+        { who: '你', v: 96, me: true },
+        { who: '知識投資家中位', v: 54 },
+        { who: '全站中位', v: 12 },
+        { who: '去年的你', v: 71 }
       ],
-      yoy: [ { y: '2024', v: 24600 }, { y: '2025', v: 38400, now: true } ],
+      yoy: [{ y: '2024', v: 24600 }, { y: '2025', v: 38400, now: true }],
       yoyLine: '比去年多投資了 56%。你不是突然變有錢，是把錢換了方向。',
-      mix: [
-        { name: '職涯發展', pct: 41, c: '#f5a524' },
-        { name: '投資理財', pct: 27, c: '#e8557f' },
-        { name: '商業思維', pct: 21, c: '#6d63ff' },
-        { name: '其他', pct: 11, c: '#3ddc97' }
+      teacher: '郭哲佑', teacherHours: 31, teacherPct: 9, teacherStudents: '2,418',
+      unbought: [
+        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' },
+        { n: '財報地雷排查', m: '2 小時 48 分 · 同標籤熱門第 2', tag: '未上' },
+        { n: '併購案拆解', m: '5 小時 06 分 · 12 月新上架', tag: '新課' }
       ],
-      mixLine: '你的投資組合裡，最重倉的是「職涯發展」。看起來你不只投資股票，也在加倉自己。',
-      facts: ['帶走 <b>14</b> 堂課', '平均每 <b>26</b> 天再投資一次', '<b>3 月</b>最失控，一口氣 4 堂'],
-      top: '郭哲佑',
+      dex: [
+        { n: '職涯發展', c: 6, own: true }, { n: '投資理財', c: 4, own: true },
+        { n: '商業思維', c: 3, own: true }, { n: '簡報溝通', c: 1, own: true },
+        { n: '數位工具', c: 0, gap: true }, { n: '語言學習', c: 0 },
+        { n: '設計美學', c: 0 }, { n: '興趣生活', c: 0 }
+      ],
+      dexLine: '你解鎖了 8 個領域中的 4 個，最重倉的是職涯發展。和你品味重疊 82% 的人，多半也補了「數位工具」這一格。',
+      twinCount: '1,842', twinCourse: 'AI 工作流實戰',
       cta: '選一堂一直想上的課，1 月完成第一單元'
     },
     learn: {
-      name: '圖書館裡的那個人',
-      title: '2025，你的 PPA 頭銜是：圖書館裡的那個人',
-      sub: '默默且持續學習的人',
-      persona: '穩定通勤派',
-      days: 214, peakHour: 8, peakLabel: '06:00–10:59',
-      hero: { n: '1,208', unit: '則內容', line: '2025，你總共點開了 1,208 篇課程影片或文章。平均每 0.3 天，就會對世界多一點好奇。' },
-      unitName: '點擊與學習時間',
+      title: '2025，你的 PPA 頭銜是：圖書館裡的那個人', sub: '默默且持續學習的人',
+      persona: '穩定通勤派', days: 214, peakHour: 8, peakLabel: '06:00–10:59',
+      spend: 9800, spendMax: 60000, spendBin: 2,
+      unitName: '點擊與學習時間', metric: '學習時數', hours: 142,
       pct: 91, gatePct: 95, rank: '11,160', pool: '124,000',
       gateLine: '再看完 6 個單元，你就進全站前 5%',
       gateWeek: '一週兩個單元，三週就到。',
       peers: [
-        { who: '你', v: 1208, me: true },
-        { who: '靜靜看課派中位', v: 640 },
-        { who: '全站中位', v: 96 },
-        { who: '去年的你', v: 870 }
+        { who: '你', v: 142, me: true },
+        { who: '靜靜看課派中位', v: 78 },
+        { who: '全站中位', v: 12 },
+        { who: '去年的你', v: 103 }
       ],
-      yoy: [ { y: '2024', v: 870 }, { y: '2025', v: 1208, now: true } ],
+      yoy: [{ y: '2024', v: 870 }, { y: '2025', v: 1208, now: true }],
       yoyLine: '比去年多點開 39% 的內容，而且完成率也一起上去了。',
-      mix: [
-        { name: '影片', pct: 62, c: '#6d63ff' },
-        { name: '文章', pct: 31, c: '#f5a524' },
-        { name: '直播重播', pct: 7, c: '#3ddc97' }
+      teacher: '楊斯棓', teacherHours: 27, teacherPct: 4, teacherStudents: '3,106',
+      unbought: [
+        { n: '閱讀的技術', m: '3 小時 20 分 · 你追蹤的老師', tag: '未上' },
+        { n: '演講表達入門', m: '2 小時 05 分 · 同標籤熱門第 1', tag: '未上' },
+        { n: '筆記系統建構', m: '1 小時 52 分 · 完課率 81%', tag: '好評' }
       ],
-      mixLine: '在所有被你點開的內容裡，有 74% 被你看完。對一個活在注意力經濟時代的人來說，這個數字非常不合理地認真。',
-      facts: ['完成率 <b>74%</b>', '上站 <b>214</b> 天', '最捨不得略過：<b>語言學習</b>'],
-      top: '楊斯棓',
+      dex: [
+        { n: '語言學習', c: 5, own: true }, { n: '職涯發展', c: 4, own: true },
+        { n: '簡報溝通', c: 3, own: true }, { n: '興趣生活', c: 2, own: true },
+        { n: '投資理財', c: 1, own: true }, { n: '數位工具', c: 0, gap: true },
+        { n: '商業思維', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 8 個領域中的 5 個，是站上少見的廣度。和你品味重疊 76% 的人，最近都在補「數位工具」。',
+      twinCount: '2,640', twinCourse: 'Notion 知識庫建構',
       cta: '把只剩 2 堂就完課的那 3 門收掉'
     },
     social: {
-      name: '平台存在感代表',
-      title: '2025，你的 PPA 頭銜是：平台存在感代表',
-      sub: '你沒出現的那天，系統都會覺得怪怪的',
-      persona: '假日學習派',
-      days: 246, peakHour: 21, peakLabel: '19:00–22:59',
-      hero: { n: '932', unit: '次互動', line: '2025，你總共參與了 932 次活動。等於平均每 0.4 天就來刷一次存在感。' },
-      unitName: '參與活躍度',
+      title: '2025，你的 PPA 頭銜是：平台存在感代表', sub: '你沒出現的那天，系統都會覺得怪怪的',
+      persona: '假日學習派', days: 246, peakHour: 21, peakLabel: '19:00–22:59',
+      spend: 16200, spendMax: 60000, spendBin: 4,
+      unitName: '參與活躍度', metric: '互動次數', hours: 932,
       pct: 96, gatePct: 99, rank: '4,960', pool: '124,000',
       gateLine: '再互動 74 次，你就進全站前 1%',
       gateWeek: '維持你現在的節奏，一個月就到。',
@@ -323,51 +412,83 @@
         { who: '全站中位', v: 42 },
         { who: '去年的你', v: 604 }
       ],
-      yoy: [ { y: '2024', v: 604 }, { y: '2025', v: 932, now: true } ],
+      yoy: [{ y: '2024', v: 604 }, { y: '2025', v: 932, now: true }],
       yoyLine: '比去年多 54%。每 133 次站內互動就有 1 則來自你，你不只是學生，更是場控。',
-      mix: [
-        { name: '簽到', pct: 48, c: '#3ddc97' },
-        { name: '留言', pct: 26, c: '#e8557f' },
-        { name: '知識王', pct: 18, c: '#6d63ff' },
-        { name: '抽獎', pct: 8, c: '#f5a524' }
+      teacher: '張修修', teacherHours: 19, teacherPct: 2, teacherStudents: '1,884',
+      unbought: [
+        { n: '身體修復實作', m: '2 小時 44 分 · 你留言最多的老師', tag: '未上' },
+        { n: '呼吸與睡眠', m: '1 小時 30 分 · 同標籤熱門第 3', tag: '未上' },
+        { n: '徒手訓練進階', m: '3 小時 58 分 · 12 月新上架', tag: '新課' }
       ],
-      mixLine: '你是名副其實的「簽到狂」：看到簽到，手比大腦更快按下去。',
-      facts: ['留言 <b>18,400</b> 字', '知識王正確率 <b>71%</b>', '最常出現在 <b>張修修</b> 的留言區'],
-      top: '張修修',
+      dex: [
+        { n: '興趣生活', c: 5, own: true }, { n: '簡報溝通', c: 2, own: true },
+        { n: '職涯發展', c: 2, own: true }, { n: '語言學習', c: 0, gap: true },
+        { n: '投資理財', c: 0 }, { n: '商業思維', c: 0 },
+        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 3 個領域，但互動量是站上前 4%。和你一樣愛在留言區出沒的人，最近都在上「語言學習」。',
+      twinCount: '968', twinCourse: '日文五十音到會話',
       cta: '報名 1 月的第一場直播'
     },
     tail: {
-      name: '潛力股',
-      title: '2025，你的 PPA 頭銜是：潛力股',
-      sub: '你已經開始了，這比什麼都難',
-      persona: '臨時抱佛腳派',
-      days: 23, peakHour: 22, peakLabel: '19:00–22:59',
-      hero: { n: '4', unit: '個單元', line: '今年你看完了 4 個單元。數字不大，但那是從零開始的 4 個。' },
-      unitName: '學習量',
+      title: '2025，你的 PPA 頭銜是：潛力股', sub: '你已經開始了，這比什麼都難',
+      persona: '臨時抱佛腳派', days: 23, peakHour: 22, peakLabel: '19:00–22:59',
+      spend: 1280, spendMax: 60000, spendBin: 0,
+      unitName: '學習量', metric: '完成單元', hours: 4,
       pct: null, gatePct: null, rank: null, pool: null,
       gateLine: '每週 30 分鐘，就能養成一個撐得住的習慣',
       gateWeek: '我們幫你挑了一堂 22 分鐘就能看完的課。',
       peers: null,
-      yoy: [ { y: '2024', v: 1 }, { y: '2025', v: 4, now: true } ],
+      yoy: [{ y: '2024', v: 1 }, { y: '2025', v: 4, now: true }],
       yoyLine: '去年你看完 1 個單元，今年 4 個。成長 4 倍的人不多，你是其中一個。',
-      mix: [
-        { name: '職涯發展', pct: 75, c: '#f5a524' },
-        { name: '興趣生活', pct: 25, c: '#3ddc97' }
+      teacher: '林長揚', teacherHours: 2, teacherPct: null, teacherStudents: '5,240',
+      unbought: [
+        { n: '簡報結構入門', m: '22 分鐘 · 最短的一堂', tag: '推薦' },
+        { n: '一頁式圖表', m: '48 分鐘 · 新手完課率 88%', tag: '好評' }
       ],
-      mixLine: '你點開的內容幾乎都跟工作有關，看來你想解決的是很實際的問題。',
-      facts: ['上站 <b>23</b> 天', '收藏了 <b>7</b> 堂課', '最想學：<b>簡報技巧</b>'],
-      top: '林長揚',
+      dex: [
+        { n: '簡報溝通', c: 1, own: true }, { n: '職涯發展', c: 0, gap: true },
+        { n: '興趣生活', c: 0 }, { n: '語言學習', c: 0 },
+        { n: '投資理財', c: 0 }, { n: '商業思維', c: 0 },
+        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了第一格。剛開始的人通常第二格會補「職涯發展」，那裡有最多 30 分鐘內看完的課。',
+      twinCount: '4,120', twinCourse: '職場溝通基本功',
       cta: '從收藏清單挑 1 堂，1 月看完第一單元'
     }
   };
 
-  function clock(peak){
+  var HIST = [18,15,13,11,9,8,7,6,5,4,3,1];
+  var HIST_LABELS = ['0', '1 萬', '3 萬', '6 萬+'];
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function nf(n){ return n.toLocaleString('en-US'); }
+
+  function head(eyebrow, lv){
+    var f = lv ? '<span class="flag ' + lv + '">' + lv.toUpperCase() + ' ' +
+      (lv === 'l1' ? '頁內互動' : lv === 'l2' ? '弱社交' : '強社交') + '</span>'
+      : '<span class="flag keep">沿用企劃書</span>';
+    return '<div class="tagrow"><span class="eyebrow">' + eyebrow + '</span>' + f + '</div>';
+  }
+
+  function hist(meBin, guessBin){
+    var s = '';
+    for (var b = 0; b < HIST.length; b++){
+      var cls = b === meBin ? 'me' : (guessBin === b ? 'guess' : '');
+      s += '<i class="' + cls + '" style="height:' + Math.round(HIST[b] / 18 * 100) + '%"></i>';
+    }
+    return '<div class="hist" aria-hidden="true">' + s + '</div>' +
+      '<div class="hist-scale">' + HIST_LABELS.map(function(l){ return '<span>' + l + '</span>'; }).join('') + '</div>';
+  }
+
+  function clock(peak, refLabel){
     var s = '', base = [4,3,2,2,3,6,14,26,34,30,22,26,34,30,24,22,26,34,44,56,64,72,58,32];
     for (var h = 0; h < 24; h++){
-      var v = h === peak ? 82 : base[h];
+      var v = h === peak ? 88 : base[h];
       s += '<i class="' + (h === peak ? 'peak' : '') + '" style="height:' + v + '%"></i>';
     }
     return '<div class="clock" aria-hidden="true">' + s + '</div>' +
+      '<div class="clock-ref"><span>' + refLabel + '</span></div>' +
       '<div class="clock-scale"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>';
   }
 
@@ -379,136 +500,256 @@
       s += '<div class="bar-row' + (r.me ? ' me' : '') + '">' +
         '<span class="who">' + r.who + '</span>' +
         '<span class="bar-shell"><span class="bar-fill" style="width:' + Math.round(r.v / max * 100) + '%"></span></span>' +
-        '<span class="bar-val">' + r.v.toLocaleString('en-US') + '</span></div>';
+        '<span class="bar-val">' + nf(r.v) + '</span></div>';
     });
-    return '<div class="bars">' + s + '</div><p class="fine">比較對象用同標籤群體，不用全站。' + unit + '單位下，參照群體越近，動力越強。</p>';
+    return '<div class="bars">' + s + '</div><p class="fine">比較對象用同標籤群體，不用全站。' + unit + '越接近的參照群體，動力越強。</p>';
   }
 
-  function yoy(rows, line){
+  function yoyBlock(rows, line){
     var max = 0;
     rows.forEach(function(r){ if (r.v > max) max = r.v; });
     var s = '';
     rows.forEach(function(r){
       s += '<div class="yoy-row' + (r.now ? ' now' : '') + '"><span>' + r.y + '</span>' +
-        '<span class="yoy-bar"><i style="width:' + Math.max(12, Math.round(r.v / max * 100)) + '%">' +
-        r.v.toLocaleString('en-US') + '</i></span></div>';
+        '<span class="yoy-bar"><i style="width:' + Math.max(14, Math.round(r.v / max * 100)) + '%">' + nf(r.v) + '</i></span></div>';
     });
     return '<div class="yoy">' + s + '</div><p>' + line + '</p>';
   }
 
-  function mix(d){
-    var b = '', k = '';
-    d.mix.forEach(function(m){
-      b += '<i style="width:' + m.pct + '%;background:' + m.c + '"></i>';
-      k += '<span><i class="dot" style="background:' + m.c + '"></i>' + m.name + ' ' + m.pct + '%</span>';
-    });
-    return '<div class="mix" aria-hidden="true">' + b + '</div><div class="mix-key">' + k + '</div><p>' + d.mixLine + '</p>';
-  }
-
-  function head(eyebrow, flag){
-    return '<div class="tagrow"><span class="eyebrow">' + eyebrow + '</span>' +
-      (flag === 'add' ? '<span class="flag add">新增</span>' : '<span class="flag keep">沿用企劃書</span>') + '</div>';
-  }
-
   function scenes(d){
-    var list = [
-      { nav: '開場稱號卡', flag: 'keep', html:
-        head('卡 1 · 開場稱號', 'keep') +
-        '<h2>' + d.title + '</h2>' +
-        '<p>' + d.sub + '</p>' +
-        '<p class="fine">你的存在，讓演算法以為你是全職學生。</p>' +
-        '<div class="facts">' + d.facts.map(function(f){ return '<span class="fact">' + f + '</span>'; }).join('') + '</div>' },
+    var L = [];
 
-      { nav: '關係狀態', flag: 'keep', html:
-        head('卡 2 · 你和平台的關係狀態', 'keep') +
-        '<h2>今年，我們到底見了幾次面</h2>' +
-        '<div class="bignum">' + d.days + '<small>天</small></div>' +
-        '<p>今年你打開平台共 ' + d.days + ' 天。以這個頻率來看，你跟我的關係不算普通朋友。</p>' +
-        '<p class="fine">最常上線時段：' + d.peakLabel + '</p>' },
+    L.push({ nav: '開場稱號', lv: null, html:
+      head('卡 1 · 開場稱號', null) +
+      '<h2>' + d.title + '</h2><p>' + d.sub + '</p>' +
+      '<p class="fine">你的存在，讓演算法以為你是全職學生。</p>' +
+      '<div class="facts"><span class="fact">上站 <b>' + d.days + '</b> 天</span><span class="fact">' + d.persona + '</span><span class="fact">最常上線 ' + d.peakLabel + '</span></div>' });
 
-      { nav: '學習人格', flag: 'keep', html:
-        head('卡 3 · 你今年的學習人格', 'keep') +
-        '<h2>你是典型的「' + d.persona + '」</h2>' +
-        clock(d.peakHour) +
-        '<p>偷偷觀察一年後的結論是：你的學習幾乎都發生在 ' + d.peakLabel + '。但沒關係，只要有學就好。</p>' +
-        '<div class="facts"><span class="fact">分享這張卡</span><span class="fact">只分享稱號，數字不進圖</span></div>' },
+    L.push({ nav: '猜猜你花多少', lv: 'l1', mech: 'guessSpend', html:
+      head('花費 · 猜了再揭曉', 'l1') +
+      '<h2>先別看數字。<br>猜猜你今年在 PPA 花了多少</h2>' +
+      '<div class="guess">' +
+        '<span class="guess-val" id="gv">NT$ 12,000</span>' +
+        '<input type="range" id="gs" min="0" max="' + d.spendMax + '" step="200" value="12000" aria-label="猜測金額" />' +
+        '<div class="guess-scale"><span>0</span><span>NT$ ' + nf(d.spendMax) + '</span></div>' +
+        '<div><button class="primary" id="gb" type="button">揭曉</button></div>' +
+      '</div>' +
+      '<div id="gr"></div>' +
+      '<p class="fine">猜錯產生的落差，比被動看到數字有感得多。這個機制花費、時數、排名都能套。</p>' });
 
-      { nav: '標籤重點', flag: 'keep', html:
-        head('卡 4 · 標籤專屬重點', 'keep') +
-        '<div class="bignum">' + d.hero.n + '<small>' + d.hero.unit + '</small></div>' +
-        '<p>' + d.hero.line + '</p>' },
+    L.push({ nav: '花費分佈', lv: 'l2', html:
+      head('花費 · 全站分佈', 'l2') +
+      '<h2>全站的錢都花在哪個級距</h2>' +
+      hist(d.spendBin, -1) +
+      '<p>你落在 <b>' + (d.spendBin >= 9 ? 'NT$ 3 萬以上' : d.spendBin >= 4 ? 'NT$ 1.5–3 萬' : 'NT$ 1.5 萬以下') + '</b> 這一格。這裡只顯示級距，不顯示你贏過多少人。</p>' +
+      '<p class="fine">花費刻意不做排名比較：對高消費用戶是肯定，對中間層是罪惡感，而且會讓人重新檢視自己刷了多少。</p>' });
 
-      { nav: '主題分佈', flag: 'keep', html:
-        head('卡 5 · 你的主題分佈', 'keep') +
-        '<h2>你今年最上心的方向</h2>' +
-        mix(d) }
-    ];
+    L.push({ nav: '花費換算 + 同比', lv: null, html:
+      head('花費 · 價值換算與同比', null) +
+      '<div class="bignum">' + nf(d.spend) + '<small>元</small></div>' +
+      yoyBlock(d.yoy, d.yoyLine) +
+      '<p class="fine">相當於少買了 ' + Math.round(d.spend / 800) + ' 件衣服。如果後悔，現在還來得及把學到的東西拿去賺回來。</p>' });
+
+    L.push({ nav: '學習時段', lv: 'l2', html:
+      head('學習時間 · 時段對照', 'l2') +
+      '<h2>你是典型的「' + d.persona + '」</h2>' +
+      clock(d.peakHour, '同標籤平均') +
+      '<p>你的學習幾乎都發生在 ' + d.peakLabel + '，綠線是跟你同標籤的人的平均。你比他們更晚，也更集中。</p>' });
 
     if (d.pct !== null){
-      list.push({ nav: '全站排名', flag: 'keep', html:
-        head('卡 6 · 全站排名', 'keep') +
-        '<h2>你的' + d.unitName + '<br>打敗了全站 ' + d.pct + '% 的會員</h2>' +
-        '<div class="ruler"><div class="ruler-track">' +
-          '<span class="ruler-gate" style="left:' + d.gatePct + '%"><span>前 ' + (100 - d.gatePct) + '% 門檻</span></span>' +
-          '<span class="ruler-me" style="left:' + d.pct + '%"><span>你 · 前 ' + (100 - d.pct) + '%</span></span>' +
-        '</div><div class="ruler-scale"><span>全站中位</span><span>前 1%</span></div></div>' +
-        '<p><b>換句話說：' + d.pool + ' 位活躍會員裡，你排第 ' + d.rank + ' 名。</b><span class="flag add" style="margin-left:8px">名次為新增</span></p>' +
-        '<p class="fine">有些人只會說「明年再說」，但你顯然比其他人更相信自己的未來。放心，這種打敗別人的方式很健康。</p>' });
+      L.push({ nav: '賭一把排名', lv: 'l1', mech: 'guessRank', pct: d.pct, gatePct: d.gatePct, rank: d.rank, pool: d.pool, unitName: d.unitName, html:
+        head('學習時間 · 賭一把排名', 'l1') +
+        '<h2>你覺得自己的' + d.unitName + '<br>贏過站上多少人</h2>' +
+        '<div class="guess">' +
+          '<span class="guess-val" id="rv">50%</span>' +
+          '<input type="range" id="rs" min="0" max="99" step="1" value="50" aria-label="猜測百分位" />' +
+          '<div class="guess-scale"><span>0%</span><span>99%</span></div>' +
+          '<div><button class="primary" id="rb" type="button">揭曉排名</button></div>' +
+        '</div>' +
+        '<div id="rr"></div>' });
 
-      list.push({ nav: '下一階門檻', flag: 'add', html:
-        head('卡 7 · 下一階門檻', 'add') +
+      L.push({ nav: '下一階門檻', lv: null, html:
+        head('學習時間 · 下一階門檻', null) +
         '<h2>' + d.gateLine + '</h2>' +
         '<p>' + d.gateWeek + ' 排名後面一定要接一個做得到的下一步，焦慮才會變成動力。</p>' +
         '<div class="tiers">' +
           '<div class="tier"><b>前 20% 用戶看到</b><em>' + d.gateLine + '</em></div>' +
           '<div class="tier mid"><b>中段用戶看到</b><em>你比去年的自己成長了，再一點就追上同標籤前 30%</em></div>' +
-          '<div class="tier low"><b>中長尾用戶看到</b><em>每週 30 分鐘，就能養成一個撐得住的習慣（不顯示任何排名）</em></div>' +
+          '<div class="tier low"><b>中長尾用戶看到</b><em>每週 30 分鐘就能養成習慣（完全不顯示排名）</em></div>' +
         '</div>' });
 
-      list.push({ nav: '同標籤比較', flag: 'add', html:
-        head('卡 7.5 · 同標籤比較', 'add') +
+      L.push({ nav: '同標籤比較', lv: 'l2', html:
+        head('學習時間 · 同標籤比較', 'l2') +
         '<h2>跟你同一類的人，長什麼樣</h2>' +
-        bars(d.peers, d.unitName) });
+        bars(d.peers, d.metric) });
+    } else {
+      L.push({ nav: '最小承諾', lv: null, html:
+        head('學習時間 · 最小承諾', null) +
+        '<h2>' + d.gateLine + '</h2>' +
+        '<p>' + d.gateWeek + '</p>' +
+        '<p class="fine">中長尾用戶完全不顯示任何排名與全站比較，只跟去年的自己比。這是避免回顧變成羞辱的底線。</p>' +
+        yoyBlock(d.yoy, d.yoyLine) });
     }
 
-    list.push({ nav: '去年的自己', flag: 'add', html:
-      head('卡 8 · 去年的自己', 'add') +
-      '<h2>跟去年的你比</h2>' +
-      yoy(d.yoy, d.yoyLine) +
-      '<p class="fine">這是唯一對所有分群都安全的比較對象，也是中長尾用戶唯一會看到的比較。</p>' });
+    L.push({ nav: '你的老師', lv: 'l2', html:
+      head('追蹤老師 · 學生中的位置', 'l2') +
+      '<h2>2025 聽說你最信 ' + d.teacher + '</h2>' +
+      '<p>他的課你看了 <b>' + d.teacherHours + ' 小時</b>' +
+      (d.teacherPct !== null ? '，在他 ' + d.teacherStudents + ' 位學生中你排 <b>前 ' + d.teacherPct + '%</b>' : '，他有 ' + d.teacherStudents + ' 位學生') +
+      '。看來他講的話，比你主管還有說服力。</p>' +
+      '<div class="clip"><span class="av" aria-hidden="true"></span><div><strong>' + d.teacher + ' 來電</strong><span>接通後播放老師的年度 Clips</span></div></div>' +
+      '<p class="fine">只能按接通，播完才進下一張。老師端也做一版回顧，讓他看到自己的 Top 學生，他會主動分享。</p>' });
 
-    list.push({ nav: 'TOP 榜 + Clips', flag: 'keep', html:
-      head('卡 9 · 年度 TOP 榜', 'keep') +
-      '<h2>2025 聽說你最信他</h2>' +
-      '<p>今年你最麻吉的老師是「' + d.top + '」，看來他講的話，比你主管還有說服力。</p>' +
-      '<div class="clip"><span class="av" aria-hidden="true"></span><div><strong>' + d.top + ' 來電</strong><span>接通後播放老師的年度 Clips</span></div></div>' +
-      '<p class="fine">只能按接通，播完才進下一張。90 支 Clips 的套版自動化需另外評估。</p>' });
+    L.push({ nav: '老師的其他課', lv: 'l2', html:
+      head('追蹤老師 · 你還沒上的', 'l2') +
+      '<h2>' + d.teacher + '還有 ' + d.unbought.length + ' 堂課<br>你還沒上</h2>' +
+      '<div class="courses">' + d.unbought.map(function(c){
+        return '<div><span>' + esc(c.n) + '<span class="meta">' + esc(c.m) + '</span></span><em>' + esc(c.tag) + '</em></div>';
+      }).join('') + '</div>' +
+      '<p class="fine">榮耀感接缺口，這張卡的轉換會是全頁最高的一張。</p>' });
 
-    list.push({ nav: '2026 小承諾', flag: 'keep', html:
-      head('卡 10 · 收尾與 CTA', 'keep') +
+    L.push({ nav: '領域圖鑑', lv: 'l1', html:
+      head('買課領域 · 解鎖圖鑑', 'l1') +
+      '<h2>你今年解鎖了幾格</h2>' +
+      '<div class="dex">' + d.dex.map(function(x){
+        return '<div class="' + (x.own ? 'own' : x.gap ? 'gap' : '') + '"><b>' + (x.own ? x.c : x.gap ? '?' : '—') + '</b>' + esc(x.n) + '</div>';
+      }).join('') + '</div>' +
+      '<p>' + d.dexLine + '</p>' });
+
+    L.push({ nav: '同類人也在學', lv: 'l2', html:
+      head('買課領域 · 同類人也在學', 'l2') +
+      '<h2>和你同一類的 ' + d.twinCount + ' 人<br>最近都在上這堂</h2>' +
+      '<div class="courses"><div><span>' + esc(d.twinCourse) + '<span class="meta">和你品味重疊度最高的族群，本季購買第 1 名</span></span><em>推薦</em></div></div>' +
+      '<p>協同過濾包裝成社交：不是系統推薦你，是跟你很像的人已經在學了。</p>' +
+      '<p class="fine">若沒有現成模型，第一版可以退回同子分類熱銷排行，文案照樣成立。</p>' });
+
+    L.push({ nav: 'PK 連結', lv: 'l3', mech: 'pk', html:
+      head('強社交 · PK 連結', 'l3') +
+      '<h2>把你的年度戰績<br>丟給一個朋友比一比</h2>' +
+      '<p class="fine">比較項目由你自己勾選，對方只看到你勾的。金額預設關閉。</p>' +
+      '<div class="opts">' +
+        '<label class="opt"><input type="checkbox" id="k1" checked /> 學習時數</label>' +
+        '<label class="opt"><input type="checkbox" id="k2" checked /> 領域重疊度</label>' +
+        '<label class="opt"><input type="checkbox" id="k3" /> 花費金額</label>' +
+      '</div>' +
+      '<div class="pk" id="pk"></div>' +
+      '<div><button id="pkb" type="button">產生 PK 連結</button></div>' +
+      '<p class="fine" id="pkmsg"></p>' });
+
+    L.push({ nav: '2026 宣言牆', lv: 'l3', mech: 'wall', html:
+      head('強社交 · 宣言牆', 'l3') +
       '<h2>2026 年，我們會再見面吧</h2>' +
-      '<p>留一個小任務，給明年的你：' + d.cta + '。</p>' +
+      '<p>留一句給明年的你，也看看別人寫了什麼。</p>' +
+      '<div class="compose"><input type="text" id="wi" placeholder="例如：每週看完一個單元" maxlength="40" /><button id="wb" type="button">貼上牆</button></div>' +
+      '<div class="wall" id="wall"></div>' +
+      '<p class="fine">UGC 門檻最低的一種，但需要審核機制。建議先小量灰度。</p>' });
+
+    L.push({ nav: '收尾 CTA', lv: null, html:
+      head('卡 10 · 收尾與 CTA', null) +
+      '<h2>幫你設好第一個 2026 任務</h2>' +
+      '<p>' + d.cta + '。</p>' +
       '<div class="facts"><span class="fact">立刻挑一堂</span><span class="fact">看年末策展排行榜</span></div>' });
 
-    return list;
+    return L;
   }
+
+  var WALL = [
+    { t: '今年要把英文口說練到能開會', w: '一位知識投資家' },
+    { t: '每週一三五早上通勤聽課，不准偷懶', w: '一位圖書館裡的那個人' },
+    { t: '把去年買了沒看的 5 堂課清完', w: '一位潛力股' }
+  ];
 
   var card = document.getElementById('card');
   var nav = document.getElementById('nav');
   var pips = document.getElementById('pips');
   var counter = document.getElementById('counter');
-  var S = [], i = 0, key = 'buy';
+  var S = [], i = 0, cur = P.buy;
+
+  function binOf(v, max){
+    var b = Math.floor(v / max * HIST.length);
+    return Math.max(0, Math.min(HIST.length - 1, b));
+  }
+
+  function initScene(s){
+    if (s.mech === 'guessSpend'){
+      var gs = document.getElementById('gs'), gv = document.getElementById('gv');
+      gs.addEventListener('input', function(){ gv.textContent = 'NT$ ' + nf(+gs.value); });
+      document.getElementById('gb').addEventListener('click', function(){
+        var guess = +gs.value, real = cur.spend;
+        var diff = Math.round(Math.abs(real - guess) / Math.max(real, 1) * 100);
+        var word = guess < real ? '你猜低了' : guess > real ? '你猜高了' : '你完全猜中了';
+        document.getElementById('gr').innerHTML =
+          '<div class="verdict"><strong>實際是 NT$ ' + nf(real) + '</strong>' +
+          (diff === 0 ? '你對自己的投入掌握得很清楚。' : word + ' ' + diff + '%。' +
+            (guess < real ? '你花掉的，比你以為的更多——但那些都還在你身上。' : '你比自己想像的更節制。')) +
+          '</div>' + hist(cur.spendBin, binOf(guess, cur.spendMax));
+      });
+    }
+    if (s.mech === 'guessRank'){
+      var rs = document.getElementById('rs'), rv = document.getElementById('rv');
+      rs.addEventListener('input', function(){ rv.textContent = rs.value + '%'; });
+      document.getElementById('rb').addEventListener('click', function(){
+        var g = +rs.value, real = s.pct;
+        document.getElementById('rr').innerHTML =
+          '<div class="verdict"><strong>你其實贏過全站 ' + real + '% 的會員</strong>' +
+          (g < real ? '你猜 ' + g + '%，低估了自己 ' + (real - g) + ' 個百分點。' : g > real ? '你猜 ' + g + '%，比實際高了 ' + (g - real) + ' 個百分點。' : '你完全猜中了。') +
+          '</div>' +
+          '<div class="ruler"><div class="ruler-track">' +
+            '<span class="ruler-gate" style="left:' + s.gatePct + '%"><span>前 ' + (100 - s.gatePct) + '% 門檻</span></span>' +
+            '<span class="ruler-me" style="left:' + real + '%"><span>你 · 前 ' + (100 - real) + '%</span></span>' +
+          '</div><div class="ruler-scale"><span>全站中位</span><span>前 1%</span></div></div>' +
+          '<p><b>' + s.pool + ' 位活躍會員裡，你排第 ' + s.rank + ' 名。</b></p>' +
+          '<p class="fine">放心，這種打敗別人的方式很健康。</p>';
+      });
+    }
+    if (s.mech === 'pk'){
+      var render = function(){
+        var rows = [];
+        if (document.getElementById('k1').checked) rows.push({ k: cur.metric, l: nf(cur.hours), r: nf(Math.round(cur.hours * 0.62)), win: true });
+        if (document.getElementById('k2').checked) rows.push({ k: '領域重疊', l: '68%', r: '68%', win: false });
+        if (document.getElementById('k3').checked) rows.push({ k: '花費', l: 'NT$ ' + nf(cur.spend), r: 'NT$ ' + nf(Math.round(cur.spend * 0.8)), win: true });
+        var pk = document.getElementById('pk');
+        if (!rows.length){ pk.innerHTML = '<p class="fine">至少勾一項才能產生 PK 卡。</p>'; return; }
+        pk.innerHTML = '<div class="pk-row"><span class="l">你</span><span class="k">VS</span><span class="r">朋友</span></div>' +
+          rows.map(function(r){
+            return '<div class="pk-row' + (r.win ? ' win' : '') + '"><span class="l">' + r.l + '</span><span class="k">' + r.k + '</span><span class="r">' + r.r + '</span></div>';
+          }).join('');
+      };
+      ['k1','k2','k3'].forEach(function(id){ document.getElementById(id).addEventListener('change', render); });
+      document.getElementById('pkb').addEventListener('click', function(){
+        document.getElementById('pkmsg').textContent = '原型示意：實際會產生一次性連結，對方打開只看到你勾選的項目，7 天後失效。';
+      });
+      render();
+    }
+    if (s.mech === 'wall'){
+      var wall = document.getElementById('wall');
+      var draw = function(){
+        wall.innerHTML = WALL.map(function(w){
+          return '<div class="' + (w.mine ? 'mine' : '') + '">' + esc(w.t) + '<span>' + esc(w.w) + '</span></div>';
+        }).join('');
+      };
+      document.getElementById('wb').addEventListener('click', function(){
+        var el = document.getElementById('wi');
+        var t = el.value.trim();
+        if (!t) { el.focus(); return; }
+        WALL.unshift({ t: t, w: '你 · 剛剛', mine: true });
+        el.value = '';
+        draw();
+      });
+      draw();
+    }
+  }
 
   function build(k){
-    key = k;
-    S = scenes(P[k]);
+    cur = P[k];
+    S = scenes(cur);
     nav.innerHTML = '';
     pips.innerHTML = '';
     S.forEach(function(s, n){
       var li = document.createElement('li');
       var b = document.createElement('button');
       b.type = 'button';
-      b.innerHTML = '<span>' + s.nav + '</span>' + (s.flag === 'add' ? '<span class="newmark">新</span>' : '');
+      b.innerHTML = '<span>' + s.nav + '</span>' + (s.lv ? '<span class="lv ' + s.lv + '">' + s.lv.toUpperCase() + '</span>' : '');
       b.addEventListener('click', function(){ go(n); });
       li.appendChild(b);
       nav.appendChild(li);
@@ -527,6 +768,7 @@
     Array.prototype.forEach.call(pips.children, function(p, m){
       p.className = m === i ? 'on' : '';
     });
+    initScene(S[i]);
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('.switch button'), function(b){
@@ -542,6 +784,7 @@
   document.getElementById('next').addEventListener('click', function(){ go(i + 1); });
   document.getElementById('prev').addEventListener('click', function(){ go(i - 1); });
   document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
     if (e.key === 'ArrowRight') go(i + 1);
     if (e.key === 'ArrowLeft') go(i - 1);
   });
