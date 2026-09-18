@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>PPA 年度回顧 2025 原型</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" />
+<style>
+  :root{
+    --ink:#0c1020;
+    --veil:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.14);
+    --paper:#f2efe9;
+    --dim:#a7a9bd;
+    --amber:#f5a524;
+    --rose:#e8557f;
+    --violet:#6d63ff;
+    --mint:#3ddc97;
+    --serif:'Noto Serif TC','Songti TC',serif;
+    --sans:'Noto Sans TC',system-ui,-apple-system,sans-serif;
+    --num:'Bodoni Moda','Times New Roman',serif;
+  }
+  body{
+    background:
+      radial-gradient(120% 80% at 12% -10%, #1d2144 0%, rgba(29,33,68,0) 60%),
+      radial-gradient(100% 70% at 95% 105%, #3a1c33 0%, rgba(58,28,51,0) 55%),
+      var(--ink);
+    color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding-inline:20px;padding-block:40px 72px;}
+
+  .masthead{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .brandline{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);}
+  .stamp{font-family:var(--num);font-size:.9rem;letter-spacing:.06em;color:var(--amber);}
+  .lede{margin:20px 0 0;max-width:46em;color:#ddd9e4;font-size:.95rem;}
+  .lede b{font-weight:500;color:var(--paper);}
+
+  /* persona switch */
+  .switch{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center;}
+  .switch span.lbl{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-right:4px;}
+
+  .deck{margin-top:22px;display:grid;grid-template-columns:minmax(0,1fr) 256px;gap:26px;align-items:start;}
+  @media (max-width:860px){.deck{grid-template-columns:1fr;}}
+
+  .stage{position:relative;border:1px solid var(--line);border-radius:6px;
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+    padding:28px 26px 24px;min-height:470px;display:flex;flex-direction:column;overflow:hidden;}
+  .stage::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(70% 55% at 86% 6%,rgba(245,165,36,.15),transparent 70%);}
+  .card{position:relative;flex:1;display:flex;flex-direction:column;gap:16px;animation:rise .45s ease both;}
+  @keyframes rise{from{opacity:.3;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.card{animation:none;}}
+
+  .tagrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);}
+  .flag{font-size:.68rem;letter-spacing:.1em;padding:2px 9px;border-radius:100px;border:1px solid currentColor;}
+  .flag.keep{color:var(--dim);}
+  .flag.add{color:var(--mint);}
+  .card h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.4rem,4.2vw,2rem);line-height:1.4;text-wrap:balance;margin:0;}
+  .card p{margin:0;color:#ddd9e4;max-width:34em;font-size:.98rem;}
+  .card p b{font-weight:500;color:var(--paper);}
+  .fine{font-size:.82rem;color:var(--dim);}
+  .bignum{font-family:var(--num);font-weight:700;font-size:clamp(2.8rem,12vw,5rem);line-height:.92;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .bignum small{font-family:var(--sans);font-size:.95rem;font-weight:400;letter-spacing:.08em;margin-left:10px;color:var(--dim);}
+  .facts{display:flex;flex-wrap:wrap;gap:9px;margin-top:auto;}
+  .fact{border:1px solid var(--line);border-radius:100px;padding:5px 14px;font-size:.83rem;color:#e6e2ec;background:var(--veil);}
+  .fact b{font-family:var(--num);font-weight:700;}
+
+  .ruler{margin:2px 0 4px;}
+  .ruler-track{position:relative;height:10px;border-radius:100px;background:linear-gradient(90deg,#2a2f4d,#6d63ff 62%,#e8557f 88%,#f5a524);}
+  .ruler-me{position:absolute;top:-9px;width:2px;height:28px;background:var(--paper);}
+  .ruler-me span{position:absolute;top:-25px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;letter-spacing:.05em;}
+  .ruler-gate{position:absolute;top:-4px;width:2px;height:18px;background:var(--mint);}
+  .ruler-gate span{position:absolute;top:18px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.7rem;color:var(--mint);}
+  .ruler-scale{display:flex;justify-content:space-between;margin-top:30px;font-size:.72rem;color:var(--dim);font-variant-numeric:tabular-nums;}
+
+  .bars{display:flex;flex-direction:column;gap:10px;}
+  .bar-row{display:grid;grid-template-columns:118px minmax(0,1fr) 86px;gap:10px;align-items:center;font-size:.86rem;}
+  .bar-row .who{color:var(--dim);}
+  .bar-row.me .who{color:var(--paper);font-weight:500;}
+  .bar-shell{height:13px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;}
+  .bar-fill{height:100%;background:#4a4f78;}
+  .bar-row.me .bar-fill{background:linear-gradient(90deg,var(--rose),var(--amber));}
+  .bar-val{text-align:right;font-family:var(--num);font-weight:700;font-variant-numeric:tabular-nums;}
+
+  .mix{display:flex;height:16px;border-radius:3px;overflow:hidden;}
+  .mix i{display:block;}
+  .mix-key{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.83rem;color:#ddd9e4;}
+  .mix-key span{display:inline-flex;align-items:center;gap:7px;}
+  .dot{width:9px;height:9px;border-radius:2px;display:block;}
+
+  .clock{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;align-items:end;height:74px;max-width:520px;}
+  .clock i{display:block;background:var(--violet);border-radius:1px 1px 0 0;}
+  .clock i.peak{background:var(--amber);}
+  .clock-scale{display:flex;justify-content:space-between;max-width:520px;font-size:.7rem;color:var(--dim);margin-top:6px;font-variant-numeric:tabular-nums;}
+
+  .yoy{display:flex;flex-direction:column;gap:14px;}
+  .yoy-row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center;}
+  .yoy-row span{font-size:.84rem;color:var(--dim);}
+  .yoy-row.now span{color:var(--paper);}
+  .yoy-bar{height:26px;border-radius:3px;background:rgba(255,255,255,.08);position:relative;}
+  .yoy-bar i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:#4a4f78;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--num);font-weight:700;font-size:.85rem;}
+  .yoy-row.now .yoy-bar i{background:linear-gradient(90deg,var(--violet),var(--mint));color:#0c1020;}
+
+  .tiers{display:grid;gap:9px;}
+  .tier{border-left:2px solid var(--line);padding:1px 0 1px 13px;}
+  .tier b{display:block;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:500;}
+  .tier.mid b{color:var(--violet);}
+  .tier.low b{color:var(--mint);}
+  .tier em{font-style:normal;color:#e6e2ec;font-size:.92rem;}
+
+  .clip{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:14px;background:var(--veil);max-width:420px;}
+  .clip .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));flex:none;}
+  .clip div strong{display:block;font-weight:500;}
+  .clip div span{font-size:.82rem;color:var(--dim);}
+
+  .controls{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  button{font-family:inherit;font-size:.88rem;color:var(--paper);background:var(--veil);border:1px solid var(--line);border-radius:100px;padding:7px 17px;cursor:pointer;transition:background .18s,border-color .18s;}
+  button:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);}
+  button:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+  button[aria-pressed="true"]{background:rgba(245,165,36,.18);border-color:var(--amber);}
+  .counter{font-family:var(--num);font-weight:700;font-size:.88rem;color:var(--dim);font-variant-numeric:tabular-nums;}
+  .pips{display:flex;gap:4px;margin-left:auto;}
+  .pips i{width:16px;height:3px;border-radius:2px;background:rgba(255,255,255,.18);display:block;}
+  .pips i.on{background:var(--amber);}
+
+  .rail{border:1px solid var(--line);border-radius:6px;padding:18px 16px;background:rgba(255,255,255,.03);}
+  .rail h3{font-family:var(--serif);font-size:.98rem;font-weight:600;margin:0 0 4px;}
+  .rail .hint{font-size:.78rem;color:var(--dim);margin:0 0 12px;line-height:1.6;}
+  .rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;counter-reset:s;}
+  .rail li{counter-increment:s;}
+  .rail li button{display:flex;gap:9px;width:100%;text-align:left;border:0;background:transparent;border-radius:4px;padding:6px 9px;font-size:.84rem;color:var(--dim);}
+  .rail li button::before{content:counter(s);font-family:var(--num);font-weight:700;color:rgba(255,255,255,.35);}
+  .rail li button:hover{background:var(--veil);color:var(--paper);}
+  .rail li button[aria-current="true"]{background:rgba(245,165,36,.14);color:var(--paper);}
+  .rail li button[aria-current="true"]::before{color:var(--amber);}
+  .rail .newmark{color:var(--mint);margin-left:auto;font-size:.72rem;}
+
+  .spec{margin-top:56px;border-top:1px solid var(--line);padding-top:32px;}
+  .spec h2{font-family:var(--serif);font-size:1.32rem;font-weight:600;margin:0 0 6px;}
+  .spec > p{color:var(--dim);font-size:.9rem;margin:0 0 20px;max-width:52em;}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;}
+  table{border-collapse:collapse;width:100%;min-width:680px;font-size:.86rem;}
+  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;}
+  th{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:500;background:rgba(255,255,255,.04);}
+  tbody tr:last-child td{border-bottom:0;}
+  td b{font-weight:500;color:var(--paper);}
+  td.new{color:var(--mint);}
+  .guard{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+  .guard div{border-top:2px solid var(--rose);padding-top:11px;}
+  .guard h4{margin:0 0 3px;font-size:.9rem;font-weight:500;}
+  .guard p{margin:0;font-size:.83rem;color:var(--dim);}
+  .asks{margin-top:30px;display:grid;gap:8px;}
+  .asks h2{margin-bottom:8px;}
+  .ask{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.88rem;color:#ddd9e4;}
+  .ask i{font-family:var(--num);font-weight:700;color:var(--amber);font-style:normal;}
+  .foot{margin-top:40px;font-size:.79rem;color:var(--dim);border-top:1px solid var(--line);padding-top:14px;}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="brandline">PPA 2025 年度回顧 · 互動原型</div>
+    <div class="stamp">假數據示意 · 手機直式為主</div>
+  </header>
+  <p class="lede">沿用企劃書的三標籤稱號卡架構，接上<b>比較與門檻模組</b>：排名之後一定給得到的下一階，並補上企劃書尚未覆蓋的<b>中長尾用戶版本</b>與<b>去年的自己</b>。標了 <span style="color:var(--mint)">新增</span> 的是這次提出的，其餘沿用企劃書。</p>
+
+  <div class="switch" role="group" aria-label="切換標籤">
+    <span class="lbl">標籤</span>
+    <button type="button" data-p="buy" aria-pressed="true">愛買課 · 知識投資家</button>
+    <button type="button" data-p="learn" aria-pressed="false">愛學習 · 圖書館裡的那個人</button>
+    <button type="button" data-p="social" aria-pressed="false">愛互動 · 平台存在感代表</button>
+    <button type="button" data-p="tail" aria-pressed="false">中長尾 · 潛力股（新增）</button>
+  </div>
+
+  <div class="deck">
+    <section class="stage" aria-live="polite">
+      <div class="card" id="card"></div>
+      <div class="controls">
+        <button id="prev" type="button">← 上一張</button>
+        <button id="next" type="button">下一張 →</button>
+        <span class="counter" id="counter"></span>
+        <span class="pips" id="pips" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <aside class="rail">
+      <h3>卡片動線</h3>
+      <p class="hint">先給稱號與肯定，第 6 張才進排名，第 7 張立刻給門檻。焦慮只放在這兩張之間，且一定有出口。</p>
+      <ol id="nav"></ol>
+    </aside>
+  </div>
+
+  <section class="spec">
+    <h2>沿用 × 新增對照</h2>
+    <p>企劃書已完成的部分照用，包含三標籤稱號、時段文案、TOP 榜、老師 Clips 接通、2026 小承諾。以下是這次補的四塊，以及對應要備的欄位。</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>模組</th><th>狀態</th><th>做法</th><th>需要的數據欄位</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>全站百分位</b></td><td>沿用</td><td>「打敗全站 X% 會員」＋小字「這種打敗別人的方式很健康」</td><td>消費／點擊／互動百分位</td></tr>
+          <tr><td><b>排名具體化</b></td><td class="new">新增</td><td>百分位加上名次與分母：前 12%＝12.4 萬人中第 14,880 名。抽象比例沒有名次有感</td><td>rank、當期活躍會員總數</td></tr>
+          <tr><td><b>下一階門檻</b></td><td class="new">新增</td><td>排名卡後緊接「再 X 就進前 Y%」，並換算成每週可執行量。焦慮沒有出口只會轉成退訂</td><td>各百分位級距的門檻值</td></tr>
+          <tr><td><b>去年的自己</b></td><td class="new">新增</td><td>同比成長率，是唯一對所有分群都安全的比較對象</td><td>2024 同欄位數據</td></tr>
+          <tr><td><b>中長尾版本</b></td><td class="new">新增</td><td>企劃書三標籤只覆蓋前 10%／30%，其餘多數人沒有版本。給第四種稱號「潛力股」，不顯示任何排名，只跟去年的自己比＋最小承諾</td><td>是否具備任一標籤的判定邏輯</td></tr>
+          <tr><td><b>參照群體</b></td><td class="new">新增</td><td>比較對象從全站改為同標籤群體，參照群體越近動力越強</td><td>標籤內百分位</td></tr>
+          <tr><td><b>分享卡</b></td><td>沿用（調整）</td><td>上次分享成效差，因為分享的是戰績。改成只分享稱號與人格，數字預設不進圖</td><td>稱號、人格類型</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="guard">
+      <div>
+        <h4>永遠不顯示負向排名</h4>
+        <p>沒有「你落後 70% 的人」。低使用量用戶一律改用同比與最小承諾，這是避免回顧變成羞辱的底線。</p>
+      </div>
+      <div>
+        <h4>排名後面必接門檻</h4>
+        <p>第 6、7 張是一組，不可拆開投放。只給排名不給下一階，等於製造無處可去的焦慮。</p>
+      </div>
+      <div>
+        <h4>門檻要可達</h4>
+        <p>下一階設定在用戶當前水準往上一級，並換算成每週執行量（每週 1 小時、每月 1 堂），不要跳級。</p>
+      </div>
+      <div>
+        <h4>金額類比要留台階</h4>
+        <p>「少買 X 件衣服」對高消費用戶有後悔風險，文案要收在「學到的拿去賺回來」，不能停在花費本身。</p>
+      </div>
+    </div>
+
+    <div class="asks">
+      <h2>需要先確認的事</h2>
+      <div class="ask"><i>1</i><span>百分位級距的實際分佈：前 5%／10%／30% 的門檻值各是多少，才寫得出「再 X 就到」。這題要跟數據負責人一起拉。</span></div>
+      <div class="ask"><i>2</i><span>2024 同欄位資料是否可取得，決定「去年的自己」這張卡能不能做。</span></div>
+      <div class="ask"><i>3</i><span>沒有任何標籤的用戶佔比多少。若超過六成，中長尾版本就不是備案而是主版本。</span></div>
+      <div class="ask"><i>4</i><span>裝置取向：原型以手機直式為主、桌機為輔。90 支 Clips 的套版自動化要另外評估。</span></div>
+    </div>
+
+    <p class="foot">原型數據為假資料。企劃來源：2025 用戶年度回顧頁面企劃。</p>
+  </section>
+</div>
+
+<script>
+  var P = {
+    buy: {
+      name: '知識投資家',
+      title: '2025，你的 PPA 頭銜是：知識投資家',
+      sub: '成為自己腦袋最大的股東',
+      persona: '半夜焦慮派',
+      days: 187, peakHour: 23, peakLabel: '23:00–01:59',
+      hero: { n: '38,400', unit: '元', line: '今年，你為自己的腦袋砸了 NT$38,400。如果腦袋可以上市，你就是最大股東。' },
+      unitName: '消費金額',
+      pct: 88, gatePct: 95, rank: '14,880', pool: '124,000',
+      gateLine: '再買 1 堂 4,200 元的課，你就進全站前 5%',
+      gateWeek: '或是把訂閱續到明年 3 月，一樣到。',
+      peers: [
+        { who: '你', v: 38400, me: true },
+        { who: '知識投資家中位', v: 21000 },
+        { who: '全站中位', v: 3600 },
+        { who: '去年的你', v: 24600 }
+      ],
+      yoy: [ { y: '2024', v: 24600 }, { y: '2025', v: 38400, now: true } ],
+      yoyLine: '比去年多投資了 56%。你不是突然變有錢，是把錢換了方向。',
+      mix: [
+        { name: '職涯發展', pct: 41, c: '#f5a524' },
+        { name: '投資理財', pct: 27, c: '#e8557f' },
+        { name: '商業思維', pct: 21, c: '#6d63ff' },
+        { name: '其他', pct: 11, c: '#3ddc97' }
+      ],
+      mixLine: '你的投資組合裡，最重倉的是「職涯發展」。看起來你不只投資股票，也在加倉自己。',
+      facts: ['帶走 <b>14</b> 堂課', '平均每 <b>26</b> 天再投資一次', '<b>3 月</b>最失控，一口氣 4 堂'],
+      top: '郭哲佑',
+      cta: '選一堂一直想上的課，1 月完成第一單元'
+    },
+    learn: {
+      name: '圖書館裡的那個人',
+      title: '2025，你的 PPA 頭銜是：圖書館裡的那個人',
+      sub: '默默且持續學習的人',
+      persona: '穩定通勤派',
+      days: 214, peakHour: 8, peakLabel: '06:00–10:59',
+      hero: { n: '1,208', unit: '則內容', line: '2025，你總共點開了 1,208 篇課程影片或文章。平均每 0.3 天，就會對世界多一點好奇。' },
+      unitName: '點擊與學習時間',
+      pct: 91, gatePct: 95, rank: '11,160', pool: '124,000',
+      gateLine: '再看完 6 個單元，你就進全站前 5%',
+      gateWeek: '一週兩個單元，三週就到。',
+      peers: [
+        { who: '你', v: 1208, me: true },
+        { who: '靜靜看課派中位', v: 640 },
+        { who: '全站中位', v: 96 },
+        { who: '去年的你', v: 870 }
+      ],
+      yoy: [ { y: '2024', v: 870 }, { y: '2025', v: 1208, now: true } ],
+      yoyLine: '比去年多點開 39% 的內容，而且完成率也一起上去了。',
+      mix: [
+        { name: '影片', pct: 62, c: '#6d63ff' },
+        { name: '文章', pct: 31, c: '#f5a524' },
+        { name: '直播重播', pct: 7, c: '#3ddc97' }
+      ],
+      mixLine: '在所有被你點開的內容裡，有 74% 被你看完。對一個活在注意力經濟時代的人來說，這個數字非常不合理地認真。',
+      facts: ['完成率 <b>74%</b>', '上站 <b>214</b> 天', '最捨不得略過：<b>語言學習</b>'],
+      top: '楊斯棓',
+      cta: '把只剩 2 堂就完課的那 3 門收掉'
+    },
+    social: {
+      name: '平台存在感代表',
+      title: '2025，你的 PPA 頭銜是：平台存在感代表',
+      sub: '你沒出現的那天，系統都會覺得怪怪的',
+      persona: '假日學習派',
+      days: 246, peakHour: 21, peakLabel: '19:00–22:59',
+      hero: { n: '932', unit: '次互動', line: '2025，你總共參與了 932 次活動。等於平均每 0.4 天就來刷一次存在感。' },
+      unitName: '參與活躍度',
+      pct: 96, gatePct: 99, rank: '4,960', pool: '124,000',
+      gateLine: '再互動 74 次，你就進全站前 1%',
+      gateWeek: '維持你現在的節奏，一個月就到。',
+      peers: [
+        { who: '你', v: 932, me: true },
+        { who: '吵鬧系中位', v: 310 },
+        { who: '全站中位', v: 42 },
+        { who: '去年的你', v: 604 }
+      ],
+      yoy: [ { y: '2024', v: 604 }, { y: '2025', v: 932, now: true } ],
+      yoyLine: '比去年多 54%。每 133 次站內互動就有 1 則來自你，你不只是學生，更是場控。',
+      mix: [
+        { name: '簽到', pct: 48, c: '#3ddc97' },
+        { name: '留言', pct: 26, c: '#e8557f' },
+        { name: '知識王', pct: 18, c: '#6d63ff' },
+        { name: '抽獎', pct: 8, c: '#f5a524' }
+      ],
+      mixLine: '你是名副其實的「簽到狂」：看到簽到，手比大腦更快按下去。',
+      facts: ['留言 <b>18,400</b> 字', '知識王正確率 <b>71%</b>', '最常出現在 <b>張修修</b> 的留言區'],
+      top: '張修修',
+      cta: '報名 1 月的第一場直播'
+    },
+    tail: {
+      name: '潛力股',
+      title: '2025，你的 PPA 頭銜是：潛力股',
+      sub: '你已經開始了，這比什麼都難',
+      persona: '臨時抱佛腳派',
+      days: 23, peakHour: 22, peakLabel: '19:00–22:59',
+      hero: { n: '4', unit: '個單元', line: '今年你看完了 4 個單元。數字不大，但那是從零開始的 4 個。' },
+      unitName: '學習量',
+      pct: null, gatePct: null, rank: null, pool: null,
+      gateLine: '每週 30 分鐘，就能養成一個撐得住的習慣',
+      gateWeek: '我們幫你挑了一堂 22 分鐘就能看完的課。',
+      peers: null,
+      yoy: [ { y: '2024', v: 1 }, { y: '2025', v: 4, now: true } ],
+      yoyLine: '去年你看完 1 個單元，今年 4 個。成長 4 倍的人不多，你是其中一個。',
+      mix: [
+        { name: '職涯發展', pct: 75, c: '#f5a524' },
+        { name: '興趣生活', pct: 25, c: '#3ddc97' }
+      ],
+      mixLine: '你點開的內容幾乎都跟工作有關，看來你想解決的是很實際的問題。',
+      facts: ['上站 <b>23</b> 天', '收藏了 <b>7</b> 堂課', '最想學：<b>簡報技巧</b>'],
+      top: '林長揚',
+      cta: '從收藏清單挑 1 堂，1 月看完第一單元'
+    }
+  };
+
+  function clock(peak){
+    var s = '', base = [4,3,2,2,3,6,14,26,34,30,22,26,34,30,24,22,26,34,44,56,64,72,58,32];
+    for (var h = 0; h < 24; h++){
+      var v = h === peak ? 82 : base[h];
+      s += '<i class="' + (h === peak ? 'peak' : '') + '" style="height:' + v + '%"></i>';
+    }
+    return '<div class="clock" aria-hidden="true">' + s + '</div>' +
+      '<div class="clock-scale"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>';
+  }
+
+  function bars(rows, unit){
+    var max = 0;
+    rows.forEach(function(r){ if (r.v > max) max = r.v; });
+    var s = '';
+    rows.forEach(function(r){
+      s += '<div class="bar-row' + (r.me ? ' me' : '') + '">' +
+        '<span class="who">' + r.who + '</span>' +
+        '<span class="bar-shell"><span class="bar-fill" style="width:' + Math.round(r.v / max * 100) + '%"></span></span>' +
+        '<span class="bar-val">' + r.v.toLocaleString('en-US') + '</span></div>';
+    });
+    return '<div class="bars">' + s + '</div><p class="fine">比較對象用同標籤群體，不用全站。' + unit + '單位下，參照群體越近，動力越強。</p>';
+  }
+
+  function yoy(rows, line){
+    var max = 0;
+    rows.forEach(function(r){ if (r.v > max) max = r.v; });
+    var s = '';
+    rows.forEach(function(r){
+      s += '<div class="yoy-row' + (r.now ? ' now' : '') + '"><span>' + r.y + '</span>' +
+        '<span class="yoy-bar"><i style="width:' + Math.max(12, Math.round(r.v / max * 100)) + '%">' +
+        r.v.toLocaleString('en-US') + '</i></span></div>';
+    });
+    return '<div class="yoy">' + s + '</div><p>' + line + '</p>';
+  }
+
+  function mix(d){
+    var b = '', k = '';
+    d.mix.forEach(function(m){
+      b += '<i style="width:' + m.pct + '%;background:' + m.c + '"></i>';
+      k += '<span><i class="dot" style="background:' + m.c + '"></i>' + m.name + ' ' + m.pct + '%</span>';
+    });
+    return '<div class="mix" aria-hidden="true">' + b + '</div><div class="mix-key">' + k + '</div><p>' + d.mixLine + '</p>';
+  }
+
+  function head(eyebrow, flag){
+    return '<div class="tagrow"><span class="eyebrow">' + eyebrow + '</span>' +
+      (flag === 'add' ? '<span class="flag add">新增</span>' : '<span class="flag keep">沿用企劃書</span>') + '</div>';
+  }
+
+  function scenes(d){
+    var list = [
+      { nav: '開場稱號卡', flag: 'keep', html:
+        head('卡 1 · 開場稱號', 'keep') +
+        '<h2>' + d.title + '</h2>' +
+        '<p>' + d.sub + '</p>' +
+        '<p class="fine">你的存在，讓演算法以為你是全職學生。</p>' +
+        '<div class="facts">' + d.facts.map(function(f){ return '<span class="fact">' + f + '</span>'; }).join('') + '</div>' },
+
+      { nav: '關係狀態', flag: 'keep', html:
+        head('卡 2 · 你和平台的關係狀態', 'keep') +
+        '<h2>今年，我們到底見了幾次面</h2>' +
+        '<div class="bignum">' + d.days + '<small>天</small></div>' +
+        '<p>今年你打開平台共 ' + d.days + ' 天。以這個頻率來看，你跟我的關係不算普通朋友。</p>' +
+        '<p class="fine">最常上線時段：' + d.peakLabel + '</p>' },
+
+      { nav: '學習人格', flag: 'keep', html:
+        head('卡 3 · 你今年的學習人格', 'keep') +
+        '<h2>你是典型的「' + d.persona + '」</h2>' +
+        clock(d.peakHour) +
+        '<p>偷偷觀察一年後的結論是：你的學習幾乎都發生在 ' + d.peakLabel + '。但沒關係，只要有學就好。</p>' +
+        '<div class="facts"><span class="fact">分享這張卡</span><span class="fact">只分享稱號，數字不進圖</span></div>' },
+
+      { nav: '標籤重點', flag: 'keep', html:
+        head('卡 4 · 標籤專屬重點', 'keep') +
+        '<div class="bignum">' + d.hero.n + '<small>' + d.hero.unit + '</small></div>' +
+        '<p>' + d.hero.line + '</p>' },
+
+      { nav: '主題分佈', flag: 'keep', html:
+        head('卡 5 · 你的主題分佈', 'keep') +
+        '<h2>你今年最上心的方向</h2>' +
+        mix(d) }
+    ];
+
+    if (d.pct !== null){
+      list.push({ nav: '全站排名', flag: 'keep', html:
+        head('卡 6 · 全站排名', 'keep') +
+        '<h2>你的' + d.unitName + '<br>打敗了全站 ' + d.pct + '% 的會員</h2>' +
+        '<div class="ruler"><div class="ruler-track">' +
+          '<span class="ruler-gate" style="left:' + d.gatePct + '%"><span>前 ' + (100 - d.gatePct) + '% 門檻</span></span>' +
+          '<span class="ruler-me" style="left:' + d.pct + '%"><span>你 · 前 ' + (100 - d.pct) + '%</span></span>' +
+        '</div><div class="ruler-scale"><span>全站中位</span><span>前 1%</span></div></div>' +
+        '<p><b>換句話說：' + d.pool + ' 位活躍會員裡，你排第 ' + d.rank + ' 名。</b><span class="flag add" style="margin-left:8px">名次為新增</span></p>' +
+        '<p class="fine">有些人只會說「明年再說」，但你顯然比其他人更相信自己的未來。放心，這種打敗別人的方式很健康。</p>' });
+
+      list.push({ nav: '下一階門檻', flag: 'add', html:
+        head('卡 7 · 下一階門檻', 'add') +
+        '<h2>' + d.gateLine + '</h2>' +
+        '<p>' + d.gateWeek + ' 排名後面一定要接一個做得到的下一步，焦慮才會變成動力。</p>' +
+        '<div class="tiers">' +
+          '<div class="tier"><b>前 20% 用戶看到</b><em>' + d.gateLine + '</em></div>' +
+          '<div class="tier mid"><b>中段用戶看到</b><em>你比去年的自己成長了，再一點就追上同標籤前 30%</em></div>' +
+          '<div class="tier low"><b>中長尾用戶看到</b><em>每週 30 分鐘，就能養成一個撐得住的習慣（不顯示任何排名）</em></div>' +
+        '</div>' });
+
+      list.push({ nav: '同標籤比較', flag: 'add', html:
+        head('卡 7.5 · 同標籤比較', 'add') +
+        '<h2>跟你同一類的人，長什麼樣</h2>' +
+        bars(d.peers, d.unitName) });
+    }
+
+    list.push({ nav: '去年的自己', flag: 'add', html:
+      head('卡 8 · 去年的自己', 'add') +
+      '<h2>跟去年的你比</h2>' +
+      yoy(d.yoy, d.yoyLine) +
+      '<p class="fine">這是唯一對所有分群都安全的比較對象，也是中長尾用戶唯一會看到的比較。</p>' });
+
+    list.push({ nav: 'TOP 榜 + Clips', flag: 'keep', html:
+      head('卡 9 · 年度 TOP 榜', 'keep') +
+      '<h2>2025 聽說你最信他</h2>' +
+      '<p>今年你最麻吉的老師是「' + d.top + '」，看來他講的話，比你主管還有說服力。</p>' +
+      '<div class="clip"><span class="av" aria-hidden="true"></span><div><strong>' + d.top + ' 來電</strong><span>接通後播放老師的年度 Clips</span></div></div>' +
+      '<p class="fine">只能按接通，播完才進下一張。90 支 Clips 的套版自動化需另外評估。</p>' });
+
+    list.push({ nav: '2026 小承諾', flag: 'keep', html:
+      head('卡 10 · 收尾與 CTA', 'keep') +
+      '<h2>2026 年，我們會再見面吧</h2>' +
+      '<p>留一個小任務，給明年的你：' + d.cta + '。</p>' +
+      '<div class="facts"><span class="fact">立刻挑一堂</span><span class="fact">看年末策展排行榜</span></div>' });
+
+    return list;
+  }
+
+  var card = document.getElementById('card');
+  var nav = document.getElementById('nav');
+  var pips = document.getElementById('pips');
+  var counter = document.getElementById('counter');
+  var S = [], i = 0, key = 'buy';
+
+  function build(k){
+    key = k;
+    S = scenes(P[k]);
+    nav.innerHTML = '';
+    pips.innerHTML = '';
+    S.forEach(function(s, n){
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.innerHTML = '<span>' + s.nav + '</span>' + (s.flag === 'add' ? '<span class="newmark">新</span>' : '');
+      b.addEventListener('click', function(){ go(n); });
+      li.appendChild(b);
+      nav.appendChild(li);
+      pips.appendChild(document.createElement('i'));
+    });
+    go(Math.min(i, S.length - 1));
+  }
+
+  function go(n){
+    i = (n + S.length) % S.length;
+    card.innerHTML = S[i].html;
+    counter.textContent = (i + 1) + ' / ' + S.length;
+    Array.prototype.forEach.call(nav.querySelectorAll('li > button'), function(b, m){
+      b.setAttribute('aria-current', m === i ? 'true' : 'false');
+    });
+    Array.prototype.forEach.call(pips.children, function(p, m){
+      p.className = m === i ? 'on' : '';
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.switch button'), function(b){
+    b.addEventListener('click', function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.switch button'), function(o){
+        o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+      });
+      i = 0;
+      build(b.getAttribute('data-p'));
+    });
+  });
+
+  document.getElementById('next').addEventListener('click', function(){ go(i + 1); });
+  document.getElementById('prev').addEventListener('click', function(){ go(i - 1); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') go(i + 1);
+    if (e.key === 'ArrowLeft') go(i - 1);
+  });
+
+  build('buy');
+</script>
+
+</body>
+</html>
