@@ -226,17 +226,14 @@
 <div class="wrap">
   <header class="masthead">
     <div class="brandline">PPA 2025 年度回顧 · 互動原型</div>
-    <div class="stamp">假數據示意 · 手機直式為主</div>
+    <div class="stamp">階級分佈為真實數據 · 個人數字為推算輪廓</div>
   </header>
-  <p class="lede">沿用企劃書的三標籤稱號卡架構，四個面向<b>花費、學習時間、追蹤老師、買課領域</b>各配一組互動。本期範圍定案為 <b>L1 頁內互動</b>（滑桿、猜測、圖鑑）與 <b>L2 弱社交</b>（只用彙總數據，無隱私問題）；PK 連結、宣言牆等強社交機制留到第二期。滑桿與選項都可以實際操作。</p>
+  <p class="lede">五個會員階級的<b>人數、佔比、ARPU、升級與保級門檻</b>取自 2026_PPA_會員分級機制（總會員 1,770,518）。個別會員的時數、老師與領域數字是依各階級 ARPU 推算的代表輪廓，<b>不是真實個人資料</b>。本期互動範圍定案為 L1 頁內互動與 L2 弱社交，滑桿與選項都可以實際操作。</p>
 
-  <div class="switch" role="group" aria-label="切換標籤">
-    <span class="lbl">標籤</span>
-    <button type="button" data-p="buy" aria-pressed="true">愛買課 · 知識投資家</button>
-    <button type="button" data-p="learn" aria-pressed="false">愛學習 · 圖書館裡的那個人</button>
-    <button type="button" data-p="social" aria-pressed="false">愛互動 · 平台存在感代表</button>
-    <button type="button" data-p="tail" aria-pressed="false">中長尾 · 潛力股</button>
+  <div class="switch" role="group" aria-label="切換會員階級" id="tierRow">
+    <span class="lbl">階級</span>
   </div>
+  <div class="switch" role="group" aria-label="切換輪廓" id="profRow"></div>
 
   <div class="deck">
     <section class="stage" aria-live="polite">
@@ -262,199 +259,88 @@
   </div>
 
   <section class="spec">
-    <h2>本期範圍：L1 + L2</h2>
-    <p>同一個機制套在不同面向上效果差很多。花費適合「猜了再揭曉」但不適合跟其他用戶比；學習時間和領域則是彙總比較的主場。最右欄的 L3 本期不做，列出來是為了讓第二期有方向。</p>
+    <h2>真實分佈打掉的兩個假設</h2>
+    <p>把 2026_PPA_會員分級機制的數字接進來之後，原本的設計有兩處撐不住。這兩件事在拿到真實分佈之前都看不出來。</p>
     <div class="tablewrap">
       <table>
         <thead>
-          <tr><th>面向</th><th>L1 頁內互動 · 本期</th><th>L2 弱社交 · 本期</th><th>L3 · 第二期</th><th>需要的欄位</th></tr>
+          <tr><th>階級</th><th>消費級距</th><th>會員數</th><th>佔比</th><th>ARPU</th><th>升級／保級門檻</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td><b>花費</b></td>
-            <td class="l1">猜猜你今年花多少 → 揭曉落差，猜測同時標在分佈圖上</td>
-            <td class="l2">全站分佈直方圖標出你的級距（不顯示排名）</td>
-            <td class="l3">不建議做 PK</td>
-            <td>年度總金額、金額分佈直方圖</td>
-          </tr>
-          <tr>
-            <td><b>學習時間</b></td>
-            <td class="l1">猜自己的排名 → 揭曉＋名次</td>
-            <td class="l2">同標籤中位疊圖、同班同學數、時段分佈對照</td>
-            <td class="l3">時數 PK 連結、宣言牆</td>
-            <td>總時數、百分位、時段分佈、同標籤中位</td>
-          </tr>
-          <tr>
-            <td><b>追蹤老師</b></td>
-            <td class="l1">刮開「你最麻吉的老師」＋接通 Clips</td>
-            <td class="l2">你在他學生中排前 X%、他還有幾堂你沒上</td>
-            <td class="l3">老師端回顧：讓老師看到 Top 學生</td>
-            <td>老師觀看時數、學生內排名、該老師未購課程</td>
-          </tr>
-          <tr>
-            <td><b>買課領域</b></td>
-            <td class="l1">猜主戰場 → 領域圖鑑解鎖格揭曉</td>
-            <td class="l2">同類人也在學、品味重疊度推薦</td>
-            <td class="l3">品味雙胞胎（匿名）</td>
-            <td>子分類購買分佈、協同過濾清單</td>
-          </tr>
+          <tr><td><b>石頭</b></td><td>無消費 / 0 元專案</td><td>1,198,044</td><td class="l3">67.6%</td><td>NT$0</td><td>首購即進青銅</td></tr>
+          <tr><td><b>青銅</b></td><td>NT$1–4,999</td><td>348,002</td><td>19.7%</td><td>NT$2,580</td><td>累積 5,000 升白銀</td></tr>
+          <tr><td><b>白銀</b></td><td>NT$5,000–19,999</td><td>160,852</td><td>9.1%</td><td>NT$9,813</td><td>累積 20,000 升鉑金</td></tr>
+          <tr><td><b>鉑金</b></td><td>NT$20,000–39,999</td><td>35,357</td><td>2.0%</td><td>NT$27,946</td><td>累積 40,000 升黑鑽</td></tr>
+          <tr><td><b>黑鑽</b></td><td>NT$40,000 以上</td><td>28,263</td><td>1.6%</td><td class="l2">NT$81,563</td><td>12 個月消費 10,000 或 Plus 訂閱</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="guard">
       <div>
-        <h4>花費不做用戶間比較</h4>
-        <p>「你比 88% 的人更願意花錢」對高消費者是肯定，對中間層是罪惡感，而且會讓人重新檢視自己刷了多少。花費只做猜測揭曉、同比與價值換算。</p>
+        <h4>石頭是主版本，不是備案</h4>
+        <p>67.6%、將近 120 萬人沒有任何消費紀錄。同事企劃的三個標籤（消費前 10%、點擊前 10%、互動前 30%）加起來覆蓋不到全站 15%。石頭版本要先做完，其他四階級才是加值。</p>
       </div>
       <div>
-        <h4>排名後面必接門檻</h4>
-        <p>第 6、7 張是一組，不可拆開投放。只給排名不給下一階，等於製造無處可去的焦慮。</p>
+        <h4>門檻改用階級，不用百分位</h4>
+        <p>「再 12 小時進前 5%」是我編的；「再 2,420 元升白銀，每月多一張 9 折券」是制度裡現成的。後者具體、可達、還附權益，強度差很多。</p>
       </div>
       <div>
-        <h4>永遠不顯示負向排名</h4>
-        <p>沒有「你落後 70% 的人」。中長尾用戶一律改用同比與最小承諾，切標籤到「潛力股」可以看到那一版。</p>
+        <h4>黑鑽保級卡是最值錢的一張</h4>
+        <p>黑鑽隔年留存率 64%，流失的 36% 約 1 萬人、ARPU 8 萬。年度回顧是保級提醒的天然載體，比單獨發催繳信自然得多。語氣要用「重新點亮」而不是「降級」。</p>
+      </div>
+      <div>
+        <h4>比較基準是階級內</h4>
+        <p>黑鑽 ARPU 81,563 是鉑金的 2.9 倍。對黑鑽說「你贏過 98% 的人」全階級都一樣，沒有資訊量。要比就比階級內與相鄰階級。</p>
+      </div>
+      <div>
+        <h4>石頭階級不出現任何金額</h4>
+        <p>連「猜猜你花多少」都不行。對還沒消費的人談錢或排名，回顧就變成催繳單。切到石頭那兩個輪廓可以看到那一版長什麼樣。</p>
       </div>
       <div>
         <h4>猜測不能連續三張</h4>
-        <p>三個猜測機制刻意分散在花費、排名、領域三段，中間用肯定與彙總卡隔開。連續猜會變成問卷，用戶直接跳過。</p>
-      </div>
-      <div>
-        <h4>壓力後面要接同行感</h4>
-        <p>排名與門檻之後緊接「同班同學」，讓整頁不是只有落差。這張也是彙總數據，實作成本一樣低。</p>
+        <p>三個猜測機制分散在花費、排名、領域，中間用肯定與彙總卡隔開。連續猜會變成問卷，用戶直接跳過。</p>
       </div>
     </div>
 
     <div class="asks">
-      <h2>需要先確認的事</h2>
-      <div class="ask"><i>1</i><span>各百分位級距門檻值（前 5／10／30% 各是多少），沒有這個寫不出「再 X 就到」。</span></div>
-      <div class="ask"><i>2</i><span>2024 同欄位是否可取得，決定「去年的自己」與所有同比卡能不能做。</span></div>
-      <div class="ask"><i>3</i><span>協同過濾清單（買了 A 的人也買 B）是否已有現成模型，或這次要簡化成同子分類熱銷。</span></div>
-      <div class="ask"><i>4</i><span>同班同學數與同時段在線人數是否可算。這張卡成本低但情緒價值高，不想漏掉。</span></div>
-      <div class="ask"><i>5</i><span>老師端回顧要不要一起做。這是 L2、沒有隱私問題，而且老師會主動分享，對 BD 的效益可能高於用戶端分享卡。</span></div>
-      <div class="ask"><i>6</i><span>無標籤用戶佔比。若超過六成，潛力股版本就是主版本而非備案。</span></div>
+      <h2>還缺的資料</h2>
+      <div class="ask"><i>1</i><span>學習時數與完成單元的分佈。分級機制只有消費金額，時數完全沒有，所以原型裡所有時數都是推算的。這是最大的缺口。</span></div>
+      <div class="ask"><i>2</i><span>石頭階級的活躍樣貌：120 萬人裡有多少人今年真的看過內容？如果多數是殭屍帳號，這一版的受眾要重新估。</span></div>
+      <div class="ask"><i>3</i><span>各階級的 2024 對應數字，決定同比卡能不能做。</span></div>
+      <div class="ask"><i>4</i><span>黑鑽裡「今年消費未達 10,000」的人數，這是保級卡的實際受眾規模。</span></div>
+      <div class="ask"><i>5</i><span>老師維度：每位老師的學生數與學生內排名是否可算。</span></div>
+      <div class="ask"><i>6</i><span>同階級熱銷排行，用來替代協同過濾。</span></div>
     </div>
 
-    <p class="foot">原型數據為假資料。企劃來源：2025 用戶年度回顧頁面企劃。</p>
+    <p class="foot">階級人數、佔比、ARPU、門檻、留存率取自 2026_PPA_會員分級機制（jameslin，2026/04 更新）。個人層級數字為依 ARPU 推算的代表輪廓，非真實會員資料。卡片架構來源：2025 用戶年度回顧頁面企劃。</p>
   </section>
 </div>
 
 <script>
+  // 階級定義與分佈：取自 2026_PPA_會員分級機制（總會員 1,770,518）
+  var TIERS = {
+    stone:    { name: '石頭',   band: '無消費紀錄 / 0 元專案', count: 1198044, share: 67.6, arpu: 0,     beat: null, next: '青銅', nextNeed: 1,     benefit: '首購 50 元折價券' },
+    bronze:   { name: '青銅',   band: 'NT$1–4,999',           count: 348002,  share: 19.7, arpu: 2580,  beat: 68,   next: '白銀', nextNeed: 5000,  benefit: '每月 9 折券 + 會員日 100 元券' },
+    silver:   { name: '白銀',   band: 'NT$5,000–19,999',      count: 160852,  share: 9.1,  beat: 87,    arpu: 9813, next: '鉑金', nextNeed: 20000, benefit: '每月 88 折券 + 會員日 200 元券 + 點數 1.8 倍' },
+    platinum: { name: '鉑金',   band: 'NT$20,000–39,999',     count: 35357,   share: 2.0,  beat: 96,    arpu: 27946,next: '黑鑽', nextNeed: 40000, benefit: '每月 85 折券 + 新課 48 小時預購 + 生日月募資價回歸' },
+    black:    { name: '黑鑽',   band: 'NT$40,000 以上',        count: 28263,   share: 1.6,  beat: 98,    arpu: 81563,next: null,   nextNeed: null,  benefit: '保級：12 個月消費滿 10,000 或維持 Plus 訂閱' }
+  };
+
   var P = {
-    buy: {
-      title: '2025，你的 PPA 頭銜是：知識投資家', sub: '成為自己腦袋最大的股東',
-      persona: '半夜焦慮派', days: 187, peakHour: 23, peakLabel: '23:00–01:59',
-      spend: 38400, spendMax: 60000, spendBin: 9,
-      unitName: '消費金額', metric: '學習時數', hours: 96,
-      pct: 88, gatePct: 95, rank: '14,880', pool: '124,000',
-      gateLine: '再買 1 堂 4,200 元的課，你就進全站前 5%',
-      gateWeek: '或是把訂閱續到明年 3 月，一樣到。',
-      peers: [
-        { who: '你', v: 96, me: true },
-        { who: '知識投資家中位', v: 54 },
-        { who: '全站中位', v: 12 },
-        { who: '去年的你', v: 71 }
-      ],
-      yoy: [{ y: '2024', v: 24600 }, { y: '2025', v: 38400, now: true }],
-      yoyLine: '比去年多投資了 56%。你不是突然變有錢，是把錢換了方向。',
-      teacher: '郭哲佑', teacherHours: 31, teacherPct: 9, teacherStudents: '2,418',
-      unbought: [
-        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' },
-        { n: '財報地雷排查', m: '2 小時 48 分 · 同標籤熱門第 2', tag: '未上' },
-        { n: '併購案拆解', m: '5 小時 06 分 · 12 月新上架', tag: '新課' }
-      ],
-      dex: [
-        { n: '職涯發展', c: 6, own: true }, { n: '投資理財', c: 4, own: true },
-        { n: '商業思維', c: 3, own: true }, { n: '簡報溝通', c: 1, own: true },
-        { n: '數位工具', c: 0, gap: true }, { n: '語言學習', c: 0 },
-        { n: '設計美學', c: 0 }, { n: '興趣生活', c: 0 }
-      ],
-      dexLine: '你解鎖了 8 個領域中的 4 個，最重倉的是職涯發展。和你品味重疊 82% 的人，多半也補了「數位工具」這一格。',
-      twinCount: '1,842', twinCourse: 'AI 工作流實戰',
-      mates: '18,420', mateCourse: '財務建模實戰', sameNight: '3,180',
-      cta: '選一堂一直想上的課，1 月完成第一單元'
-    },
-    learn: {
-      title: '2025，你的 PPA 頭銜是：圖書館裡的那個人', sub: '默默且持續學習的人',
-      persona: '穩定通勤派', days: 214, peakHour: 8, peakLabel: '06:00–10:59',
-      spend: 9800, spendMax: 60000, spendBin: 2,
-      unitName: '點擊與學習時間', metric: '學習時數', hours: 142,
-      pct: 91, gatePct: 95, rank: '11,160', pool: '124,000',
-      gateLine: '再看完 6 個單元，你就進全站前 5%',
-      gateWeek: '一週兩個單元，三週就到。',
-      peers: [
-        { who: '你', v: 142, me: true },
-        { who: '靜靜看課派中位', v: 78 },
-        { who: '全站中位', v: 12 },
-        { who: '去年的你', v: 103 }
-      ],
-      yoy: [{ y: '2024', v: 870 }, { y: '2025', v: 1208, now: true }],
-      yoyLine: '比去年多點開 39% 的內容，而且完成率也一起上去了。',
-      teacher: '楊斯棓', teacherHours: 27, teacherPct: 4, teacherStudents: '3,106',
-      unbought: [
-        { n: '閱讀的技術', m: '3 小時 20 分 · 你追蹤的老師', tag: '未上' },
-        { n: '演講表達入門', m: '2 小時 05 分 · 同標籤熱門第 1', tag: '未上' },
-        { n: '筆記系統建構', m: '1 小時 52 分 · 完課率 81%', tag: '好評' }
-      ],
-      dex: [
-        { n: '語言學習', c: 5, own: true }, { n: '職涯發展', c: 4, own: true },
-        { n: '簡報溝通', c: 3, own: true }, { n: '興趣生活', c: 2, own: true },
-        { n: '投資理財', c: 1, own: true }, { n: '數位工具', c: 0, gap: true },
-        { n: '商業思維', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 8 個領域中的 5 個，是站上少見的廣度。和你品味重疊 76% 的人，最近都在補「數位工具」。',
-      twinCount: '2,640', twinCourse: 'Notion 知識庫建構',
-      mates: '26,180', mateCourse: '閱讀的技術', sameNight: '1,240',
-      cta: '把只剩 2 堂就完課的那 3 門收掉'
-    },
-    social: {
-      title: '2025，你的 PPA 頭銜是：平台存在感代表', sub: '你沒出現的那天，系統都會覺得怪怪的',
-      persona: '假日學習派', days: 246, peakHour: 21, peakLabel: '19:00–22:59',
-      spend: 16200, spendMax: 60000, spendBin: 4,
-      unitName: '參與活躍度', metric: '互動次數', hours: 932,
-      pct: 96, gatePct: 99, rank: '4,960', pool: '124,000',
-      gateLine: '再互動 74 次，你就進全站前 1%',
-      gateWeek: '維持你現在的節奏，一個月就到。',
-      peers: [
-        { who: '你', v: 932, me: true },
-        { who: '吵鬧系中位', v: 310 },
-        { who: '全站中位', v: 42 },
-        { who: '去年的你', v: 604 }
-      ],
-      yoy: [{ y: '2024', v: 604 }, { y: '2025', v: 932, now: true }],
-      yoyLine: '比去年多 54%。每 133 次站內互動就有 1 則來自你，你不只是學生，更是場控。',
-      teacher: '張修修', teacherHours: 19, teacherPct: 2, teacherStudents: '1,884',
-      unbought: [
-        { n: '身體修復實作', m: '2 小時 44 分 · 你留言最多的老師', tag: '未上' },
-        { n: '呼吸與睡眠', m: '1 小時 30 分 · 同標籤熱門第 3', tag: '未上' },
-        { n: '徒手訓練進階', m: '3 小時 58 分 · 12 月新上架', tag: '新課' }
-      ],
-      dex: [
-        { n: '興趣生活', c: 5, own: true }, { n: '簡報溝通', c: 2, own: true },
-        { n: '職涯發展', c: 2, own: true }, { n: '語言學習', c: 0, gap: true },
-        { n: '投資理財', c: 0 }, { n: '商業思維', c: 0 },
-        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 3 個領域，但互動量是站上前 4%。和你一樣愛在留言區出沒的人，最近都在上「語言學習」。',
-      twinCount: '968', twinCourse: '日文五十音到會話',
-      mates: '9,640', mateCourse: '身體修復實作', sameNight: '2,470',
-      cta: '報名 1 月的第一場直播'
-    },
-    tail: {
-      title: '2025，你的 PPA 頭銜是：潛力股', sub: '你已經開始了，這比什麼都難',
-      persona: '臨時抱佛腳派', days: 23, peakHour: 22, peakLabel: '19:00–22:59',
-      spend: 1280, spendMax: 60000, spendBin: 0,
-      unitName: '學習量', metric: '完成單元', hours: 4,
-      pct: null, gatePct: null, rank: null, pool: null,
-      gateLine: '每週 30 分鐘，就能養成一個撐得住的習慣',
-      gateWeek: '我們幫你挑了一堂 22 分鐘就能看完的課。',
-      peers: null,
-      yoy: [{ y: '2024', v: 1 }, { y: '2025', v: 4, now: true }],
-      yoyLine: '去年你看完 1 個單元，今年 4 個。成長 4 倍的人不多，你是其中一個。',
-      teacher: '林長揚', teacherHours: 2, teacherPct: null, teacherStudents: '5,240',
+    'stone-a': {
+      tier: 'stone', tierNote: '典型輪廓 · 佔石頭 78%',
+      title: '2025，你的 PPA 頭銜是：剛上路的人', sub: '你已經走進來了，這比什麼都難',
+      persona: '打游擊型', days: 11, peakHour: 22, peakLabel: '19:00–22:59',
+      spend: 0, spendMax: 5000, spendBin: 0, showSpend: false,
+      metric: '完成單元', hours: 2,
+      pct: null, rank: null, pool: null,
+      yoy: [{ y: '2024', v: 0 }, { y: '2025', v: 2, now: true }],
+      yoyLine: '去年你沒看完任何一個單元，今年 2 個。從 0 到 1 是最難的那一步。',
+      teacher: '林長揚', teacherHours: 1, teacherPct: null, teacherStudents: '5,240',
       unbought: [
         { n: '簡報結構入門', m: '22 分鐘 · 最短的一堂', tag: '推薦' },
-        { n: '一頁式圖表', m: '48 分鐘 · 新手完課率 88%', tag: '好評' }
+        { n: '職場溝通基本功', m: '31 分鐘 · 新手完課率 88%', tag: '好評' }
       ],
       dex: [
         { n: '簡報溝通', c: 1, own: true }, { n: '職涯發展', c: 0, gap: true },
@@ -462,34 +348,248 @@
         { n: '投資理財', c: 0 }, { n: '商業思維', c: 0 },
         { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
       ],
-      dexLine: '你解鎖了第一格。剛開始的人通常第二格會補「職涯發展」，那裡有最多 30 分鐘內看完的課。',
-      twinCount: '4,120', twinCourse: '職場溝通基本功',
-      mates: '2,310', mateCourse: '簡報結構入門', sameNight: '1,860',
+      dexLine: '你打開了第一格。剛開始的人第二格通常會補「職涯發展」，那裡有最多 30 分鐘內看完的課。',
+      twinCount: '48,200', twinCourse: '職場溝通基本功',
+      mates: '1,840', mateCourse: '簡報結構入門', sameNight: '12,600',
       cta: '從收藏清單挑 1 堂，1 月看完第一單元'
+    },
+    'stone-b': {
+      tier: 'stone', tierNote: '領過免費課但未消費 · 26.1 萬人',
+      title: '2025，你的 PPA 頭銜是：試過水溫的人', sub: '你知道這裡有什麼，只是還沒挑到那一堂',
+      persona: '臨時抱佛腳派', days: 34, peakHour: 12, peakLabel: '11:00–14:59',
+      spend: 0, spendMax: 5000, spendBin: 0, showSpend: false,
+      metric: '完成單元', hours: 7,
+      pct: null, rank: null, pool: null,
+      yoy: [{ y: '2024', v: 3 }, { y: '2025', v: 7, now: true }],
+      yoyLine: '比去年多看完 4 個單元。你用的都是免費資源，但你確實在前進。',
+      teacher: '郭哲佑', teacherHours: 3, teacherPct: null, teacherStudents: '2,418',
+      unbought: [
+        { n: '個人理財第一課', m: '1 小時 12 分 · 首購 50 元券可用', tag: '可折抵' },
+        { n: '履歷健檢實作', m: '48 分鐘 · 同階級熱門第 1', tag: '未上' }
+      ],
+      dex: [
+        { n: '投資理財', c: 2, own: true }, { n: '職涯發展', c: 1, own: true },
+        { n: '商業思維', c: 0, gap: true }, { n: '簡報溝通', c: 0 },
+        { n: '語言學習', c: 0 }, { n: '興趣生活', c: 0 },
+        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '兩格都是免費內容解鎖的。你的方向很明確，就在理財和職涯之間。',
+      twinCount: '26,100', twinCourse: '個人理財第一課',
+      mates: '5,600', mateCourse: '個人理財第一課', sameNight: '9,300',
+      cta: '用註冊禮的 50 元券，挑一堂 300 元以內的課'
+    },
+    'bronze-a': {
+      tier: 'bronze', tierNote: '典型輪廓 · 等於青銅 ARPU NT$2,580',
+      title: '2025，你的 PPA 頭銜是：出手過的人', sub: '你為自己按下了第一次結帳',
+      persona: '半夜焦慮派', days: 68, peakHour: 23, peakLabel: '23:00–01:59',
+      spend: 2580, spendMax: 5000, spendBin: 3, showSpend: true,
+      metric: '學習時數', hours: 14,
+      pct: 68, rank: '566,400', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 900 }, { y: '2025', v: 2580, now: true }],
+      yoyLine: '比去年多投資了 187%。你從試用者變成了付費學習的人。',
+      teacher: '楊斯棓', teacherHours: 6, teacherPct: 38, teacherStudents: '3,106',
+      unbought: [
+        { n: '閱讀的技術', m: '3 小時 20 分 · 你追蹤的老師', tag: '未上' },
+        { n: '筆記系統建構', m: '1 小時 52 分 · 完課率 81%', tag: '好評' }
+      ],
+      dex: [
+        { n: '職涯發展', c: 1, own: true }, { n: '簡報溝通', c: 1, own: true },
+        { n: '商業思維', c: 0, gap: true }, { n: '投資理財', c: 0 },
+        { n: '語言學習', c: 0 }, { n: '興趣生活', c: 0 },
+        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 2 格，兩格都跟工作有關。看來你想解決的是很實際的問題。',
+      twinCount: '34,800', twinCourse: '職涯定位工作坊',
+      mates: '8,900', mateCourse: '履歷健檢實作', sameNight: '3,180',
+      cta: '把只剩 1 堂就完課的那門收掉'
+    },
+    'bronze-b': {
+      tier: 'bronze', tierNote: '接近升級 · 差 NT$400 到白銀',
+      title: '2025，你的 PPA 頭銜是：差一步的人', sub: '你離下一個階級只剩一堂課的距離',
+      persona: '穩定通勤派', days: 96, peakHour: 8, peakLabel: '06:00–10:59',
+      spend: 4600, spendMax: 5000, spendBin: 9, showSpend: true,
+      metric: '學習時數', hours: 31,
+      pct: 74, rank: '460,300', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 2100 }, { y: '2025', v: 4600, now: true }],
+      yoyLine: '比去年多投資了 119%，而且你的完課率也一起上去了。',
+      teacher: '郭哲佑', teacherHours: 11, teacherPct: 24, teacherStudents: '2,418',
+      unbought: [
+        { n: '財報地雷排查', m: '2 小時 48 分 · NT$1,280', tag: '可升級' },
+        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' }
+      ],
+      dex: [
+        { n: '投資理財', c: 2, own: true }, { n: '職涯發展', c: 1, own: true },
+        { n: '商業思維', c: 1, own: true }, { n: '數位工具', c: 0, gap: true },
+        { n: '簡報溝通', c: 0 }, { n: '語言學習', c: 0 },
+        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 3 格。和你消費水準相近的人，第四格最常補「數位工具」。',
+      twinCount: '34,800', twinCourse: 'AI 工作流實戰',
+      mates: '12,400', mateCourse: '財報地雷排查', sameNight: '1,240',
+      cta: '再一堂就升白銀，每月多一張 9 折券'
+    },
+    'silver-a': {
+      tier: 'silver', tierNote: '典型輪廓 · 等於白銀 ARPU NT$9,813',
+      title: '2025，你的 PPA 頭銜是：認真的那個人', sub: '你已經把學習變成固定支出',
+      persona: '穩定通勤派', days: 142, peakHour: 8, peakLabel: '06:00–10:59',
+      spend: 9813, spendMax: 20000, spendBin: 4, showSpend: true,
+      metric: '學習時數', hours: 62,
+      pct: 87, rank: '230,200', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 6200 }, { y: '2025', v: 9813, now: true }],
+      yoyLine: '比去年多投資了 58%。你不是突然變有錢，是把錢換了方向。',
+      teacher: '楊斯棓', teacherHours: 19, teacherPct: 11, teacherStudents: '3,106',
+      unbought: [
+        { n: '演講表達入門', m: '2 小時 05 分 · 同階級熱門第 1', tag: '未上' },
+        { n: '閱讀的技術', m: '3 小時 20 分 · 你追蹤的老師', tag: '未上' },
+        { n: '寫作變現實戰', m: '4 小時 30 分 · 12 月新上架', tag: '新課' }
+      ],
+      dex: [
+        { n: '語言學習', c: 3, own: true }, { n: '職涯發展', c: 2, own: true },
+        { n: '簡報溝通', c: 2, own: true }, { n: '投資理財', c: 1, own: true },
+        { n: '數位工具', c: 0, gap: true }, { n: '商業思維', c: 0 },
+        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 4 格，廣度在白銀階級裡算前段。同階級的人第五格最常補「數位工具」。',
+      twinCount: '16,000', twinCourse: 'Notion 知識庫建構',
+      mates: '26,180', mateCourse: '演講表達入門', sameNight: '2,470',
+      cta: '把只剩 2 堂就完課的那 3 門收掉'
+    },
+    'silver-b': {
+      tier: 'silver', tierNote: '接近升級 · 差 NT$1,800 到鉑金',
+      title: '2025，你的 PPA 頭銜是：快要換階級的人', sub: '鉑金的門就在前面',
+      persona: '半夜焦慮派', days: 178, peakHour: 23, peakLabel: '23:00–01:59',
+      spend: 18200, spendMax: 20000, spendBin: 9, showSpend: true,
+      metric: '學習時數', hours: 88,
+      pct: 91, rank: '159,300', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 11400 }, { y: '2025', v: 18200, now: true }],
+      yoyLine: '比去年多投資了 60%。這是連續第二年成長。',
+      teacher: '郭哲佑', teacherHours: 24, teacherPct: 9, teacherStudents: '2,418',
+      unbought: [
+        { n: '併購案拆解', m: '5 小時 06 分 · NT$2,480', tag: '可升級' },
+        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' },
+        { n: '財報地雷排查', m: '2 小時 48 分 · 同階級熱門第 2', tag: '未上' }
+      ],
+      dex: [
+        { n: '投資理財', c: 4, own: true }, { n: '商業思維', c: 3, own: true },
+        { n: '職涯發展', c: 2, own: true }, { n: '簡報溝通', c: 1, own: true },
+        { n: '數位工具', c: 0, gap: true }, { n: '語言學習', c: 0 },
+        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 4 格，最重倉的是投資理財。看起來你不只投資股票，也在加倉自己。',
+      twinCount: '16,000', twinCourse: 'AI 工作流實戰',
+      mates: '26,180', mateCourse: '財報地雷排查', sameNight: '3,180',
+      cta: '再 1,800 元就升鉑金，每月券從 9 折變 88 折'
+    },
+    'platinum-a': {
+      tier: 'platinum', tierNote: '典型輪廓 · 等於鉑金 ARPU NT$27,946',
+      title: '2025，你的 PPA 頭銜是：知識投資家', sub: '成為自己腦袋最大的股東',
+      persona: '半夜焦慮派', days: 187, peakHour: 23, peakLabel: '23:00–01:59',
+      spend: 27946, spendMax: 40000, spendBin: 4, showSpend: true,
+      metric: '學習時數', hours: 96,
+      pct: 96, rank: '70,800', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 19400 }, { y: '2025', v: 27946, now: true }],
+      yoyLine: '比去年多投資了 44%。你不是突然變有錢，是把錢換了方向。',
+      teacher: '郭哲佑', teacherHours: 31, teacherPct: 6, teacherStudents: '2,418',
+      unbought: [
+        { n: '併購案拆解', m: '5 小時 06 分 · NT$2,480', tag: '可升級' },
+        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' },
+        { n: '財報地雷排查', m: '2 小時 48 分 · 同階級熱門第 2', tag: '未上' }
+      ],
+      dex: [
+        { n: '職涯發展', c: 6, own: true }, { n: '投資理財', c: 4, own: true },
+        { n: '商業思維', c: 3, own: true }, { n: '簡報溝通', c: 1, own: true },
+        { n: '數位工具', c: 0, gap: true }, { n: '語言學習', c: 0 },
+        { n: '設計美學', c: 0 }, { n: '興趣生活', c: 0 }
+      ],
+      dexLine: '你解鎖了 8 格中的 4 格，最重倉的是職涯發展。同階級的人多半也補了「數位工具」。',
+      twinCount: '3,500', twinCourse: 'AI 工作流實戰',
+      mates: '18,420', mateCourse: '財務建模實戰', sameNight: '3,180',
+      cta: '再 12,054 元就升黑鑽，新課能比早鳥再便宜 100–200'
+    },
+    'black-a': {
+      tier: 'black', tierNote: '典型輪廓 · 等於黑鑽 ARPU NT$81,563',
+      title: '2025，你的 PPA 頭銜是：平台的股東', sub: '全站 1.6% 的人走到這裡',
+      persona: '半夜焦慮派', days: 246, peakHour: 23, peakLabel: '23:00–01:59',
+      spend: 81563, spendMax: 120000, spendBin: 9, showSpend: true,
+      metric: '學習時數', hours: 214,
+      pct: 98, rank: '28,300', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 62800 }, { y: '2025', v: 81563, now: true }],
+      yoyLine: '比去年多投資了 30%。你在黑鑽裡也是前段班。',
+      teacher: '郭哲佑', teacherHours: 58, teacherPct: 1, teacherStudents: '2,418',
+      unbought: [
+        { n: '併購案拆解', m: '5 小時 06 分 · 你有 48 小時預購權', tag: '預購' },
+        { n: '公司估值實戰', m: '4 小時 12 分 · 生日月可用募資價', tag: '未上' },
+        { n: '產業趨勢年會', m: '6 小時 · 黑鑽獨家講座優先權', tag: '獨家' }
+      ],
+      dex: [
+        { n: '職涯發展', c: 11, own: true }, { n: '投資理財', c: 9, own: true },
+        { n: '商業思維', c: 7, own: true }, { n: '數位工具', c: 5, own: true },
+        { n: '簡報溝通', c: 4, own: true }, { n: '語言學習', c: 2, own: true },
+        { n: '興趣生活', c: 1, own: true }, { n: '設計美學', c: 0, gap: true }
+      ],
+      dexLine: '你解鎖了 8 格中的 7 格。站上只有極少數人收集到這個程度，最後一格是設計美學。',
+      twinCount: '2,800', twinCourse: '產業趨勢年會',
+      mates: '31,600', mateCourse: '財務建模實戰', sameNight: '3,180',
+      cta: '維持 Plus 訂閱，黑鑽身份永不降級'
+    },
+    'black-b': {
+      tier: 'black', tierNote: '保級風險 · 12 個月消費未達 10,000',
+      title: '2025，你的 PPA 頭銜是：黑鑽，但要小心', sub: '你的標章還亮著，只是今年安靜了一點',
+      persona: '打游擊型', days: 41, peakHour: 21, peakLabel: '19:00–22:59',
+      spend: 46200, spendMax: 120000, spendBin: 6, showSpend: true,
+      metric: '學習時數', hours: 27,
+      pct: 98, rank: '28,300', pool: '1,770,518',
+      yoy: [{ y: '2024', v: 38400 }, { y: '2025', v: 46200, now: true }],
+      yoyLine: '終身累積 46,200，但今年只消費 7,800——離保級門檻還差 2,200。',
+      teacher: '楊斯棓', teacherHours: 9, teacherPct: 22, teacherStudents: '3,106',
+      unbought: [
+        { n: '閱讀的技術', m: '3 小時 20 分 · NT$2,280', tag: '可保級' },
+        { n: '寫作變現實戰', m: '4 小時 30 分 · 你有 48 小時預購權', tag: '預購' }
+      ],
+      dex: [
+        { n: '職涯發展', c: 7, own: true }, { n: '投資理財', c: 5, own: true },
+        { n: '簡報溝通', c: 3, own: true }, { n: '語言學習', c: 2, own: true },
+        { n: '商業思維', c: 1, own: true }, { n: '數位工具', c: 0, gap: true },
+        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
+      ],
+      dexLine: '你解鎖了 5 格，都是前幾年累積的。今年只動了其中一格。',
+      twinCount: '2,800', twinCourse: '閱讀的技術',
+      mates: '31,600', mateCourse: '閱讀的技術', sameNight: '2,470',
+      cta: '再 2,200 元或維持 Plus 訂閱，就能保住黑鑽'
     }
   };
 
-  var HIST = [18,15,13,11,9,8,7,6,5,4,3,1];
-  var HIST_LABELS = ['0', '1 萬', '3 萬', '6 萬+'];
+  var TIER_ORDER = ['stone', 'bronze', 'silver', 'platinum', 'black'];
+  var PROFILES = {
+    stone: ['stone-a', 'stone-b'],
+    bronze: ['bronze-a', 'bronze-b'],
+    silver: ['silver-a', 'silver-b'],
+    platinum: ['platinum-a'],
+    black: ['black-a', 'black-b']
+  };
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function nf(n){ return n.toLocaleString('en-US'); }
 
   function head(eyebrow, lv){
     var f = lv ? '<span class="flag ' + lv + '">' + lv.toUpperCase() + ' ' +
-      (lv === 'l1' ? '頁內互動' : lv === 'l2' ? '弱社交' : '強社交') + '</span>'
+      (lv === 'l1' ? '頁內互動' : '弱社交') + '</span>'
       : '<span class="flag keep">沿用企劃書</span>';
     return '<div class="tagrow"><span class="eyebrow">' + eyebrow + '</span>' + f + '</div>';
   }
 
-  function hist(meBin, guessBin){
-    var s = '';
-    for (var b = 0; b < HIST.length; b++){
-      var cls = b === meBin ? 'me' : (guessBin === b ? 'guess' : '');
-      s += '<i class="' + cls + '" style="height:' + Math.round(HIST[b] / 18 * 100) + '%"></i>';
-    }
-    return '<div class="hist" aria-hidden="true">' + s + '</div>' +
-      '<div class="hist-scale">' + HIST_LABELS.map(function(l){ return '<span>' + l + '</span>'; }).join('') + '</div>';
+  // 真實階級分佈長條圖（佔比取自分級機制表）
+  function tierChart(meTier, guessTier){
+    var max = 67.6, s = '';
+    TIER_ORDER.forEach(function(k){
+      var t = TIERS[k];
+      var cls = k === meTier ? 'me' : (k === guessTier ? 'guess' : '');
+      s += '<i class="' + cls + '" style="height:' + Math.max(3, Math.round(t.share / max * 100)) + '%"></i>';
+    });
+    return '<div class="hist" style="grid-template-columns:repeat(5,1fr)" aria-hidden="true">' + s + '</div>' +
+      '<div class="hist-scale">' + TIER_ORDER.map(function(k){
+        return '<span>' + TIERS[k].name + ' ' + TIERS[k].share + '%</span>';
+      }).join('') + '</div>';
   }
 
   function clock(peak, refLabel){
@@ -503,17 +603,25 @@
       '<div class="clock-scale"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>';
   }
 
-  function bars(rows, unit){
+  function tierPeers(d, t){
+    var rows = [
+      { who: '你', v: d.spend, me: true },
+      { who: t.name + '平均', v: t.arpu }
+    ];
+    var idx = TIER_ORDER.indexOf(d.tier);
+    if (idx > 0) rows.push({ who: TIERS[TIER_ORDER[idx - 1]].name + '平均', v: TIERS[TIER_ORDER[idx - 1]].arpu });
+    if (idx < TIER_ORDER.length - 1) rows.push({ who: TIERS[TIER_ORDER[idx + 1]].name + '平均', v: TIERS[TIER_ORDER[idx + 1]].arpu });
     var max = 0;
     rows.forEach(function(r){ if (r.v > max) max = r.v; });
     var s = '';
     rows.forEach(function(r){
       s += '<div class="bar-row' + (r.me ? ' me' : '') + '">' +
         '<span class="who">' + r.who + '</span>' +
-        '<span class="bar-shell"><span class="bar-fill" style="width:' + Math.round(r.v / max * 100) + '%"></span></span>' +
+        '<span class="bar-shell"><span class="bar-fill" style="width:' + Math.max(2, Math.round(r.v / max * 100)) + '%"></span></span>' +
         '<span class="bar-val">' + nf(r.v) + '</span></div>';
     });
-    return '<div class="bars">' + s + '</div><p class="fine">比較對象用同標籤群體，不用全站。' + unit + '越接近的參照群體，動力越強。</p>';
+    return '<div class="bars">' + s + '</div>' +
+      '<p class="fine">比較基準用階級內與相鄰階級，不用全站。黑鑽 ARPU 是鉑金的 2.9 倍，全站平均對他們毫無意義。</p>';
   }
 
   function yoyBlock(rows, line){
@@ -522,55 +630,70 @@
     var s = '';
     rows.forEach(function(r){
       s += '<div class="yoy-row' + (r.now ? ' now' : '') + '"><span>' + r.y + '</span>' +
-        '<span class="yoy-bar"><i style="width:' + Math.max(14, Math.round(r.v / max * 100)) + '%">' + nf(r.v) + '</i></span></div>';
+        '<span class="yoy-bar"><i style="width:' + Math.max(14, Math.round(r.v / Math.max(max, 1) * 100)) + '%">' + nf(r.v) + '</i></span></div>';
     });
     return '<div class="yoy">' + s + '</div><p>' + line + '</p>';
   }
 
   function scenes(d){
-    var L = [];
+    var t = TIERS[d.tier], L = [];
 
     L.push({ nav: '開場稱號', lv: null, html:
       head('卡 1 · 開場稱號', null) +
       '<h2>' + d.title + '</h2><p>' + d.sub + '</p>' +
       '<p class="fine">你的存在，讓演算法以為你是全職學生。</p>' +
-      '<div class="facts"><span class="fact">上站 <b>' + d.days + '</b> 天</span><span class="fact">' + d.persona + '</span><span class="fact">最常上線 ' + d.peakLabel + '</span></div>' });
+      '<div class="facts"><span class="fact">' + t.name + ' · ' + t.band + '</span><span class="fact">上站 <b>' + d.days + '</b> 天</span><span class="fact">' + d.persona + '</span></div>' });
 
-    L.push({ nav: '猜猜你花多少', lv: 'l1', mech: 'guessSpend', html:
-      head('花費 · 猜了再揭曉', 'l1') +
-      '<h2>先別看數字。<br>猜猜你今年在 PPA 花了多少</h2>' +
-      '<div class="guess">' +
-        '<span class="guess-val" id="gv">NT$ 12,000</span>' +
-        '<input type="range" id="gs" min="0" max="' + d.spendMax + '" step="200" value="12000" aria-label="猜測金額" />' +
-        '<div class="guess-scale"><span>0</span><span>NT$ ' + nf(d.spendMax) + '</span></div>' +
-        '<div><button class="primary" id="gb" type="button">揭曉</button></div>' +
-      '</div>' +
-      '<div id="gr"></div>' +
-      '<p class="fine">猜錯產生的落差，比被動看到數字有感得多。這個機制花費、時數、排名都能套。</p>' });
+    if (d.showSpend){
+      L.push({ nav: '猜猜你花多少', lv: 'l1', mech: 'guessSpend', html:
+        head('花費 · 猜了再揭曉', 'l1') +
+        '<h2>先別看數字。<br>猜猜你今年在 PPA 花了多少</h2>' +
+        '<div class="guess">' +
+          '<span class="guess-val" id="gv">NT$ 0</span>' +
+          '<input type="range" id="gs" min="0" max="' + d.spendMax + '" step="100" value="' + Math.round(d.spendMax * 0.25) + '" aria-label="猜測金額" />' +
+          '<div class="guess-scale"><span>0</span><span>NT$ ' + nf(d.spendMax) + '</span></div>' +
+          '<div><button class="primary" id="gb" type="button">揭曉</button></div>' +
+        '</div>' +
+        '<div id="gr"></div>' +
+        '<p class="fine">猜錯產生的落差，比被動看到數字有感得多。石頭階級（全站 67.6%）不出現這張卡。</p>' });
 
-    L.push({ nav: '花費分佈', lv: 'l2', html:
-      head('花費 · 全站分佈', 'l2') +
-      '<h2>全站的錢都花在哪個級距</h2>' +
-      hist(d.spendBin, -1) +
-      '<p>你落在 <b>' + (d.spendBin >= 9 ? 'NT$ 3 萬以上' : d.spendBin >= 4 ? 'NT$ 1.5–3 萬' : 'NT$ 1.5 萬以下') + '</b> 這一格。這裡只顯示級距，不顯示你贏過多少人。</p>' +
-      '<p class="fine">花費刻意不做排名比較：對高消費用戶是肯定，對中間層是罪惡感，而且會讓人重新檢視自己刷了多少。</p>' });
+      L.push({ nav: '你在哪個階級', lv: 'l2', html:
+        head('花費 · 五階級分佈', 'l2') +
+        '<h2>全站 177 萬人<br>你在 ' + t.name + '，前 ' + (100 - (t.beat || 0)) + '%</h2>' +
+        tierChart(d.tier, null) +
+        '<p>' + t.name + '有 <b>' + nf(t.count) + ' 人</b>，佔全站 ' + t.share + '%。' +
+        (t.beat ? '你的終身累積消費贏過全站 <b>' + t.beat + '%</b> 的會員。' : '') + '</p>' +
+        '<p class="fine">真實分佈，取自 2026_PPA_會員分級機制。左邊那根就是 67.6% 的石頭階級——這也是為什麼石頭要有自己的版本。</p>' });
 
-    L.push({ nav: '花費換算 + 同比', lv: null, html:
-      head('花費 · 價值換算與同比', null) +
-      '<div class="bignum">' + nf(d.spend) + '<small>元</small></div>' +
-      yoyBlock(d.yoy, d.yoyLine) +
-      '<p class="fine">相當於少買了 ' + Math.round(d.spend / 800) + ' 件衣服。如果後悔，現在還來得及把學到的東西拿去賺回來。</p>' });
+      L.push({ nav: '階級內比較', lv: 'l2', html:
+        head('花費 · 階級內與相鄰階級', 'l2') +
+        '<h2>' + t.name + '裡的人<br>平均花 NT$ ' + nf(t.arpu) + '</h2>' +
+        tierPeers(d, t) });
+
+      L.push({ nav: '花費換算 + 同比', lv: null, html:
+        head('花費 · 價值換算與同比', null) +
+        '<div class="bignum">' + nf(d.spend) + '<small>元</small></div>' +
+        yoyBlock(d.yoy, d.yoyLine) +
+        '<p class="fine">相當於少買了 ' + Math.round(d.spend / 800) + ' 件衣服。如果後悔，現在還來得及把學到的東西拿去賺回來。</p>' });
+    } else {
+      L.push({ nav: '你的第一步', lv: null, html:
+        head('石頭階級 · 不談錢', null) +
+        '<h2>今年你來了 ' + d.days + ' 天</h2>' +
+        '<p>石頭階級佔全站 <b>67.6%</b>，將近 120 萬人。這一版完全不出現消費金額、不出現排名、不出現階級比較。</p>' +
+        yoyBlock(d.yoy, d.yoyLine) +
+        '<p class="fine">對還沒消費的人談錢或排名，回顧就變成催繳單。這是整個設計的底線。</p>' });
+    }
 
     L.push({ nav: '學習時段', lv: 'l2', html:
       head('學習時間 · 時段對照', 'l2') +
       '<h2>你是典型的「' + d.persona + '」</h2>' +
-      clock(d.peakHour, '同標籤平均') +
-      '<p>你的學習幾乎都發生在 ' + d.peakLabel + '，綠線是跟你同標籤的人的平均。你比他們更晚，也更集中。</p>' });
+      clock(d.peakHour, t.name + '平均') +
+      '<p>你的學習幾乎都發生在 ' + d.peakLabel + '，綠線是同階級的人的平均。</p>' });
 
     if (d.pct !== null){
-      L.push({ nav: '賭一把排名', lv: 'l1', mech: 'guessRank', pct: d.pct, gatePct: d.gatePct, rank: d.rank, pool: d.pool, unitName: d.unitName, html:
+      L.push({ nav: '賭一把排名', lv: 'l1', mech: 'guessRank', pct: d.pct, rank: d.rank, pool: d.pool, html:
         head('學習時間 · 賭一把排名', 'l1') +
-        '<h2>你覺得自己的' + d.unitName + '<br>贏過站上多少人</h2>' +
+        '<h2>你覺得自己的學習量<br>贏過站上多少人</h2>' +
         '<div class="guess">' +
           '<span class="guess-val" id="rv">50%</span>' +
           '<input type="range" id="rs" min="0" max="99" step="1" value="50" aria-label="猜測百分位" />' +
@@ -578,35 +701,48 @@
           '<div><button class="primary" id="rb" type="button">揭曉排名</button></div>' +
         '</div>' +
         '<div id="rr"></div>' });
+    }
 
-      L.push({ nav: '下一階門檻', lv: null, html:
-        head('學習時間 · 下一階門檻', null) +
-        '<h2>' + d.gateLine + '</h2>' +
-        '<p>' + d.gateWeek + ' 排名後面一定要接一個做得到的下一步，焦慮才會變成動力。</p>' +
+    // 門檻卡改用真實階級升級／保級門檻
+    if (!d.showSpend){
+      L.push({ nav: '下一步', lv: null, html:
+        head('門檻 · 石頭階級不談金額', null) +
+        '<h2>下一步不是花錢，<br>是看完一堂</h2>' +
+        '<p>' + d.cta + '。註冊禮的 50 元折價券還在，挑一堂 300 元以內的課就用得上。</p>' +
         '<div class="tiers">' +
-          '<div class="tier"><b>前 20% 用戶看到</b><em>' + d.gateLine + '</em></div>' +
-          '<div class="tier mid"><b>中段用戶看到</b><em>你比去年的自己成長了，再一點就追上同標籤前 30%</em></div>' +
-          '<div class="tier low"><b>中長尾用戶看到</b><em>每週 30 分鐘就能養成習慣（完全不顯示排名）</em></div>' +
+          '<div class="tier low"><b>這一版拿掉什麼</b><em>消費金額、階級排名、升級門檻金額，全部不出現</em></div>' +
+          '<div class="tier mid"><b>留下什麼</b><em>上站天數、完成單元、去年的自己、老師、領域圖鑑</em></div>' +
+          '<div class="tier"><b>為什麼</b><em>石頭佔 67.6%。對還沒消費的人談錢，回顧就變成催繳單</em></div>' +
         '</div>' });
-
-      L.push({ nav: '同標籤比較', lv: 'l2', html:
-        head('學習時間 · 同標籤比較', 'l2') +
-        '<h2>跟你同一類的人，長什麼樣</h2>' +
-        bars(d.peers, d.metric) });
+    } else if (t.next){
+      var need = t.nextNeed - d.spend;
+      L.push({ nav: '升級門檻', lv: null, html:
+        head('門檻 · 真實階級升級', null) +
+        '<h2>' + (need > 0 ? '再 NT$ ' + nf(need) + ' 就升' + t.next : '你已達' + t.next + '門檻') + '</h2>' +
+        '<p>升上' + t.next + '之後你會拿到：<b>' + TIERS[Object.keys(TIERS).filter(function(k){ return TIERS[k].name === t.next; })[0]].benefit + '</b></p>' +
+        '<div class="tiers">' +
+          '<div class="tier"><b>為什麼不用百分位</b><em>「再 12 小時進前 5%」是抽象的，而階級門檻是制度裡現成的，還附帶實質權益</em></div>' +
+          '<div class="tier mid"><b>門檻來源</b><em>白銀 NT$5,000 / 鉑金 NT$20,000 / 黑鑽 NT$40,000，終身累積淨消費</em></div>' +
+          '<div class="tier low"><b>石頭階級看到</b><em>不顯示任何門檻金額，只給「用註冊禮 50 元券挑一堂」</em></div>' +
+        '</div>' });
     } else {
-      L.push({ nav: '最小承諾', lv: null, html:
-        head('學習時間 · 最小承諾', null) +
-        '<h2>' + d.gateLine + '</h2>' +
-        '<p>' + d.gateWeek + '</p>' +
-        '<p class="fine">中長尾用戶完全不顯示任何排名與全站比較，只跟去年的自己比。這是避免回顧變成羞辱的底線。</p>' +
-        yoyBlock(d.yoy, d.yoyLine) });
+      L.push({ nav: '保級門檻', lv: null, html:
+        head('門檻 · 黑鑽保級', null) +
+        '<h2>' + (d.hours < 50 ? '你的黑鑽標章<br>今年有點安靜' : '維持 Plus，<br>黑鑽永不降級') + '</h2>' +
+        '<p>黑鑽保級條件是 12 個月內消費滿 <b>NT$10,000</b>，或維持有效 Plus 訂閱。' +
+        (d.hours < 50 ? '你今年消費 7,800，離保級還差 <b>2,200</b>。' : '你今年的消費已經遠超保級門檻。') + '</p>' +
+        '<div class="tiers">' +
+          '<div class="tier"><b>為什麼這張卡最值錢</b><em>黑鑽隔年留存率 64%，那流失的 36% 就是這張卡要救的人</em></div>' +
+          '<div class="tier mid"><b>語氣要收</b><em>「標章變灰」不能說成懲罰，要說成「再消費 X 元即可重新點亮」</em></div>' +
+          '<div class="tier low"><b>最佳投放時機</b><em>年度回顧是保級提醒的天然載體，比單獨發一封催繳信自然得多</em></div>' +
+        '</div>' });
     }
 
     L.push({ nav: '同班同學', lv: 'l2', html:
       head('學習時間 · 你不是一個人', 'l2') +
       '<h2>今年和你同班的<br>有 ' + d.mates + ' 人</h2>' +
       '<p>其中《' + esc(d.mateCourse) + '》是你們最多人重疊的一堂。你最常學習的那個時段，平均還有 <b>' + d.sameNight + ' 人</b>和你一起在線上。</p>' +
-      '<p class="fine">同樣是彙總數據，但方向相反：前面幾張製造落差，這張消除孤獨感。刻意放在門檻卡之後，避免整頁只有壓力。</p>' });
+      '<p class="fine">方向刻意跟前面幾張相反：前面製造落差，這張消除孤獨感，壓在門檻卡之後。</p>' });
 
     L.push({ nav: '你的老師', lv: 'l2', html:
       head('追蹤老師 · 學生中的位置', 'l2') +
@@ -615,7 +751,7 @@
       (d.teacherPct !== null ? '，在他 ' + d.teacherStudents + ' 位學生中你排 <b>前 ' + d.teacherPct + '%</b>' : '，他有 ' + d.teacherStudents + ' 位學生') +
       '。看來他講的話，比你主管還有說服力。</p>' +
       '<div class="clip"><span class="av" aria-hidden="true"></span><div><strong>' + d.teacher + ' 來電</strong><span>接通後播放老師的年度 Clips</span></div></div>' +
-      '<p class="fine">只能按接通，播完才進下一張。老師端也做一版回顧，讓他看到自己的 Top 學生，他會主動分享。</p>' });
+      '<p class="fine">老師端也做一版回顧，讓他看到自己的 Top 學生。這是 L2、沒有隱私問題，而且老師會主動分享。</p>' });
 
     L.push({ nav: '老師的其他課', lv: 'l2', html:
       head('追蹤老師 · 你還沒上的', 'l2') +
@@ -623,11 +759,11 @@
       '<div class="courses">' + d.unbought.map(function(c){
         return '<div><span>' + esc(c.n) + '<span class="meta">' + esc(c.m) + '</span></span><em>' + esc(c.tag) + '</em></div>';
       }).join('') + '</div>' +
-      '<p class="fine">榮耀感接缺口，這張卡的轉換會是全頁最高的一張。</p>' });
+      '<p class="fine">' + (t.next ? '標「可升級」的那堂是刻意挑的：金額剛好跨過下一階門檻。' : '標「預購」的用到黑鑽的 48 小時預購權，讓權益在回顧頁裡被看見。') + '</p>' });
 
     L.push({ nav: '猜你的主戰場', lv: 'l1', mech: 'guessDex', top: d.dex[0].n, topCount: d.dex[0].c, html:
       head('買課領域 · 猜了再揭曉', 'l1') +
-      '<h2>再猜一題。<br>你今年買最多課的領域是哪一個</h2>' +
+      '<h2>再猜一題。<br>你今年投入最多的領域是哪一個</h2>' +
       '<div class="opts" id="dg">' +
         d.dex.slice(0, 4).map(function(x){
           return '<button type="button" data-n="' + esc(x.n) + '">' + esc(x.n) + '</button>';
@@ -644,12 +780,12 @@
       }).join('') + '</div>' +
       '<p>' + d.dexLine + '</p>' });
 
-    L.push({ nav: '同類人也在學', lv: 'l2', html:
-      head('買課領域 · 同類人也在學', 'l2') +
-      '<h2>和你同一類的 ' + d.twinCount + ' 人<br>最近都在上這堂</h2>' +
-      '<div class="courses"><div><span>' + esc(d.twinCourse) + '<span class="meta">和你品味重疊度最高的族群，本季購買第 1 名</span></span><em>推薦</em></div></div>' +
-      '<p>協同過濾包裝成社交：不是系統推薦你，是跟你很像的人已經在學了。</p>' +
-      '<p class="fine">若沒有現成模型，第一版可以退回同子分類熱銷排行，文案照樣成立。</p>' });
+    L.push({ nav: '同階級也在學', lv: 'l2', html:
+      head('買課領域 · 同階級也在學', 'l2') +
+      '<h2>和你同階級的 ' + d.twinCount + ' 人<br>最近都在上這堂</h2>' +
+      '<div class="courses"><div><span>' + esc(d.twinCourse) + '<span class="meta">' + t.name + '階級本季購買第 1 名</span></span><em>推薦</em></div></div>' +
+      '<p>協同過濾包裝成社交：不是系統推薦你，是跟你同階級的人已經在學了。</p>' +
+      '<p class="fine">沒有現成模型的話，第一版退成同階級熱銷排行，文案照樣成立。</p>' });
 
     L.push({ nav: '收尾 CTA', lv: null, html:
       head('卡 10 · 收尾與 CTA', null) +
@@ -664,26 +800,25 @@
   var nav = document.getElementById('nav');
   var pips = document.getElementById('pips');
   var counter = document.getElementById('counter');
-  var S = [], i = 0, cur = P.buy;
-
-  function binOf(v, max){
-    var b = Math.floor(v / max * HIST.length);
-    return Math.max(0, Math.min(HIST.length - 1, b));
-  }
+  var tierRow = document.getElementById('tierRow');
+  var profRow = document.getElementById('profRow');
+  var S = [], i = 0, curKey = 'platinum-a', cur = P['platinum-a'], curTier = 'platinum';
 
   function initScene(s){
     if (s.mech === 'guessSpend'){
       var gs = document.getElementById('gs'), gv = document.getElementById('gv');
-      gs.addEventListener('input', function(){ gv.textContent = 'NT$ ' + nf(+gs.value); });
+      var show = function(){ gv.textContent = 'NT$ ' + nf(+gs.value); };
+      gs.addEventListener('input', show);
+      show();
       document.getElementById('gb').addEventListener('click', function(){
         var guess = +gs.value, real = cur.spend;
         var diff = Math.round(Math.abs(real - guess) / Math.max(real, 1) * 100);
-        var word = guess < real ? '你猜低了' : guess > real ? '你猜高了' : '你完全猜中了';
+        var word = guess < real ? '你猜低了' : '你猜高了';
         document.getElementById('gr').innerHTML =
           '<div class="verdict"><strong>實際是 NT$ ' + nf(real) + '</strong>' +
           (diff === 0 ? '你對自己的投入掌握得很清楚。' : word + ' ' + diff + '%。' +
-            (guess < real ? '你花掉的，比你以為的更多——但那些都還在你身上。' : '你比自己想像的更節制。')) +
-          '</div>' + hist(cur.spendBin, binOf(guess, cur.spendMax));
+            (guess < real ? '你花掉的比你以為的更多——但那些都還在你身上。' : '你比自己想像的更節制。')) +
+          '</div>' + tierChart(cur.tier, null);
       });
     }
     if (s.mech === 'guessRank'){
@@ -695,11 +830,7 @@
           '<div class="verdict"><strong>你其實贏過全站 ' + real + '% 的會員</strong>' +
           (g < real ? '你猜 ' + g + '%，低估了自己 ' + (real - g) + ' 個百分點。' : g > real ? '你猜 ' + g + '%，比實際高了 ' + (g - real) + ' 個百分點。' : '你完全猜中了。') +
           '</div>' +
-          '<div class="ruler"><div class="ruler-track">' +
-            '<span class="ruler-gate" style="left:' + s.gatePct + '%"><span>前 ' + (100 - s.gatePct) + '% 門檻</span></span>' +
-            '<span class="ruler-me" style="left:' + real + '%"><span>你 · 前 ' + (100 - real) + '%</span></span>' +
-          '</div><div class="ruler-scale"><span>全站中位</span><span>前 1%</span></div></div>' +
-          '<p><b>' + s.pool + ' 位活躍會員裡，你排第 ' + s.rank + ' 名。</b></p>' +
+          '<p><b>' + s.pool + ' 位會員裡，你大約排第 ' + s.rank + ' 名。</b></p>' +
           '<p class="fine">放心，這種打敗別人的方式很健康。</p>';
       });
     }
@@ -716,16 +847,38 @@
           });
           document.getElementById('dr').innerHTML =
             '<div class="verdict"><strong>' + (right ? '猜對了，是「' + esc(s.top) + '」' : '其實是「' + esc(s.top) + '」') + '</strong>' +
-            (right ? '你很清楚自己在往哪裡走，這一格你買了 ' + s.topCount + ' 堂。'
-                   : '你以為是「' + esc(g) + '」，但錢其實花在「' + esc(s.top) + '」上，共 ' + s.topCount + ' 堂。你的實際選擇比你的印象更集中。') +
+            (right ? '你很清楚自己在往哪裡走，這一格你累積了 ' + s.topCount + ' 堂。'
+                   : '你以為是「' + esc(g) + '」，但你的錢其實花在「' + esc(s.top) + '」上，共 ' + s.topCount + ' 堂。實際選擇比印象更集中。') +
             '</div>';
         });
       });
     }
   }
 
-  function build(k){
+  function buildProfileRow(){
+    profRow.innerHTML = '';
+    var lbl = document.createElement('span');
+    lbl.className = 'lbl';
+    lbl.textContent = '輪廓';
+    profRow.appendChild(lbl);
+    PROFILES[curTier].forEach(function(k){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = P[k].tierNote;
+      b.setAttribute('aria-pressed', k === curKey ? 'true' : 'false');
+      b.addEventListener('click', function(){ i = 0; load(k); });
+      profRow.appendChild(b);
+    });
+  }
+
+  function load(k){
+    curKey = k;
     cur = P[k];
+    curTier = cur.tier;
+    Array.prototype.forEach.call(tierRow.querySelectorAll('button'), function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-t') === curTier ? 'true' : 'false');
+    });
+    buildProfileRow();
     S = scenes(cur);
     nav.innerHTML = '';
     pips.innerHTML = '';
@@ -755,14 +908,13 @@
     initScene(S[i]);
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('.switch button'), function(b){
-    b.addEventListener('click', function(){
-      Array.prototype.forEach.call(document.querySelectorAll('.switch button'), function(o){
-        o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
-      });
-      i = 0;
-      build(b.getAttribute('data-p'));
-    });
+  TIER_ORDER.forEach(function(k){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('data-t', k);
+    b.textContent = TIERS[k].name + ' ' + TIERS[k].share + '%';
+    b.addEventListener('click', function(){ i = 0; load(PROFILES[k][0]); });
+    tierRow.appendChild(b);
   });
 
   document.getElementById('next').addEventListener('click', function(){ go(i + 1); });
@@ -773,7 +925,7 @@
     if (e.key === 'ArrowLeft') go(i - 1);
   });
 
-  build('buy');
+  load('platinum-a');
 </script>
 
 </body>
