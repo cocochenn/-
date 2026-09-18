@@ -158,6 +158,8 @@
   .opts{display:flex;flex-wrap:wrap;gap:7px;}
   .opt{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:#ddd9e4;border:1px solid var(--line);border-radius:100px;padding:4px 12px;cursor:pointer;}
   .opt input{accent-color:var(--amber);}
+  .opts button[disabled]{cursor:default;opacity:.45;}
+  .opts button[aria-pressed="true"][disabled]{opacity:1;}
 
   /* wall */
   .wall{display:flex;flex-direction:column;gap:7px;max-width:520px;}
@@ -226,7 +228,7 @@
     <div class="brandline">PPA 2025 年度回顧 · 互動原型</div>
     <div class="stamp">假數據示意 · 手機直式為主</div>
   </header>
-  <p class="lede">沿用企劃書的三標籤稱號卡架構，四個面向<b>花費、學習時間、追蹤老師、買課領域</b>各配一組互動。滑桿、猜測、選項都可以實際操作。右側標示每張卡的社交強度：<b>L1</b> 頁內互動、<b>L2</b> 弱社交（只用彙總數據）、<b>L3</b> 強社交（需隱私設計，建議第二期）。</p>
+  <p class="lede">沿用企劃書的三標籤稱號卡架構，四個面向<b>花費、學習時間、追蹤老師、買課領域</b>各配一組互動。本期範圍定案為 <b>L1 頁內互動</b>（滑桿、猜測、圖鑑）與 <b>L2 弱社交</b>（只用彙總數據，無隱私問題）；PK 連結、宣言牆等強社交機制留到第二期。滑桿與選項都可以實際操作。</p>
 
   <div class="switch" role="group" aria-label="切換標籤">
     <span class="lbl">標籤</span>
@@ -252,25 +254,25 @@
       <p class="hint">先給稱號與肯定，中段用猜測與比較製造落差，排名後面一定緊接得到的下一階。</p>
       <ol id="nav"></ol>
       <div class="legend">
-        <span><b class="l1">L1</b> 頁內互動 · 必做</span>
-        <span><b class="l2">L2</b> 弱社交 · 這次主打</span>
-        <span><b class="l3">L3</b> 強社交 · 第二期</span>
+        <span><b class="l1">L1</b> 頁內互動 · 本期</span>
+        <span><b class="l2">L2</b> 弱社交 · 本期</span>
+        <span style="opacity:.6">L3 強社交 · 本期不做</span>
       </div>
     </aside>
   </div>
 
   <section class="spec">
-    <h2>互動機制 × 四個面向</h2>
-    <p>同一個機制套在不同面向上效果差很多。花費適合「猜了再揭曉」但不適合跟其他用戶比；學習時間和領域則是社交比較的主場。</p>
+    <h2>本期範圍：L1 + L2</h2>
+    <p>同一個機制套在不同面向上效果差很多。花費適合「猜了再揭曉」但不適合跟其他用戶比；學習時間和領域則是彙總比較的主場。最右欄的 L3 本期不做，列出來是為了讓第二期有方向。</p>
     <div class="tablewrap">
       <table>
         <thead>
-          <tr><th>面向</th><th>L1 頁內互動</th><th>L2 弱社交</th><th>L3 強社交</th><th>需要的欄位</th></tr>
+          <tr><th>面向</th><th>L1 頁內互動 · 本期</th><th>L2 弱社交 · 本期</th><th>L3 · 第二期</th><th>需要的欄位</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><b>花費</b></td>
-            <td class="l1">猜猜你今年花多少 → 揭曉落差</td>
+            <td class="l1">猜猜你今年花多少 → 揭曉落差，猜測同時標在分佈圖上</td>
             <td class="l2">全站分佈直方圖標出你的級距（不顯示排名）</td>
             <td class="l3">不建議做 PK</td>
             <td>年度總金額、金額分佈直方圖</td>
@@ -279,7 +281,7 @@
             <td><b>學習時間</b></td>
             <td class="l1">猜自己的排名 → 揭曉＋名次</td>
             <td class="l2">同標籤中位疊圖、同班同學數、時段分佈對照</td>
-            <td class="l3">時數 PK 連結</td>
+            <td class="l3">時數 PK 連結、宣言牆</td>
             <td>總時數、百分位、時段分佈、同標籤中位</td>
           </tr>
           <tr>
@@ -291,7 +293,7 @@
           </tr>
           <tr>
             <td><b>買課領域</b></td>
-            <td class="l1">領域圖鑑解鎖格</td>
+            <td class="l1">猜主戰場 → 領域圖鑑解鎖格揭曉</td>
             <td class="l2">同類人也在學、品味重疊度推薦</td>
             <td class="l3">品味雙胞胎（匿名）</td>
             <td>子分類購買分佈、協同過濾清單</td>
@@ -314,8 +316,12 @@
         <p>沒有「你落後 70% 的人」。中長尾用戶一律改用同比與最小承諾，切標籤到「潛力股」可以看到那一版。</p>
       </div>
       <div>
-        <h4>PK 項目要用戶自選</h4>
-        <p>金額預設關閉，且對方只看到自選項目。匿名的品味雙胞胎也要確認樣本足夠大，避免被反推身分。</p>
+        <h4>猜測不能連續三張</h4>
+        <p>三個猜測機制刻意分散在花費、排名、領域三段，中間用肯定與彙總卡隔開。連續猜會變成問卷，用戶直接跳過。</p>
+      </div>
+      <div>
+        <h4>壓力後面要接同行感</h4>
+        <p>排名與門檻之後緊接「同班同學」，讓整頁不是只有落差。這張也是彙總數據，實作成本一樣低。</p>
       </div>
     </div>
 
@@ -324,8 +330,9 @@
       <div class="ask"><i>1</i><span>各百分位級距門檻值（前 5／10／30% 各是多少），沒有這個寫不出「再 X 就到」。</span></div>
       <div class="ask"><i>2</i><span>2024 同欄位是否可取得，決定「去年的自己」與所有同比卡能不能做。</span></div>
       <div class="ask"><i>3</i><span>協同過濾清單（買了 A 的人也買 B）是否已有現成模型，或這次要簡化成同子分類熱銷。</span></div>
-      <div class="ask"><i>4</i><span>老師端回顧要不要一起做。老師會主動分享，對 BD 的效益可能高於用戶端分享卡。</span></div>
-      <div class="ask"><i>5</i><span>無標籤用戶佔比。若超過六成，潛力股版本就是主版本而非備案。</span></div>
+      <div class="ask"><i>4</i><span>同班同學數與同時段在線人數是否可算。這張卡成本低但情緒價值高，不想漏掉。</span></div>
+      <div class="ask"><i>5</i><span>老師端回顧要不要一起做。這是 L2、沒有隱私問題，而且老師會主動分享，對 BD 的效益可能高於用戶端分享卡。</span></div>
+      <div class="ask"><i>6</i><span>無標籤用戶佔比。若超過六成，潛力股版本就是主版本而非備案。</span></div>
     </div>
 
     <p class="foot">原型數據為假資料。企劃來源：2025 用戶年度回顧頁面企劃。</p>
@@ -364,6 +371,7 @@
       ],
       dexLine: '你解鎖了 8 個領域中的 4 個，最重倉的是職涯發展。和你品味重疊 82% 的人，多半也補了「數位工具」這一格。',
       twinCount: '1,842', twinCourse: 'AI 工作流實戰',
+      mates: '18,420', mateCourse: '財務建模實戰', sameNight: '3,180',
       cta: '選一堂一直想上的課，1 月完成第一單元'
     },
     learn: {
@@ -396,6 +404,7 @@
       ],
       dexLine: '你解鎖了 8 個領域中的 5 個，是站上少見的廣度。和你品味重疊 76% 的人，最近都在補「數位工具」。',
       twinCount: '2,640', twinCourse: 'Notion 知識庫建構',
+      mates: '26,180', mateCourse: '閱讀的技術', sameNight: '1,240',
       cta: '把只剩 2 堂就完課的那 3 門收掉'
     },
     social: {
@@ -428,6 +437,7 @@
       ],
       dexLine: '你解鎖了 3 個領域，但互動量是站上前 4%。和你一樣愛在留言區出沒的人，最近都在上「語言學習」。',
       twinCount: '968', twinCourse: '日文五十音到會話',
+      mates: '9,640', mateCourse: '身體修復實作', sameNight: '2,470',
       cta: '報名 1 月的第一場直播'
     },
     tail: {
@@ -454,6 +464,7 @@
       ],
       dexLine: '你解鎖了第一格。剛開始的人通常第二格會補「職涯發展」，那裡有最多 30 分鐘內看完的課。',
       twinCount: '4,120', twinCourse: '職場溝通基本功',
+      mates: '2,310', mateCourse: '簡報結構入門', sameNight: '1,860',
       cta: '從收藏清單挑 1 堂，1 月看完第一單元'
     }
   };
@@ -591,6 +602,12 @@
         yoyBlock(d.yoy, d.yoyLine) });
     }
 
+    L.push({ nav: '同班同學', lv: 'l2', html:
+      head('學習時間 · 你不是一個人', 'l2') +
+      '<h2>今年和你同班的<br>有 ' + d.mates + ' 人</h2>' +
+      '<p>其中《' + esc(d.mateCourse) + '》是你們最多人重疊的一堂。你最常學習的那個時段，平均還有 <b>' + d.sameNight + ' 人</b>和你一起在線上。</p>' +
+      '<p class="fine">同樣是彙總數據，但方向相反：前面幾張製造落差，這張消除孤獨感。刻意放在門檻卡之後，避免整頁只有壓力。</p>' });
+
     L.push({ nav: '你的老師', lv: 'l2', html:
       head('追蹤老師 · 學生中的位置', 'l2') +
       '<h2>2025 聽說你最信 ' + d.teacher + '</h2>' +
@@ -608,6 +625,17 @@
       }).join('') + '</div>' +
       '<p class="fine">榮耀感接缺口，這張卡的轉換會是全頁最高的一張。</p>' });
 
+    L.push({ nav: '猜你的主戰場', lv: 'l1', mech: 'guessDex', top: d.dex[0].n, topCount: d.dex[0].c, html:
+      head('買課領域 · 猜了再揭曉', 'l1') +
+      '<h2>再猜一題。<br>你今年買最多課的領域是哪一個</h2>' +
+      '<div class="opts" id="dg">' +
+        d.dex.slice(0, 4).map(function(x){
+          return '<button type="button" data-n="' + esc(x.n) + '">' + esc(x.n) + '</button>';
+        }).join('') +
+      '</div>' +
+      '<div id="dr"></div>' +
+      '<p class="fine">猜測機制的第三次使用，刻意放在圖鑑前面：先讓人押注，下一張揭曉才有張力。</p>' });
+
     L.push({ nav: '領域圖鑑', lv: 'l1', html:
       head('買課領域 · 解鎖圖鑑', 'l1') +
       '<h2>你今年解鎖了幾格</h2>' +
@@ -623,27 +651,6 @@
       '<p>協同過濾包裝成社交：不是系統推薦你，是跟你很像的人已經在學了。</p>' +
       '<p class="fine">若沒有現成模型，第一版可以退回同子分類熱銷排行，文案照樣成立。</p>' });
 
-    L.push({ nav: 'PK 連結', lv: 'l3', mech: 'pk', html:
-      head('強社交 · PK 連結', 'l3') +
-      '<h2>把你的年度戰績<br>丟給一個朋友比一比</h2>' +
-      '<p class="fine">比較項目由你自己勾選，對方只看到你勾的。金額預設關閉。</p>' +
-      '<div class="opts">' +
-        '<label class="opt"><input type="checkbox" id="k1" checked /> 學習時數</label>' +
-        '<label class="opt"><input type="checkbox" id="k2" checked /> 領域重疊度</label>' +
-        '<label class="opt"><input type="checkbox" id="k3" /> 花費金額</label>' +
-      '</div>' +
-      '<div class="pk" id="pk"></div>' +
-      '<div><button id="pkb" type="button">產生 PK 連結</button></div>' +
-      '<p class="fine" id="pkmsg"></p>' });
-
-    L.push({ nav: '2026 宣言牆', lv: 'l3', mech: 'wall', html:
-      head('強社交 · 宣言牆', 'l3') +
-      '<h2>2026 年，我們會再見面吧</h2>' +
-      '<p>留一句給明年的你，也看看別人寫了什麼。</p>' +
-      '<div class="compose"><input type="text" id="wi" placeholder="例如：每週看完一個單元" maxlength="40" /><button id="wb" type="button">貼上牆</button></div>' +
-      '<div class="wall" id="wall"></div>' +
-      '<p class="fine">UGC 門檻最低的一種，但需要審核機制。建議先小量灰度。</p>' });
-
     L.push({ nav: '收尾 CTA', lv: null, html:
       head('卡 10 · 收尾與 CTA', null) +
       '<h2>幫你設好第一個 2026 任務</h2>' +
@@ -652,12 +659,6 @@
 
     return L;
   }
-
-  var WALL = [
-    { t: '今年要把英文口說練到能開會', w: '一位知識投資家' },
-    { t: '每週一三五早上通勤聽課，不准偷懶', w: '一位圖書館裡的那個人' },
-    { t: '把去年買了沒看的 5 堂課清完', w: '一位潛力股' }
-  ];
 
   var card = document.getElementById('card');
   var nav = document.getElementById('nav');
@@ -702,41 +703,24 @@
           '<p class="fine">放心，這種打敗別人的方式很健康。</p>';
       });
     }
-    if (s.mech === 'pk'){
-      var render = function(){
-        var rows = [];
-        if (document.getElementById('k1').checked) rows.push({ k: cur.metric, l: nf(cur.hours), r: nf(Math.round(cur.hours * 0.62)), win: true });
-        if (document.getElementById('k2').checked) rows.push({ k: '領域重疊', l: '68%', r: '68%', win: false });
-        if (document.getElementById('k3').checked) rows.push({ k: '花費', l: 'NT$ ' + nf(cur.spend), r: 'NT$ ' + nf(Math.round(cur.spend * 0.8)), win: true });
-        var pk = document.getElementById('pk');
-        if (!rows.length){ pk.innerHTML = '<p class="fine">至少勾一項才能產生 PK 卡。</p>'; return; }
-        pk.innerHTML = '<div class="pk-row"><span class="l">你</span><span class="k">VS</span><span class="r">朋友</span></div>' +
-          rows.map(function(r){
-            return '<div class="pk-row' + (r.win ? ' win' : '') + '"><span class="l">' + r.l + '</span><span class="k">' + r.k + '</span><span class="r">' + r.r + '</span></div>';
-          }).join('');
-      };
-      ['k1','k2','k3'].forEach(function(id){ document.getElementById(id).addEventListener('change', render); });
-      document.getElementById('pkb').addEventListener('click', function(){
-        document.getElementById('pkmsg').textContent = '原型示意：實際會產生一次性連結，對方打開只看到你勾選的項目，7 天後失效。';
+    if (s.mech === 'guessDex'){
+      var picked = false;
+      Array.prototype.forEach.call(document.querySelectorAll('#dg button'), function(b){
+        b.addEventListener('click', function(){
+          if (picked) return;
+          picked = true;
+          var g = b.getAttribute('data-n'), right = g === s.top;
+          Array.prototype.forEach.call(document.querySelectorAll('#dg button'), function(o){
+            o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+            o.disabled = true;
+          });
+          document.getElementById('dr').innerHTML =
+            '<div class="verdict"><strong>' + (right ? '猜對了，是「' + esc(s.top) + '」' : '其實是「' + esc(s.top) + '」') + '</strong>' +
+            (right ? '你很清楚自己在往哪裡走，這一格你買了 ' + s.topCount + ' 堂。'
+                   : '你以為是「' + esc(g) + '」，但錢其實花在「' + esc(s.top) + '」上，共 ' + s.topCount + ' 堂。你的實際選擇比你的印象更集中。') +
+            '</div>';
+        });
       });
-      render();
-    }
-    if (s.mech === 'wall'){
-      var wall = document.getElementById('wall');
-      var draw = function(){
-        wall.innerHTML = WALL.map(function(w){
-          return '<div class="' + (w.mine ? 'mine' : '') + '">' + esc(w.t) + '<span>' + esc(w.w) + '</span></div>';
-        }).join('');
-      };
-      document.getElementById('wb').addEventListener('click', function(){
-        var el = document.getElementById('wi');
-        var t = el.value.trim();
-        if (!t) { el.focus(); return; }
-        WALL.unshift({ t: t, w: '你 · 剛剛', mine: true });
-        el.value = '';
-        draw();
-      });
-      draw();
     }
   }
 
