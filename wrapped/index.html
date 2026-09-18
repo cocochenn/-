@@ -259,19 +259,19 @@
   </div>
 
   <section class="spec">
-    <h2>真實分佈打掉的兩個假設</h2>
-    <p>把 2026_PPA_會員分級機制的數字接進來之後，原本的設計有兩處撐不住。這兩件事在拿到真實分佈之前都看不出來。</p>
+    <h2>真實門檻與分佈</h2>
+    <p>門檻取自 PPA 會員權益表：<b>升級與保級同門檻，而且是效期內累積，不是終身累積</b>。⚠ 標記的三欄（會員數、佔比、ARPU）來自分級機制表，該表用的是舊門檻級距（5,000／20,000／40,000 終身累積），與現行門檻不一致，需要依現行規則重拉。</p>
     <div class="tablewrap">
       <table>
         <thead>
-          <tr><th>階級</th><th>消費級距</th><th>會員數</th><th>佔比</th><th>ARPU</th><th>升級／保級門檻</th></tr>
+          <tr><th>階級</th><th>升級門檻（＝保級門檻）</th><th>會員數 ⚠</th><th>佔比 ⚠</th><th>ARPU ⚠</th><th>升上去拿到什麼</th></tr>
         </thead>
         <tbody>
-          <tr><td><b>岩石</b></td><td>無消費 / 0 元專案</td><td>1,198,044</td><td class="l3">67.6%</td><td>NT$0</td><td>首購即進青銅</td></tr>
-          <tr><td><b>青銅</b></td><td>NT$1–4,999</td><td>348,002</td><td>19.7%</td><td>NT$2,580</td><td>累積 5,000 升白銀</td></tr>
-          <tr><td><b>白銀</b></td><td>NT$5,000–19,999</td><td>160,852</td><td>9.1%</td><td>NT$9,813</td><td>累積 20,000 升鉑金</td></tr>
-          <tr><td><b>鉑金</b></td><td>NT$20,000–39,999</td><td>35,357</td><td>2.0%</td><td>NT$27,946</td><td>累積 40,000 升黑鑽</td></tr>
-          <tr><td><b>黑鑽</b></td><td>NT$40,000 以上</td><td>28,263</td><td>1.6%</td><td class="l2">NT$81,563</td><td>12 個月消費 10,000 或 Plus 訂閱</td></tr>
+          <tr><td><b>岩石</b></td><td>—</td><td>1,198,044</td><td class="l3">67.6%</td><td>NT$0</td><td>首購 50 元券、簽到抽獎 90 點</td></tr>
+          <tr><td><b>青銅</b></td><td>完成任一筆付費訂單</td><td>348,002</td><td>19.7%</td><td>NT$2,580</td><td>每月 9 折券、會員日 100 元券</td></tr>
+          <tr><td><b>白銀</b></td><td class="l1">效期內累積 NT$7,500<br>或官網 Plus 年訂閱</td><td>160,852</td><td>9.1%</td><td>NT$9,813</td><td>88 折券、200 元券、點數 1.8 倍</td></tr>
+          <tr><td><b>鉑金</b></td><td class="l1">效期內累積 NT$25,000</td><td>35,357</td><td>2.0%</td><td>NT$27,946</td><td>85 折券、新課 48 小時預購、生日月募資價</td></tr>
+          <tr><td><b>黑鑽</b></td><td class="l1">效期內累積 NT$65,000<br>沒有 Plus 代保級</td><td>28,263</td><td>1.6%</td><td class="l2">NT$81,563</td><td>維持黑鑽權益</td></tr>
         </tbody>
       </table>
     </div>
@@ -313,6 +313,9 @@
       <div class="ask"><i>6</i><span>同階級熱銷排行，用來替代協同過濾。</span></div>
       <div class="ask"><i>7</i><span>階級表的語義：抽樣資料裡同一個會員 ID 在同一秒同時有鉑金與白銀兩筆，所以這張表看起來是變動歷程而非當前狀態。取「當前階級」的邏輯要先跟工程確認，否則跑批會出錯。</span></div>
       <div class="ask"><i>8</i><span>階級時間戳有大量 2026-01-28 11:07 的批次灌檔值，不是真實升級日。「你在 X 月升上黑鑽」這類文案只能對批次日之後升級的人顯示，否則整批人看到同一個時間。</span></div>
+      <div class="ask"><i>9</i><span>「效期」是多長？升級與保級同門檻的話，這張卡對每位會員每個效期都會重新出現，效期長度直接決定文案語氣。</span></div>
+      <div class="ask"><i>10</i><span>會員數與 ARPU 要依現行門檻（7,500／25,000／65,000、效期內累積）重拉。舊級距算出來的佔比會讓白銀以上的人數被高估。</span></div>
+      <div class="ask"><i>11</i><span>Notion 另有一張「年度學習回顧（Wrapped）」工單（Q3 複購率看板、狀態未開始、優先度低），做的是白銀／鉑金／黑鑽三階差異化，成功指標是分享率與拉新。與策展版的範圍、目標、負責人都不同，需要先併軌。</span></div>
     </div>
 
     <p class="foot">階級人數、佔比、ARPU、門檻、留存率取自 2026_PPA_會員分級機制（jameslin，2026/04 更新）。個人層級數字為依 ARPU 推算的代表輪廓，非真實會員資料。卡片架構來源：2025 用戶年度回顧頁面企劃。</p>
@@ -321,12 +324,14 @@
 
 <script>
   // 階級定義與分佈：取自 2026_PPA_會員分級機制（總會員 1,770,518）
+  // 門檻取自 PPA 會員權益表（升級與保級同門檻、效期內累積消費）
+  // 人數／佔比／ARPU 來自 2026_PPA_會員分級機制，該表用的是舊門檻級距（5,000／20,000／40,000 終身累積），待依現行門檻重拉
   var TIERS = {
-    stone:    { name: '岩石',   band: '無消費紀錄 / 0 元專案', count: 1198044, share: 67.6, arpu: 0,     beat: null, next: '青銅', nextNeed: 1,     benefit: '首購 50 元折價券' },
-    bronze:   { name: '青銅',   band: 'NT$1–4,999',           count: 348002,  share: 19.7, arpu: 2580,  beat: 68,   next: '白銀', nextNeed: 5000,  benefit: '每月 9 折券 + 會員日 100 元券' },
-    silver:   { name: '白銀',   band: 'NT$5,000–19,999',      count: 160852,  share: 9.1,  beat: 87,    arpu: 9813, next: '鉑金', nextNeed: 20000, benefit: '每月 88 折券 + 會員日 200 元券 + 點數 1.8 倍' },
-    platinum: { name: '鉑金',   band: 'NT$20,000–39,999',     count: 35357,   share: 2.0,  beat: 96,    arpu: 27946,next: '黑鑽', nextNeed: 40000, benefit: '每月 85 折券 + 新課 48 小時預購 + 生日月募資價回歸' },
-    black:    { name: '黑鑽',   band: 'NT$40,000 以上',        count: 28263,   share: 1.6,  beat: 98,    arpu: 81563,next: null,   nextNeed: null,  benefit: '保級：12 個月消費滿 10,000 或維持 Plus 訂閱' }
+    stone:    { name: '岩石', band: '無消費紀錄',            count: 1198044, share: 67.6, arpu: 0,     beat: null, next: '青銅', nextNeed: null, nextRule: '完成任一筆付費訂單', benefit: '首購 50 元折價券、每日簽到抽獎 90 點' },
+    bronze:   { name: '青銅', band: '完成付費訂單',           count: 348002,  share: 19.7, arpu: 2580,  beat: 68,   next: '白銀', nextNeed: 7500, nextRule: '效期內累積滿 NT$7,500，或於官網訂購 Plus 年訂閱方案完成', benefit: '每月 9 折券、會員日 100 元券、點數 1.5 倍' },
+    silver:   { name: '白銀', band: '效期內累積滿 7,500',     count: 160852,  share: 9.1,  arpu: 9813,  beat: 87,   next: '鉑金', nextNeed: 25000, nextRule: '效期內累積滿 NT$25,000', benefit: '每月 88 折券、會員日 200 元券、點數 1.8 倍、每月解鎖 1 堂全套' },
+    platinum: { name: '鉑金', band: '效期內累積滿 25,000',    count: 35357,   share: 2.0,  arpu: 27946, beat: 96,   next: '黑鑽', nextNeed: 65000, nextRule: '效期內累積滿 NT$65,000', benefit: '每月 85 折券、新課 48 小時預購、生日月募資價回歸、點數 2 倍、每月解鎖 3 堂全套' },
+    black:    { name: '黑鑽', band: '效期內累積滿 65,000',    count: 28263,   share: 1.6,  arpu: 81563, beat: 98,   next: null,   nextNeed: 65000, nextRule: '保級門檻與升級同值：效期內累積滿 NT$65,000。沒有 Plus 代保級的路徑', benefit: '維持黑鑽權益' }
   };
 
   var P = {
@@ -353,6 +358,7 @@
       dexLine: '你打開了第一格。剛開始的人第二格通常會補「職涯發展」，那裡有最多 30 分鐘內看完的課。',
       twinCount: '48,200', twinCourse: '職場溝通基本功',
       mates: '1,840', mateCourse: '簡報結構入門', sameNight: '12,600',
+      classmateNext: [{ n: '職場溝通基本功', m: '31 分鐘 · 同班 62% 的人接著上這堂', tag: '未上' }, { n: '時間管理入門', m: '44 分鐘 · 同班 38%', tag: '未上' }],
       cta: '從收藏清單挑 1 堂，1 月看完第一單元'
     },
     'stone-b': {
@@ -378,6 +384,7 @@
       dexLine: '兩格都是免費內容解鎖的。你的方向很明確，就在理財和職涯之間。',
       twinCount: '26,100', twinCourse: '個人理財第一課',
       mates: '5,600', mateCourse: '個人理財第一課', sameNight: '9,300',
+      classmateNext: [{ n: '記帳到資產配置', m: '1 小時 28 分 · 同班 57% 接著上', tag: '未上' }, { n: '履歷健檢實作', m: '48 分鐘 · 同班 41%', tag: '未上' }],
       cta: '用註冊禮的 50 元券，挑一堂 300 元以內的課'
     },
     'bronze-a': {
@@ -403,6 +410,7 @@
       dexLine: '你解鎖了 2 格，兩格都跟工作有關。看來你想解決的是很實際的問題。',
       twinCount: '34,800', twinCourse: '職涯定位工作坊',
       mates: '8,900', mateCourse: '履歷健檢實作', sameNight: '3,180',
+      classmateNext: [{ n: '筆記系統建構', m: '1 小時 52 分 · 同班 64% 接著上', tag: '未上' }, { n: '閱讀的技術', m: '3 小時 20 分 · 同班 45%', tag: '未上' }],
       cta: '把只剩 1 堂就完課的那門收掉'
     },
     'bronze-b': {
@@ -428,6 +436,7 @@
       dexLine: '你解鎖了 3 格。和你消費水準相近的人，第四格最常補「數位工具」。',
       twinCount: '34,800', twinCourse: 'AI 工作流實戰',
       mates: '12,400', mateCourse: '財報地雷排查', sameNight: '1,240',
+      classmateNext: [{ n: '財報地雷排查', m: '2 小時 48 分 · 同班 71% 接著上', tag: '可升級' }, { n: 'AI 工作流實戰', m: '3 小時 10 分 · 同班 48%', tag: '未上' }],
       cta: '再一堂就升白銀，每月多一張 9 折券'
     },
     'silver-a': {
@@ -454,6 +463,7 @@
       dexLine: '你解鎖了 4 格，廣度在白銀階級裡算前段。同階級的人第五格最常補「數位工具」。',
       twinCount: '16,000', twinCourse: 'Notion 知識庫建構',
       mates: '26,180', mateCourse: '演講表達入門', sameNight: '2,470',
+      classmateNext: [{ n: '演講表達入門', m: '2 小時 05 分 · 同班 68% 接著上', tag: '未上' }, { n: '寫作變現實戰', m: '4 小時 30 分 · 同班 44%', tag: '新課' }],
       cta: '把只剩 2 堂就完課的那 3 門收掉'
     },
     'silver-b': {
@@ -480,6 +490,7 @@
       dexLine: '你解鎖了 4 格，最重倉的是投資理財。看起來你不只投資股票，也在加倉自己。',
       twinCount: '16,000', twinCourse: 'AI 工作流實戰',
       mates: '26,180', mateCourse: '財報地雷排查', sameNight: '3,180',
+      classmateNext: [{ n: '併購案拆解', m: '5 小時 06 分 · 同班 59% 接著上', tag: '可升級' }, { n: '公司估值實戰', m: '4 小時 12 分 · 同班 52%', tag: '未上' }],
       cta: '再 1,800 元就升鉑金，每月券從 9 折變 88 折'
     },
     'platinum-a': {
@@ -506,6 +517,7 @@
       dexLine: '你解鎖了 8 格中的 4 格，最重倉的是職涯發展。同階級的人多半也補了「數位工具」。',
       twinCount: '3,500', twinCourse: 'AI 工作流實戰',
       mates: '18,420', mateCourse: '財務建模實戰', sameNight: '3,180',
+      classmateNext: [{ n: '併購案拆解', m: '5 小時 06 分 · 同班 63% 接著上', tag: '未上' }, { n: '產業趨勢年會', m: '6 小時 · 同班 39%', tag: '未上' }],
       cta: '再 12,054 元就升黑鑽，新課能比早鳥再便宜 100–200'
     },
     'black-a': {
@@ -532,6 +544,7 @@
       dexLine: '你解鎖了 8 格中的 7 格。站上只有極少數人收集到這個程度，最後一格是設計美學。',
       twinCount: '2,800', twinCourse: '產業趨勢年會',
       mates: '31,600', mateCourse: '財務建模實戰', sameNight: '3,180',
+      classmateNext: [{ n: '產業趨勢年會', m: '6 小時 · 同班 58% 接著上', tag: '獨家' }, { n: '設計思考導論', m: '2 小時 20 分 · 你唯一沒解鎖的領域', tag: '未上' }],
       cta: '維持 Plus 訂閱，黑鑽身份永不降級'
     },
     'black-b': {
@@ -557,6 +570,7 @@
       dexLine: '你解鎖了 5 格，都是前幾年累積的。今年只動了其中一格。',
       twinCount: '2,800', twinCourse: '閱讀的技術',
       mates: '31,600', mateCourse: '閱讀的技術', sameNight: '2,470',
+      classmateNext: [{ n: '閱讀的技術', m: '3 小時 20 分 · 同班 66% 接著上', tag: '可保級' }, { n: '寫作變現實戰', m: '4 小時 30 分 · 同班 43%', tag: '預購' }],
       cta: '再 2,200 元或維持 Plus 訂閱，就能保住黑鑽'
     }
   };
@@ -717,26 +731,30 @@
           '<div class="tier"><b>為什麼</b><em>岩石佔 67.6%。對還沒消費的人談錢，回顧就變成催繳單</em></div>' +
         '</div>' });
     } else if (t.next){
-      var need = t.nextNeed - d.spend;
+      var nt = TIERS[Object.keys(TIERS).filter(function(k){ return TIERS[k].name === t.next; })[0]];
+      var need = t.nextNeed ? t.nextNeed - d.spend : null;
       L.push({ nav: '升級門檻', lv: null, html:
         head('門檻 · 真實階級升級', null) +
-        '<h2>' + (need > 0 ? '再 NT$ ' + nf(need) + ' 就升' + t.next : '你已達' + t.next + '門檻') + '</h2>' +
-        '<p>升上' + t.next + '之後你會拿到：<b>' + TIERS[Object.keys(TIERS).filter(function(k){ return TIERS[k].name === t.next; })[0]].benefit + '</b></p>' +
+        '<h2>' + (need === null ? '買第一堂課，<br>你就從岩石變青銅'
+                 : need > 0 ? '再 NT$ ' + nf(need) + '<br>你就升' + t.next
+                 : '你已達' + t.next + '門檻') + '</h2>' +
+        '<p>升上' + t.next + '之後你會拿到：<b>' + nt.benefit + '</b></p>' +
+        '<p class="fine">門檻規則：' + t.nextRule + '</p>' +
         '<div class="tiers">' +
-          '<div class="tier"><b>為什麼不用百分位</b><em>「再 12 小時進前 5%」是抽象的，而階級門檻是制度裡現成的，還附帶實質權益</em></div>' +
-          '<div class="tier mid"><b>門檻來源</b><em>白銀 NT$5,000 / 鉑金 NT$20,000 / 黑鑽 NT$40,000，終身累積淨消費</em></div>' +
-          '<div class="tier low"><b>岩石階級看到</b><em>不顯示任何門檻金額，只給「用註冊禮 50 元券挑一堂」</em></div>' +
+          '<div class="tier"><b>為什麼不用百分位</b><em>「再 12 小時進前 5%」是抽象的，階級門檻是制度裡現成的，還附帶實質權益</em></div>' +
+          '<div class="tier mid"><b>注意：效期內累積，不是終身</b><em>白銀 7,500 / 鉑金 25,000 / 黑鑽 65,000，而且升級與保級同門檻，所以這張卡對每個人每年都會重新出現</em></div>' +
+          '<div class="tier low"><b>岩石階級看到</b><em>不顯示任何金額，只給「用註冊禮 50 元券挑一堂」</em></div>' +
         '</div>' });
     } else {
       L.push({ nav: '保級門檻', lv: null, html:
         head('門檻 · 黑鑽保級', null) +
-        '<h2>' + (d.hours < 50 ? '你的黑鑽標章<br>今年有點安靜' : '維持 Plus，<br>黑鑽永不降級') + '</h2>' +
-        '<p>黑鑽保級條件是 12 個月內消費滿 <b>NT$10,000</b>，或維持有效 Plus 訂閱。' +
-        (d.hours < 50 ? '你今年消費 7,800，離保級還差 <b>2,200</b>。' : '你今年的消費已經遠超保級門檻。') + '</p>' +
+        '<h2>' + (d.spend < 65000 ? '你的黑鑽<br>今年還差 NT$ ' + nf(65000 - d.spend) : '你今年已經保住黑鑽') + '</h2>' +
+        '<p>黑鑽的保級門檻與升級同值：<b>效期內累積滿 NT$65,000</b>。' +
+        (d.spend < 65000 ? '你目前 ' + nf(d.spend) + '，離保級還差 ' + nf(65000 - d.spend) + '。' : '你目前 ' + nf(d.spend) + '，已經達標。') + '</p>' +
         '<div class="tiers">' +
-          '<div class="tier"><b>為什麼這張卡最值錢</b><em>黑鑽隔年留存率 64%，那流失的 36% 就是這張卡要救的人</em></div>' +
-          '<div class="tier mid"><b>語氣要收</b><em>「標章變灰」不能說成懲罰，要說成「再消費 X 元即可重新點亮」</em></div>' +
-          '<div class="tier low"><b>最佳投放時機</b><em>年度回顧是保級提醒的天然載體，比單獨發一封催繳信自然得多</em></div>' +
+          '<div class="tier"><b>沒有 Plus 代保級</b><em>只有青銅升白銀那一關可以用 Plus 年訂閱替代，黑鑽保級只能靠消費</em></div>' +
+          '<div class="tier mid"><b>所以這張卡壓力最大</b><em>保級金額等於升級金額，等於每個效期都要重新達成一次 65,000</em></div>' +
+          '<div class="tier low"><b>語氣一定要收</b><em>用「再 X 元重新點亮」而不是「你即將被降級」。黑鑽隔年留存 64%，流失那 36% 就是這張卡要救的人</em></div>' +
         '</div>' });
     }
 
@@ -744,7 +762,11 @@
       head('學習時間 · 你不是一個人', 'l2') +
       '<h2>今年和你同班的<br>有 ' + d.mates + ' 人</h2>' +
       '<p>其中《' + esc(d.mateCourse) + '》是你們最多人重疊的一堂。你最常學習的那個時段，平均還有 <b>' + d.sameNight + ' 人</b>和你一起在線上。</p>' +
-      '<p class="fine">方向刻意跟前面幾張相反：前面製造落差，這張消除孤獨感，壓在門檻卡之後。</p>' });
+      '<p><b>和你同班的人，接下來還上了這些——你還沒上：</b></p>' +
+      '<div class="courses">' + d.classmateNext.map(function(c){
+        return '<div><span>' + esc(c.n) + '<span class="meta">' + esc(c.m) + '</span></span><em>' + esc(c.tag) + '</em></div>';
+      }).join('') + '</div>' +
+      '<p class="fine">比「同階級熱銷」精準得多：同班是具體的共同經驗，不是抽象的消費級距。實作上就是把協同過濾的範圍從階級縮到同課程。</p>' });
 
     L.push({ nav: '你的老師', lv: 'l2', html:
       head('追蹤老師 · 學生中的位置', 'l2') +
