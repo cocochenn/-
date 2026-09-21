@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>PPA 年度回顧 Wireframe</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" />
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --paper:#eef0f3;
+    --card:#ffffff;
+    --ink:#161a20;
+    --ink-2:#5b6470;
+    --ink-3:#98a1ad;
+    --rule:#d3d8df;
+    --rule-2:#e6e9ee;
+    --fill:#e2e6eb;
+    --accent:#f5820b;
+    --accent-soft:#fdf0e0;
+    --ok:#1f7a5a;
+    --ok-soft:#e4f2ec;
+    --warn:#a8580a;
+    --warn-soft:#fbeedd;
+    --sans:'Noto Sans TC', system-ui, -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  }
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-weight:300;line-height:1.7;font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:40px 80px;}
+
+  /* header */
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:14px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;}
+  .masthead h1{font-size:1.5rem;font-weight:700;margin:0;letter-spacing:-.01em;}
+  .masthead .meta{font-family:var(--mono);font-size:.78rem;color:var(--ink-2);}
+  .lede{max-width:52em;margin:18px 0 0;color:var(--ink-2);}
+  .lede b{font-weight:500;color:var(--ink);}
+
+  h2.sec{font-size:1.1rem;font-weight:700;margin:48px 0 4px;padding-top:18px;border-top:1px solid var(--rule);}
+  h2.sec:first-of-type{border-top:0;}
+  .sec-note{margin:0 0 20px;color:var(--ink-2);font-size:.9rem;max-width:54em;}
+
+  /* scope strip */
+  .scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:20px;}
+  .scope div{background:var(--card);padding:12px 14px;}
+  .scope div.out{background:#e8eaee;color:var(--ink-3);}
+  .scope .t{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase;}
+  .scope .v{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.3;}
+  .scope .s{font-size:.78rem;color:var(--ink-3);}
+  .scope div.out .v{font-weight:400;}
+
+  /* flow */
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:18px;}
+  .flow span{font-family:var(--mono);font-size:.8rem;background:var(--card);border:1px solid var(--rule);padding:5px 12px;}
+  .flow i{color:var(--ink-3);font-style:normal;}
+  .flow span.hot{border-color:var(--accent);background:var(--accent-soft);}
+
+  /* wireframe grid */
+  .frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:26px 22px;margin-top:22px;}
+  .frame{display:flex;flex-direction:column;gap:8px;}
+  .fhead{display:flex;gap:8px;align-items:baseline;}
+  .fnum{font-family:var(--mono);font-size:.78rem;font-weight:500;background:var(--ink);color:var(--paper);padding:1px 7px;}
+  .fname{font-size:.9rem;font-weight:500;}
+  .phone{
+    background:var(--card);border:1px solid var(--rule);border-radius:16px;
+    aspect-ratio:9/17;padding:16px 14px 14px;display:flex;flex-direction:column;gap:9px;
+    position:relative;overflow:hidden;
+  }
+  .bar{height:3px;background:var(--fill);border-radius:2px;display:flex;gap:2px;margin-bottom:2px;}
+  .bar i{flex:1;background:var(--fill);border-radius:2px;}
+  .bar i.on{background:var(--ink);}
+  .eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase;}
+  .head{font-size:.94rem;font-weight:500;line-height:1.45;}
+  .big{font-size:2rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;}
+  .big small{font-size:.7rem;font-weight:400;color:var(--ink-3);margin-left:4px;}
+  .body{font-size:.72rem;color:var(--ink-2);line-height:1.6;}
+  .ph{border:1px dashed var(--rule);background:repeating-linear-gradient(135deg,transparent,transparent 5px,var(--rule-2) 5px,var(--rule-2) 6px);
+      display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;color:var(--ink-3);text-align:center;padding:4px;}
+  .ph.h40{height:40px}.ph.h56{height:56px}.ph.h72{height:72px}.ph.h88{height:88px}
+  .lines{display:flex;flex-direction:column;gap:4px;}
+  .lines i{height:5px;background:var(--fill);border-radius:2px;display:block;}
+  .lines i.s{width:62%}.lines i.m{width:84%}
+  .ctl{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;}
+  .btn{font-family:var(--mono);font-size:.62rem;border:1px solid var(--ink);padding:4px 10px;border-radius:100px;}
+  .btn.fill{background:var(--ink);color:var(--card);}
+  .slider{height:4px;background:var(--fill);border-radius:2px;position:relative;}
+  .slider::after{content:'';position:absolute;left:38%;top:-5px;width:14px;height:14px;border-radius:50%;background:var(--ink);}
+  .chips{display:flex;flex-wrap:wrap;gap:4px;}
+  .chip{font-size:.6rem;border:1px solid var(--rule);padding:2px 7px;border-radius:100px;color:var(--ink-2);}
+  .chip.on{border-color:var(--ink);color:var(--ink);}
+  .grid8{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+  .grid8 i{aspect-ratio:1;border:1px solid var(--rule-2);display:block;}
+  .grid8 i.on{background:var(--fill);border-color:var(--rule);}
+  .grid8 i.gap{border-style:dashed;border-color:var(--accent);}
+  .cols{display:flex;gap:3px;align-items:end;height:38px;}
+  .cols i{flex:1;background:var(--fill);display:block;}
+  .cols i.on{background:var(--ink);}
+  .rowbars{display:flex;flex-direction:column;gap:4px;}
+  .rowbar{display:flex;align-items:center;gap:5px;}
+  .rowbar span{font-size:.58rem;color:var(--ink-3);width:44px;flex:none;}
+  .rowbar i{height:7px;background:var(--fill);display:block;}
+  .rowbar.me i{background:var(--ink);}
+  .listrow{border:1px solid var(--rule-2);padding:5px 7px;font-size:.64rem;color:var(--ink-2);display:flex;justify-content:space-between;gap:6px;}
+
+  /* source tag */
+  .src{display:flex;flex-wrap:wrap;gap:5px;}
+  .tag{font-family:var(--mono);font-size:.64rem;padding:2px 7px;border:1px solid;border-radius:2px;white-space:nowrap;}
+  .tag.have{color:var(--ok);border-color:var(--ok);background:var(--ok-soft);}
+  .tag.need{color:var(--warn);border-color:var(--warn);background:var(--warn-soft);}
+  .tag.calc{color:var(--ink-2);border-color:var(--rule);background:var(--card);}
+  .fnote{font-size:.74rem;color:var(--ink-2);line-height:1.55;}
+
+  /* tables */
+  .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:var(--card);margin-top:16px;}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.86rem;}
+  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--rule-2);vertical-align:top;}
+  th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:500;background:#f6f7f9;}
+  tbody tr:last-child td{border-bottom:0;}
+  td b{font-weight:500;}
+  td.have{color:var(--ok);}
+  td.need{color:var(--warn);}
+
+  /* asks */
+  .asks{display:grid;gap:7px;margin-top:14px;}
+  .ask{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:.9rem;color:var(--ink-2);}
+  .ask i{font-family:var(--mono);font-style:normal;font-weight:500;color:var(--accent);}
+  .ask b{color:var(--ink);font-weight:500;}
+
+  .foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--rule);font-size:.78rem;color:var(--ink-3);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>PPA 2026 年度回顧｜架構與 Wireframe</h1>
+    <span class="meta">2026-09-21 · 青銅以上 · 尚未進工程</span>
+  </header>
+  <p class="lede">本次範圍為<b>青銅以上四個階級</b>，年底發送，手機直式全螢幕、一次一張。每張 wireframe 下方標示資料來源：<b class="tag have">現成</b> 代表學習軌跡頁已經在跑、<b class="tag calc">衍生</b> 代表用現有資料算得出來、<b class="tag need">待補</b> 代表需要新開欄位。</p>
+
+  <h2 class="sec">範圍</h2>
+  <p class="sec-note">岩石階級本次不做。青銅以上全員都有消費紀錄，所以金額卡與升級門檻卡都成立，不需要為無消費用戶做一套完全不同的版本。</p>
+  <div class="scope">
+    <div class="out"><span class="t">Stone 岩石</span><span class="v">119.8 萬</span><span class="s">67.6%　本次不做</span></div>
+    <div><span class="t">Bronze 青銅</span><span class="v">34.8 萬</span><span class="s">19.7%</span></div>
+    <div><span class="t">Silver 白銀</span><span class="v">16.1 萬</span><span class="s">9.1%</span></div>
+    <div><span class="t">Platinum 鉑金</span><span class="v">3.5 萬</span><span class="s">2.0%</span></div>
+    <div><span class="t">Black 黑鑽</span><span class="v">2.8 萬</span><span class="s">1.6%</span></div>
+  </div>
+  <p class="sec-note" style="margin-top:12px">合計約 <b>57.2 萬人</b>，佔全站 32.4%。人數依舊門檻級距估算，需依現行門檻（7,500／25,000／65,000）重拉。</p>
+
+  <h2 class="sec">情緒動線</h2>
+  <p class="sec-note">先肯定、再落差、立刻給出口、接著消除孤獨感、最後收在承諾。三個猜測互動分散在第 2、8、12 張，中間隔開，避免變成問卷。</p>
+  <div class="flow">
+    <span>肯定</span><i>→</i><span class="hot">落差</span><i>→</i><span class="hot">出口</span><i>→</i><span>同行</span><i>→</i><span>老師</span><i>→</i><span>領域</span><i>→</i><span>承諾</span>
+  </div>
+
+  <h2 class="sec">Wireframe｜13 張卡</h2>
+  <p class="sec-note">手機直式，一次一張，上下滑動切換。頂部進度條分段顯示（如 IG story）。以下為青銅至黑鑽共用結構，數字依階級替換。</p>
+
+  <div class="frames">
+
+    <!-- 1 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">01</span><span class="fname">開場稱號</span></div>
+      <div class="phone">
+        <div class="bar"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">2026 年度回顧</span>
+        <div class="ph h56">階級徽章圖<br>（會員權益表六角形）</div>
+        <div class="head">2026，你的頭銜是<br>白銀 · 白天學習派</div>
+        <div class="body">上站 154 天，看完 47 篇內容。你的存在，讓演算法以為你是全職學生。</div>
+        <div class="ctl"><span class="btn fill">往下看 ↓</span></div>
+      </div>
+      <div class="src"><span class="tag have">階級</span><span class="tag have">學習天數</span><span class="tag have">學習時段</span><span class="tag have">內容數量</span></div>
+      <p class="fnote">稱號＝階級 × 學習人格，一套就好，不再另做三標籤。</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">02</span><span class="fname">猜猜你花多少</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">互動 · 猜了再揭曉</span>
+        <div class="head">先別看數字。<br>猜猜你今年在 PPA 花了多少</div>
+        <div class="big">12,000<small>NT$</small></div>
+        <div class="slider"></div>
+        <div class="body">拖曳滑桿，按下揭曉後才顯示實際金額與落差。</div>
+        <div class="ctl"><span class="btn fill">揭曉</span></div>
+      </div>
+      <div class="src"><span class="tag need">今年消費金額</span></div>
+      <p class="fnote">揭曉文案：「你猜低了 42%。你花掉的比你以為的更多——但那些都還在你身上。」</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">03</span><span class="fname">你在哪個階級</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">全站分佈</span>
+        <div class="head">全站 177 萬人<br>你在白銀</div>
+        <div class="cols"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+        <div class="body">五階級長條圖，你的那根標記。顯示階級人數與佔比，不顯示「你贏過幾 %」。</div>
+        <div class="ctl"><span class="btn">下一張</span></div>
+      </div>
+      <div class="src"><span class="tag have">階級</span><span class="tag need">依現行門檻重拉的分佈</span></div>
+      <p class="fnote">分佈需重算：現有數字是用舊門檻級距切的。</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">04</span><span class="fname">階級內比較</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">同階級對照</span>
+        <div class="head">白銀裡的人<br>平均花 NT$9,813</div>
+        <div class="rowbars">
+          <div class="rowbar me"><span>你</span><i style="width:72%"></i></div>
+          <div class="rowbar"><span>白銀平均</span><i style="width:48%"></i></div>
+          <div class="rowbar"><span>青銅平均</span><i style="width:16%"></i></div>
+          <div class="rowbar"><span>鉑金平均</span><i style="width:96%"></i></div>
+        </div>
+        <div class="body">比較對象是階級內與相鄰階級，不是全站。</div>
+        <div class="ctl"><span class="btn">下一張</span></div>
+      </div>
+      <div class="src"><span class="tag calc">各階級 ARPU</span><span class="tag need">今年消費金額</span></div>
+      <p class="fnote">黑鑽 ARPU 是鉑金的 2.9 倍，全站平均對他們沒有資訊量。</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">05</span><span class="fname">你省下的</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">聰明消費</span>
+        <div class="head">會員身份幫你省下</div>
+        <div class="big">2,480<small>元</small></div>
+        <div class="body">折價券、點數回饋、會員日優惠加總。白銀身份今年幫你省下的錢。</div>
+        <div class="ph h40">折抵來源分項條</div>
+        <div class="ctl"><span class="btn">下一張</span></div>
+      </div>
+      <div class="src"><span class="tag have">聰明消費省的金額</span></div>
+      <p class="fnote">學習軌跡頁已有此欄位。正向的金錢敘事，沒有花費比較的罪惡感問題，適合放在猜測卡之後緩衝。</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">06</span><span class="fname">你今年看了多少</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">你的累積</span>
+        <div class="big">47<small>篇內容</small></div>
+        <div class="head">在 154 天裡</div>
+        <div class="body">平均每 3.3 天，你就會打開一次 PPA。以這個頻率來看，我們不算普通朋友。</div>
+        <div class="ph h40">月曲線（12 個月）</div>
+        <div class="ctl"><span class="btn">下一張</span></div>
+      </div>
+      <div class="src"><span class="tag have">內容數量</span><span class="tag have">學習天數</span><span class="tag need">月分佈</span></div>
+      <p class="fnote">主數字用「內容數量」而非學習時數——時數沒有現成資料，內容數量有。</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">07</span><span class="fname">學習人格</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">你的學習人格</span>
+        <div class="head">你是典型的<br>白天學習派</div>
+        <div class="ph h56">時段分佈圖<br>（現有欄位僅粗分類，<br>需確認能否給小時級）</div>
+        <div class="body">別人午休在滑外送，你在滑新單元。</div>
+        <div class="ctl"><span class="btn">分享這張</span><span class="btn">下一張</span></div>
+      </div>
+      <div class="src"><span class="tag have">學習時段（粗分類）</span><span class="tag need">小時級分佈</span></div>
+      <p class="fnote">唯一適合分享的一張：分享稱號與人格，不分享數字戰績。</p>
+    </div>
+
+    <!-- 8 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">08</span><span class="fname">賭一把排名</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">互動 · 猜了再揭曉</span>
+        <div class="head">你覺得自己看的內容量<br>贏過站上多少人</div>
+        <div class="big">50<small>%</small></div>
+        <div class="slider"></div>
+        <div class="body">揭曉後顯示實際百分位＋名次（57.2 萬人裡第 N 名）。</div>
+        <div class="ctl"><span class="btn fill">揭曉排名</span></div>
+      </div>
+      <div class="src"><span class="tag have">內容數量</span><span class="tag need">內容數量的百分位分佈</span></div>
+      <p class="fnote">基準從學習時數改為內容數量與學習天數，兩者都是現成欄位，不必等時數資料。</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">09</span><span class="fname">升級／保級門檻</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">下一階</span>
+        <div class="head">再 NT$1,800<br>你就升鉑金</div>
+        <div class="ph h40">進度條：目前 / 門檻</div>
+        <div class="body">升上鉑金會拿到：每月 85 折券、新課 48 小時預購、生日月募資價回歸。</div>
+        <div class="ctl"><span class="btn fill">看適合的課</span></div>
+      </div>
+      <div class="src"><span class="tag have">階級</span><span class="tag need">效期內累積消費</span></div>
+      <p class="fnote">黑鑽改為保級版：效期到 2027/5，提前五個月預警，語氣用「還來得及」不用「即將失去」。</p>
+    </div>
+
+    <!-- 10 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">10</span><span class="fname">同班同學</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+        <span class="eyebrow">你不是一個人</span>
+        <div class="head">今年和你同班的<br>有 26,180 人</div>
+        <div class="body">同班的人接下來還上了這些，你還沒上：</div>
+        <div class="listrow"><span>演講表達入門</span><span>68%</span></div>
+        <div class="listrow"><span>寫作變現實戰</span><span>44%</span></div>
+        <div class="ctl"><span class="btn">加入課程</span></div>
+      </div>
+      <div class="src"><span class="tag need">同課程人數</span><span class="tag need">同班後續選課</span></div>
+      <p class="fnote">壓力之後接同行感。推薦範圍從「同階級熱銷」縮到「同班同學」，更精準也更有說服力。</p>
+    </div>
+
+    <!-- 11 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">11</span><span class="fname">你的老師 + Clips</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+        <span class="eyebrow">來電中</span>
+        <div class="ph h88">老師頭像<br>來電畫面（只能按接通）</div>
+        <div class="head">楊斯棓 來電</div>
+        <div class="body">接通後播放老師的年度 Clips。播完接「他還有 3 堂課你沒上」。</div>
+        <div class="ctl"><span class="btn fill">接通</span></div>
+      </div>
+      <div class="src"><span class="tag need">最常看的老師</span><span class="tag need">該老師未購課程</span><span class="tag need">學生內排名</span></div>
+      <p class="fnote">30 位老師 × 3 支 = 90 支影片的套版自動化要另外評估。老師端也做一版回顧，他們會主動分享。</p>
+    </div>
+
+    <!-- 12 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">12</span><span class="fname">猜主戰場 → 領域圖鑑</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div>
+        <span class="eyebrow">互動 · 猜了再揭曉</span>
+        <div class="head">猜猜你今年<br>投入最多的領域</div>
+        <div class="chips"><span class="chip on">投資理財</span><span class="chip">職涯發展</span><span class="chip">簡報溝通</span><span class="chip">語言學習</span></div>
+        <div class="body">選完揭曉，接著顯示領域圖鑑：</div>
+        <div class="grid8"><i class="on"></i><i class="on"></i><i class="on"></i><i class="gap"></i><i></i><i></i><i></i><i></i></div>
+        <div class="ctl"><span class="btn">下一張</span></div>
+      </div>
+      <div class="src"><span class="tag have">最常學的領域</span><span class="tag need">各子分類分佈</span></div>
+      <p class="fnote">虛線格是缺口，接「和你同階級的人多半也補了這一格」。</p>
+    </div>
+
+    <!-- 13 -->
+    <div class="frame">
+      <div class="fhead"><span class="fnum">13</span><span class="fname">2027 承諾</span></div>
+      <div class="phone">
+        <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></div>
+        <span class="eyebrow">2027</span>
+        <div class="head">幫你設好<br>第一個 2027 任務</div>
+        <div class="body">選一堂一直想上的課，1 月完成第一單元。</div>
+        <div class="ph h56">推薦課程 ×3<br>（依領域缺口與同班後續）</div>
+        <div class="ctl"><span class="btn fill">立刻挑一堂</span><span class="btn">看年末排行榜</span></div>
+      </div>
+      <div class="src"><span class="tag have">最常學的領域</span><span class="tag need">推薦清單</span></div>
+      <p class="fnote">導流到年末策展頁。</p>
+    </div>
+
+  </div>
+
+  <h2 class="sec">資料盤點</h2>
+  <p class="sec-note">學習軌跡頁（會員中心 › 學習軌跡）已有六個欄位在線上運作，這是本次最大的省力點。但該頁顯示的是「一路以來累積」的 lifetime 值，年度回顧需要切成「今年」，同欄位換時間區間。</p>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>欄位</th><th>狀態</th><th>用在哪張卡</th><th>備註</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>會員階級</b></td><td class="have">現成</td><td>01 · 03 · 09</td><td>需確認取當前階級的邏輯（見下方待確認）</td></tr>
+        <tr><td><b>學習的內容數量</b></td><td class="have">現成</td><td>01 · 06 · 08</td><td>取代學習時數當主數字</td></tr>
+        <tr><td><b>在 PPA 學習天數</b></td><td class="have">現成</td><td>01 · 06</td><td>需切成今年</td></tr>
+        <tr><td><b>學習時段</b></td><td class="have">現成</td><td>01 · 07</td><td>目前僅粗分類（白天／晚上），小時級待確認</td></tr>
+        <tr><td><b>最常學的領域</b></td><td class="have">現成</td><td>12 · 13</td><td>完整子分類分佈待補</td></tr>
+        <tr><td><b>聰明消費省的金額</b></td><td class="have">現成</td><td>05</td><td>整張卡直接成立</td></tr>
+        <tr><td><b>購買課程數量</b></td><td class="have">現成</td><td>06</td><td></td></tr>
+        <tr><td><b>今年消費金額</b></td><td class="need">待補</td><td>02 · 04</td><td>猜測卡與階級內比較的核心</td></tr>
+        <tr><td><b>效期內累積消費</b></td><td class="need">待補</td><td>09</td><td>算「再 X 元升級」，門檻卡沒它就不成立</td></tr>
+        <tr><td><b>內容數量的百分位分佈</b></td><td class="need">待補</td><td>08</td><td>排名卡的基準</td></tr>
+        <tr><td><b>依現行門檻重拉的階級分佈</b></td><td class="need">待補</td><td>03 · 04</td><td>現有數字用舊級距切，白銀以上會高估</td></tr>
+        <tr><td><b>老師維度</b></td><td class="need">待補</td><td>11</td><td>最常看的老師、學生內排名、未購課程清單</td></tr>
+        <tr><td><b>同班同學與後續選課</b></td><td class="need">待補</td><td>10</td><td>沒有現成模型的話可退成同階級熱銷</td></tr>
+        <tr><td><b>2025 同欄位</b></td><td class="need">待補</td><td>同比敘述</td><td>沒有就拿掉所有「比去年」的文案</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">待確認</h2>
+  <div class="asks">
+    <div class="ask"><i>1</i><span><b>階級表的語義。</b>抽樣資料裡同一個會員 ID 在同一秒有鉑金與白銀兩筆，這張表看起來是變動歷程而非當前狀態，取當前階級需要額外邏輯。</span></div>
+    <div class="ask"><i>2</i><span><b>效期起算點對不上。</b>第一批到期是 2027/5，但抽樣最大宗的升級時間是 2026-01-28 的批次灌檔；若效期為一年，那批人 2027/1 就到期，比 5 月早四個月。這決定第 09 張卡的倒數從哪天算。</span></div>
+    <div class="ask"><i>3</i><span><b>學習時段能不能給到小時級。</b>現有欄位只有粗分類，第 07 張卡的豐富度差很多。</span></div>
+    <div class="ask"><i>4</i><span><b>學習軌跡頁的欄位能不能切成年度區間。</b>現在是 lifetime 累積，年度回顧要的是今年。</span></div>
+    <div class="ask"><i>5</i><span><b>老師 Clips 的量能。</b>30 位 × 3 支 = 90 支，套版能不能自動化，或改用「照片＋錄音」的簡化版。</span></div>
+    <div class="ask"><i>6</i><span><b>岩石階級要不要做簡版。</b>本次不做的話，120 萬人年底不會收到任何回顧，需要決定是完全不發，還是發一個只有「你來了 N 天」的極簡版。</span></div>
+  </div>
+
+  <p class="foot">階級門檻取自 PPA 會員權益表；階級人數與 ARPU 取自 2026_PPA_會員分級機制（舊級距，待重拉）；現有欄位取自會員中心學習軌跡頁。Wireframe 為低擬真示意，尚未進工程。</p>
+
+</div>
+</body>
+</html>
