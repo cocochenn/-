@@ -191,10 +191,13 @@
     <div class="brandline">PPA 2026 年度回顧 · 手機直式互動原型</div>
     <div class="stamp">青銅以上 · 13 張卡</div>
   </header>
-  <p class="lede">wireframe 的 13 張卡做成可操作的樣子。<b>滑桿、猜測、選項都能按</b>，上下鍵或點按鈕切換。右側標示每張卡的資料來源：<b style="color:var(--mint)">現成</b> 是學習軌跡頁已經在跑的欄位，<b style="color:var(--amber)">待補</b> 是需要新開的。</p>
+  <p class="lede">wireframe 的 13 張卡做成可操作的樣子。<b>滑桿、猜測、選項都能按</b>，上下鍵或點按鈕切換。<b>階級與時段是兩個獨立維度</b>，可以各自切換看組合。右側標示每張卡的資料來源：<b style="color:var(--mint)">現成</b> 是學習軌跡頁已經在跑的欄位，<b style="color:var(--amber)">待補</b> 是需要新開的。</p>
 
   <div class="switch" role="group" aria-label="切換階級" id="tierRow">
     <span class="lbl">階級</span>
+  </div>
+  <div class="switch" role="group" aria-label="切換學習時段" id="dayRow">
+    <span class="lbl">時段</span>
   </div>
 
   <div class="stagewrap">
@@ -293,7 +296,17 @@
     }
   };
 
-  var DAYPARTS = ['清晨', '白天', '傍晚', '深夜'];
+  // 學習時段與階級完全獨立：4 階級 × 4 時段 = 16 種稱號組合
+  var DAYPARTS = [
+    { slot:'清晨', range:'06:00–10:59', persona:'通勤學習派',
+      line:'通勤時間本來可以滑短影片，你拿來滑課程，還算蠻敬業的。' },
+    { slot:'白天', range:'11:00–18:59', persona:'白天學習派',
+      line:'別人午休在滑外送，你在滑新單元。便當很快就吃完，課程還看不完。' },
+    { slot:'晚間', range:'19:00–22:59', persona:'晚間黃金派',
+      line:'下班後還願意打開課程，代表你沒有把人生全部交給沙發和追劇。' },
+    { slot:'深夜', range:'23:00–01:59', persona:'半夜苦讀派',
+      line:'很抱歉，你的睡眠被學習打敗了，但未來的你應該會謝謝現在沒睡的你。' }
+  ];
   var MONTH_NAMES = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -347,14 +360,15 @@
 
   function scenes(d){
     var t = TIERS[d.tier];
+    var dp = DAYPARTS[daypart];
     var L = [];
 
     L.push({ nav:'開場稱號', src:'have', srcNote:'<span class="k have">現成</span>階級、學習天數、學習時段、內容數量', html:
       '<span class="eyebrow">2026 年度回顧</span>' +
       '<div class="badge ' + t.cls + '">' + t.name + '</div>' +
-      '<h2>2026，你的頭銜是<br>' + t.name + ' · ' + d.persona + '</h2>' +
+      '<h2>2026，你的頭銜是<br>' + t.name + ' · ' + DAYPARTS[daypart].persona + '</h2>' +
       '<p>上站 <b>' + d.days + ' 天</b>，看完 <b>' + d.contents + ' 篇</b>內容。你的存在，讓演算法以為你是全職學生。</p>' +
-      '<div class="foot-facts"><span class="fact">購課 <b>' + d.courses + '</b> 門</span><span class="fact">' + DAYPARTS[d.daypart] + '學習</span></div>' });
+      '<div class="foot-facts"><span class="fact">購課 <b>' + d.courses + '</b> 門</span><span class="fact">' + DAYPARTS[daypart].slot + '學習</span></div>' });
 
     L.push({ nav:'猜猜你花多少', src:'need', mech:'guessSpend', srcNote:'<span class="k need">待補</span>今年消費金額', html:
       '<span class="eyebrow">先別看數字</span>' +
@@ -394,11 +408,12 @@
 
     L.push({ nav:'學習人格', src:'have', srcNote:'<span class="k have">現成</span>學習時段（粗分類）　<span class="k need">待補</span>小時級分佈', html:
       '<span class="eyebrow">你的學習人格</span>' +
-      '<h2>你是典型的<br>' + d.persona + '</h2>' +
+      '<h2>你是典型的<br>' + DAYPARTS[daypart].persona + '</h2>' +
       '<div class="daypart">' + DAYPARTS.map(function(x, i){
-        return '<div class="' + (i === d.daypart ? 'on' : '') + '">' + x + '</div>';
+        return '<div class="' + (i === daypart ? 'on' : '') + '">' + x.slot + '</div>';
       }).join('') + '</div>' +
-      '<p>' + (d.daypart === 3 ? '大家睡著以後，你還在讀書。很抱歉，你的睡眠被學習打敗了。' : '別人午休在滑外送，你在滑新單元。便當很快就吃完，課程還看不完。') + '</p>' +
+      '<p>你最常在 <b>' + DAYPARTS[daypart].range + '</b> 上線。' + DAYPARTS[daypart].line + '</p>' +
+      '<p class="fine">時段與階級完全獨立，4 × 4 共 16 種稱號組合，文案要寫滿 16 組。</p>' +
       '<div class="cta"><button type="button">分享這張</button><button type="button" data-next="1">下一張</button></div>' });
 
     L.push({ nav:'賭一把排名', src:'need', mech:'guessRank', pct:d.pct, rank:d.rank, srcNote:'<span class="k have">現成</span>內容數量　<span class="k need">待補</span>內容數量的百分位分佈', html:
@@ -484,7 +499,7 @@
   var counter = document.getElementById('counter');
   var srcbox = document.getElementById('srcbox');
   var tierRow = document.getElementById('tierRow');
-  var S = [], i = 0, cur = P.silver, curTier = 'silver';
+  var S = [], i = 0, cur = P.silver, curTier = 'silver', daypart = 1;
 
   function initScene(s){
     if (s.mech === 'guessSpend'){
@@ -582,6 +597,22 @@
     tierRow.appendChild(b);
   });
 
+  var dayRow = document.getElementById('dayRow');
+  DAYPARTS.forEach(function(x, n){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('data-d', n);
+    b.textContent = x.slot + ' · ' + x.persona;
+    b.addEventListener('click', function(){
+      daypart = n;
+      Array.prototype.forEach.call(dayRow.querySelectorAll('button'), function(o){
+        o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+      });
+      load(curTier);
+    });
+    dayRow.appendChild(b);
+  });
+
   document.addEventListener('keydown', function(e){
     if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(i + 1);
@@ -597,6 +628,9 @@
     sy = null;
   }, { passive:true });
 
+  Array.prototype.forEach.call(dayRow.querySelectorAll('button'), function(o){
+    o.setAttribute('aria-pressed', o.getAttribute('data-d') === String(daypart) ? 'true' : 'false');
+  });
   load('silver');
 </script>
 
