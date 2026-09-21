@@ -21,6 +21,7 @@
     --serif:'Noto Serif TC','Songti TC',serif;
     --num:'Bodoni Moda','Times New Roman',serif;
     --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --body-accent:#f5a524;
   }
   body{
     background:
@@ -39,6 +40,7 @@
   .lede b{font-weight:500;color:var(--paper);}
 
   .switch{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;align-items:center;}
+  .switch button .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
   .switch .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:3px;}
   button{font-family:inherit;font-size:.85rem;color:var(--paper);background:var(--veil);border:1px solid var(--line);border-radius:100px;padding:6px 15px;cursor:pointer;transition:background .18s,border-color .18s;}
   button:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);}
@@ -61,12 +63,13 @@
     display:flex;flex-direction:column;
   }
   .screen::after{
-    content:'';position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(60% 34% at 84% 4%,rgba(245,165,36,.2),transparent 70%);
+    content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(58% 32% at 84% 6%,color-mix(in srgb,var(--body-accent) 26%,transparent),transparent 70%);
   }
+  .sky{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
   .segs{display:flex;gap:3px;padding:12px 14px 0;position:relative;z-index:2;}
   .segs i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.2);display:block;}
-  .segs i.on{background:var(--amber);}
+  .segs i.on{background:var(--body-accent);}
   .slide{
     position:relative;z-index:2;flex:1;padding:16px 20px 18px;
     display:flex;flex-direction:column;gap:12px;overflow-y:auto;
@@ -76,7 +79,7 @@
   @media (prefers-reduced-motion:reduce){.slide{animation:none;}}
   .slide::-webkit-scrollbar{width:0;}
 
-  .eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);}
+  .eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--body-accent);}
   .slide h2{font-family:var(--serif);font-weight:600;font-size:1.28rem;line-height:1.45;margin:0;text-wrap:balance;}
   .slide p{margin:0;font-size:.82rem;color:#d3d0dc;line-height:1.68;}
   .slide p b{font-weight:500;color:var(--paper);}
@@ -109,6 +112,18 @@
   .cta{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;}
   .cta button{font-size:.78rem;padding:7px 16px;}
   .cta button.go{background:linear-gradient(90deg,rgba(245,165,36,.28),rgba(232,85,127,.28));border-color:rgba(245,165,36,.6);}
+
+  .axisplot{position:relative;height:140px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.03);margin:2px 0;}
+  .axisplot::before,.axisplot::after{content:'';position:absolute;background:rgba(255,255,255,.12);}
+  .axisplot::before{left:50%;top:8px;bottom:8px;width:1px;}
+  .axisplot::after{top:50%;left:8px;right:8px;height:1px;}
+  .axisplot .pt{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.28);transform:translate(-50%,50%);}
+  .axisplot .pt em{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;font-style:normal;font-size:.58rem;color:var(--dim);white-space:nowrap;}
+  .axisplot .pt.on{width:11px;height:11px;}
+  .axisplot .pt.on em{color:var(--paper);font-weight:500;}
+  .axisplot .ax{position:absolute;font-family:var(--mono);font-size:.55rem;color:var(--dim);}
+  .axisplot .ax-x{right:8px;bottom:4px;}
+  .axisplot .ax-y{left:4px;top:6px;writing-mode:vertical-rl;}
 
   .tiercols{display:flex;gap:4px;align-items:end;height:74px;}
   .tiercols div{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
@@ -189,21 +204,22 @@
 <div class="wrap">
   <header class="masthead">
     <div class="brandline">PPA 2026 年度回顧 · 手機直式互動原型</div>
-    <div class="stamp">青銅以上 · 13 張卡</div>
+    <div class="stamp">青銅以上 · 14 張卡 · 天體 × 階級</div>
   </header>
-  <p class="lede">wireframe 的 13 張卡做成可操作的樣子。<b>滑桿、猜測、選項都能按</b>，上下鍵或點按鈕切換。<b>階級與時段是兩個獨立維度</b>，可以各自切換看組合。右側標示每張卡的資料來源：<b style="color:var(--mint)">現成</b> 是學習軌跡頁已經在跑的欄位，<b style="color:var(--amber)">待補</b> 是需要新開的。</p>
+  <p class="lede">wireframe 的 13 張卡做成可操作的樣子。<b>滑桿、猜測、選項都能按</b>，上下鍵或點按鈕切換。<b>天體（學習行為）與階級（消費）是兩條獨立的軸</b>——黑鑽也可能是流星雨，青銅也可能是恆星。兩排都可以切換看組合。右側標示每張卡的資料來源：<b style="color:var(--mint)">現成</b> 是學習軌跡頁已經在跑的欄位，<b style="color:var(--amber)">待補</b> 是需要新開的。</p>
 
   <div class="switch" role="group" aria-label="切換階級" id="tierRow">
     <span class="lbl">階級</span>
   </div>
-  <div class="switch" role="group" aria-label="切換學習時段" id="dayRow">
-    <span class="lbl">時段</span>
+  <div class="switch" role="group" aria-label="切換天體" id="bodyRow">
+    <span class="lbl">天體</span>
   </div>
 
   <div class="stagewrap">
     <div>
       <div class="phone">
         <div class="screen">
+          <canvas class="sky" id="sky" aria-hidden="true"></canvas>
           <div class="segs" id="segs" aria-hidden="true"></div>
           <div class="slide" id="slide" aria-live="polite"></div>
         </div>
@@ -235,7 +251,7 @@
 
   var P = {
     bronze: {
-      tier:'bronze', persona:'白天學習派', daypart:1,
+      tier:'bronze', daypart:1, persona:'白天學習派', daypart:1,
       spend:2580, spendMax:8000, cumulative:3100,
       contents:18, days:64, courses:2, saved:420,
       pct:52, rank:'274,600',
@@ -250,7 +266,7 @@
       cta:'把只剩 1 堂就完課的那門收掉'
     },
     silver: {
-      tier:'silver', persona:'白天學習派', daypart:1,
+      tier:'silver', daypart:1, persona:'白天學習派', daypart:1,
       spend:9813, spendMax:30000, cumulative:23200,
       contents:47, days:154, courses:3, saved:2480,
       pct:78, rank:'125,800',
@@ -265,7 +281,7 @@
       cta:'把只剩 2 堂就完課的那 3 門收掉'
     },
     platinum: {
-      tier:'platinum', persona:'半夜苦讀派', daypart:3,
+      tier:'platinum', daypart:3, persona:'半夜苦讀派', daypart:3,
       spend:27946, spendMax:80000, cumulative:58400,
       contents:96, days:187, courses:9, saved:6120,
       pct:94, rank:'34,300',
@@ -280,7 +296,7 @@
       cta:'再 6,600 元就升黑鑽，新課能比早鳥再便宜 100–200'
     },
     black: {
-      tier:'black', persona:'半夜苦讀派', daypart:3,
+      tier:'black', daypart:3, persona:'半夜苦讀派', daypart:3,
       spend:46200, spendMax:100000, cumulative:46200,
       contents:58, days:118, courses:14, saved:9840,
       pct:97, rank:'17,200',
@@ -296,21 +312,52 @@
     }
   };
 
-  // 學習時段與階級完全獨立：4 階級 × 4 時段 = 16 種稱號組合
-  var DAYPARTS = [
-    { slot:'清晨', range:'06:00–10:59', persona:'通勤學習派',
-      line:'通勤時間本來可以滑短影片，你拿來滑課程，還算蠻敬業的。' },
-    { slot:'白天', range:'11:00–18:59', persona:'白天學習派',
-      line:'別人午休在滑外送，你在滑新單元。便當很快就吃完，課程還看不完。' },
-    { slot:'晚間', range:'19:00–22:59', persona:'晚間黃金派',
-      line:'下班後還願意打開課程，代表你沒有把人生全部交給沙發和追劇。' },
-    { slot:'深夜', range:'23:00–01:59', persona:'半夜苦讀派',
-      line:'很抱歉，你的睡眠被學習打敗了，但未來的你應該會謝謝現在沒睡的你。' }
+  // 天體＝學習行為（規律度 × 領域廣度），與階級（消費）完全獨立
+  // 黑鑽也可能是流星雨，青銅也可能是恆星
+  var BODIES = [
+    { key:'star',   name:'恆星',   axis:'規律 × 集中', accent:'#f5a524',
+      line:'你有一條固定的軌道，而且幾乎沒有偏離過。同一個領域，你一路走到底。',
+      next:null,      nextWhy:'你已經在最穩的狀態，接下來是往外擴一格',
+      nextDo:'挑一個相鄰領域，讓軌道變寬' },
+    { key:'planet', name:'行星',   axis:'規律 × 發散', accent:'#6d63ff',
+      line:'你穩定地繞行，但同時繞著好幾個主題。節奏規律，方向多元。',
+      next:'恆星',    nextWhy:'你什麼都學得穩，但還沒有一個真正深的領域',
+      nextDo:'選一個領域連續看完整套' },
+    { key:'comet',  name:'彗星',   axis:'爆發 × 集中', accent:'#3ddc97',
+      line:'你不常出現，但一出現就是一整段。回來的時候，總是同一個方向。',
+      next:'恆星',    nextWhy:'你的爆發力夠，缺的是回來的頻率',
+      nextDo:'把單次長時間拆成每週一次' },
+    { key:'meteor', name:'流星雨', axis:'爆發 × 發散', accent:'#e8557f',
+      line:'來去很快，同時劃過好幾個方向。每次都不長，但每次方向都不一樣。',
+      next:'彗星',    nextWhy:'你什麼都碰一點，但還沒有一條真正的軌道',
+      nextDo:'挑一個領域連續看完' }
   ];
+
+  var DAYPARTS = [
+    { slot:'清晨', range:'06:00–10:59' },
+    { slot:'白天', range:'11:00–18:59' },
+    { slot:'晚間', range:'19:00–22:59' },
+    { slot:'深夜', range:'23:00–01:59' }
+  ];
+
   var MONTH_NAMES = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function nf(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  // 兩軸定位圖：規律度 × 領域廣度
+  function axisPlot(bi){
+    var pos = [[78,78],[78,24],[24,78],[24,24]];  // 恆星/行星/彗星/流星雨 → [規律%, 集中%]
+    var s = '';
+    BODIES.forEach(function(b, n){
+      var on = n === bi;
+      s += '<span class="pt' + (on ? ' on' : '') + '" style="left:' + pos[n][0] + '%;bottom:' + pos[n][1] + '%;' +
+           (on ? 'background:' + b.accent + ';box-shadow:0 0 14px ' + b.accent : '') + '">' +
+           '<em>' + b.name + '</em></span>';
+    });
+    return '<div class="axisplot" aria-hidden="true">' + s +
+      '<span class="ax ax-x">領域集中 →</span><span class="ax ax-y">規律 →</span></div>';
+  }
 
   function tierCols(meKey){
     var max = 19.7, s = '';
@@ -360,15 +407,15 @@
 
   function scenes(d){
     var t = TIERS[d.tier];
-    var dp = DAYPARTS[daypart];
+    var b = BODIES[body];
     var L = [];
 
     L.push({ nav:'開場稱號', src:'have', srcNote:'<span class="k have">現成</span>階級、學習天數、學習時段、內容數量', html:
       '<span class="eyebrow">2026 年度回顧</span>' +
       '<div class="badge ' + t.cls + '">' + t.name + '</div>' +
-      '<h2>2026，你的頭銜是<br>' + t.name + ' · ' + DAYPARTS[daypart].persona + '</h2>' +
+      '<h2>2026，你是一顆<br>' + t.name + '的' + b.name + '</h2>' +
       '<p>上站 <b>' + d.days + ' 天</b>，看完 <b>' + d.contents + ' 篇</b>內容。你的存在，讓演算法以為你是全職學生。</p>' +
-      '<div class="foot-facts"><span class="fact">購課 <b>' + d.courses + '</b> 門</span><span class="fact">' + DAYPARTS[daypart].slot + '學習</span></div>' });
+      '<div class="foot-facts"><span class="fact">購課 <b>' + d.courses + '</b> 門</span><span class="fact">' + b.axis + '</span></div>' });
 
     L.push({ nav:'猜猜你花多少', src:'need', mech:'guessSpend', srcNote:'<span class="k need">待補</span>今年消費金額', html:
       '<span class="eyebrow">先別看數字</span>' +
@@ -406,14 +453,12 @@
       '<p>平均每 <b>' + (d.days / d.contents).toFixed(1) + ' 天</b>，你就會打開一次 PPA。以這個頻率來看，我們不算普通朋友。</p>' +
       monthChart(d) });
 
-    L.push({ nav:'學習人格', src:'have', srcNote:'<span class="k have">現成</span>學習時段（粗分類）　<span class="k need">待補</span>小時級分佈', html:
-      '<span class="eyebrow">你的學習人格</span>' +
-      '<h2>你是典型的<br>' + DAYPARTS[daypart].persona + '</h2>' +
-      '<div class="daypart">' + DAYPARTS.map(function(x, i){
-        return '<div class="' + (i === daypart ? 'on' : '') + '">' + x.slot + '</div>';
-      }).join('') + '</div>' +
-      '<p>你最常在 <b>' + DAYPARTS[daypart].range + '</b> 上線。' + DAYPARTS[daypart].line + '</p>' +
-      '<p class="fine">時段與階級完全獨立，4 × 4 共 16 種稱號組合，文案要寫滿 16 組。</p>' +
+    L.push({ nav:'你的天體', src:'need', srcNote:'<span class="k have">現成</span>學習天數、學習時段　<span class="k need">待補</span>規律度與領域廣度的判定', html:
+      '<span class="eyebrow">你的天體</span>' +
+      '<h2>2026，你是<br>一' + (b.key === 'meteor' ? '場' : '顆') + b.name + '</h2>' +
+      axisPlot(body) +
+      '<p>' + b.line + '</p>' +
+      '<p class="fine">出現在 ' + DAYPARTS[d.daypart].slot + '（' + DAYPARTS[d.daypart].range + '）的次數最多。天體由學習行為決定，階級由消費決定，兩條軸互相獨立。</p>' +
       '<div class="cta"><button type="button">分享這張</button><button type="button" data-next="1">下一張</button></div>' });
 
     L.push({ nav:'賭一把排名', src:'need', mech:'guessRank', pct:d.pct, rank:d.rank, srcNote:'<span class="k have">現成</span>內容數量　<span class="k need">待補</span>內容數量的百分位分佈', html:
@@ -483,6 +528,13 @@
       dexGrid(d) +
       '<p>虛線那格是你的缺口。和你同階級的人，多半也補了這一格。</p>' });
 
+    L.push({ nav:'下一顆星', src:'need', srcNote:'<span class="k need">待補</span>規律度與領域廣度的判定、領域缺口', html:
+      '<span class="eyebrow">2027</span>' +
+      '<h2>' + (b.next ? '下一顆星：' + b.next : '把軌道再擴一格') + '</h2>' +
+      '<p>' + b.nextWhy + '。</p>' +
+      '<p><b>做法：' + b.nextDo + '</b></p>' +
+      '<p class="fine">天體不是標籤，是可以移動的位置。這張把人格卡的趣味轉成明年的具體行動。</p>' });
+
     L.push({ nav:'2027 承諾', src:'have', srcNote:'<span class="k have">現成</span>最常學的領域　<span class="k need">待補</span>推薦清單', html:
       '<span class="eyebrow">2027</span>' +
       '<h2>幫你設好<br>第一個 2027 任務</h2>' +
@@ -499,7 +551,7 @@
   var counter = document.getElementById('counter');
   var srcbox = document.getElementById('srcbox');
   var tierRow = document.getElementById('tierRow');
-  var S = [], i = 0, cur = P.silver, curTier = 'silver', daypart = 1;
+  var S = [], i = 0, cur = P.silver, curTier = 'silver', body = 0;
 
   function initScene(s){
     if (s.mech === 'guessSpend'){
@@ -597,20 +649,21 @@
     tierRow.appendChild(b);
   });
 
-  var dayRow = document.getElementById('dayRow');
-  DAYPARTS.forEach(function(x, n){
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('data-d', n);
-    b.textContent = x.slot + ' · ' + x.persona;
-    b.addEventListener('click', function(){
-      daypart = n;
-      Array.prototype.forEach.call(dayRow.querySelectorAll('button'), function(o){
-        o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+  var bodyRow = document.getElementById('bodyRow');
+  BODIES.forEach(function(x, n){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('data-b', n);
+    btn.innerHTML = '<span class="dot" style="background:' + x.accent + '"></span>' + x.name + ' · ' + x.axis;
+    btn.addEventListener('click', function(){
+      body = n;
+      Array.prototype.forEach.call(bodyRow.querySelectorAll('button'), function(o){
+        o.setAttribute('aria-pressed', o === btn ? 'true' : 'false');
       });
+      document.documentElement.style.setProperty('--body-accent', x.accent);
       load(curTier);
     });
-    dayRow.appendChild(b);
+    bodyRow.appendChild(btn);
   });
 
   document.addEventListener('keydown', function(e){
@@ -628,10 +681,97 @@
     sy = null;
   }, { passive:true });
 
-  Array.prototype.forEach.call(dayRow.querySelectorAll('button'), function(o){
-    o.setAttribute('aria-pressed', o.getAttribute('data-d') === String(daypart) ? 'true' : 'false');
+  Array.prototype.forEach.call(bodyRow.querySelectorAll('button'), function(o){
+    o.setAttribute('aria-pressed', o.getAttribute('data-b') === String(body) ? 'true' : 'false');
   });
+  document.documentElement.style.setProperty('--body-accent', BODIES[body].accent);
+  startSky();
   load('silver');
+
+  // ---- 星空與流星 ----
+  function startSky(){
+    var c = document.getElementById('sky');
+    if (!c || !c.getContext) return;
+    var ctx = c.getContext('2d');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var stars = [], meteors = [], W = 0, H = 0, dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    function size(){
+      var r = c.getBoundingClientRect();
+      W = r.width; H = r.height;
+      c.width = Math.max(1, Math.round(W * dpr));
+      c.height = Math.max(1, Math.round(H * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      stars = [];
+      for (var n = 0; n < 70; n++){
+        stars.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: Math.random() * 1.1 + 0.3,
+          a: Math.random() * 0.5 + 0.25,
+          tw: Math.random() * 0.02 + 0.004,
+          p: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    size();
+    if (window.ResizeObserver) new ResizeObserver(size).observe(c);
+
+    function spawn(){
+      var fromLeft = Math.random() < 0.5;
+      meteors.push({
+        x: fromLeft ? -20 : Math.random() * W,
+        y: Math.random() * H * 0.55,
+        vx: 2.1 + Math.random() * 1.4,
+        vy: 1.5 + Math.random() * 1.1,
+        len: 46 + Math.random() * 46,
+        life: 1
+      });
+    }
+
+    var last = 0;
+    function frame(ts){
+      ctx.clearRect(0, 0, W, H);
+      var accent = getComputedStyle(document.documentElement).getPropertyValue('--body-accent').trim() || '#f5a524';
+
+      for (var n = 0; n < stars.length; n++){
+        var st = stars[n];
+        if (!reduce) st.p += st.tw;
+        var a = st.a + Math.sin(st.p) * 0.22;
+        ctx.globalAlpha = Math.max(0.05, a);
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      if (!reduce){
+        if (ts - last > (BODIES[body].key === 'meteor' ? 700 : 2600)){
+          last = ts;
+          spawn();
+          if (BODIES[body].key === 'meteor'){ spawn(); }
+        }
+        for (var m = meteors.length - 1; m >= 0; m--){
+          var mt = meteors[m];
+          mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.008;
+          if (mt.life <= 0 || mt.x > W + 60 || mt.y > H + 60){ meteors.splice(m, 1); continue; }
+          var g = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.len, mt.y - mt.len * 0.7);
+          g.addColorStop(0, accent);
+          g.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.globalAlpha = Math.max(0, mt.life) * 0.9;
+          ctx.strokeStyle = g;
+          ctx.lineWidth = 1.6;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(mt.x, mt.y);
+          ctx.lineTo(mt.x - mt.len, mt.y - mt.len * 0.7);
+          ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
 </script>
 
 </body>
