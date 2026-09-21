@@ -5,844 +5,501 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>PPA 年度回顧 2026 原型</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" />
 <style>
   :root{
-    --ink:#0c1020;
+    --ink:#0a0d18;
     --veil:rgba(255,255,255,.07);
     --line:rgba(255,255,255,.14);
-    --paper:#f2efe9;
-    --dim:#a7a9bd;
+    --paper:#f4f1ec;
+    --dim:#9aa0b5;
     --amber:#f5a524;
     --rose:#e8557f;
     --violet:#6d63ff;
     --mint:#3ddc97;
-    --serif:'Noto Serif TC','Songti TC',serif;
     --sans:'Noto Sans TC',system-ui,-apple-system,sans-serif;
+    --serif:'Noto Serif TC','Songti TC',serif;
     --num:'Bodoni Moda','Times New Roman',serif;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
   }
   body{
     background:
-      radial-gradient(120% 80% at 12% -10%, #1d2144 0%, rgba(29,33,68,0) 60%),
-      radial-gradient(100% 70% at 95% 105%, #3a1c33 0%, rgba(58,28,51,0) 55%),
+      radial-gradient(110% 70% at 8% -8%, #1b2046 0%, rgba(27,32,70,0) 58%),
+      radial-gradient(90% 60% at 98% 104%, #3d1b34 0%, rgba(61,27,52,0) 52%),
       var(--ink);
-    color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.75;
+    color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.7;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1060px;margin:0 auto;padding-inline:20px;padding-block:40px 72px;}
+  .wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:36px 64px;}
 
-  .masthead{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;}
-  .brandline{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);}
-  .stamp{font-family:var(--num);font-size:.9rem;letter-spacing:.06em;color:var(--amber);}
-  .lede{margin:18px 0 0;max-width:48em;color:#ddd9e4;font-size:.95rem;}
+  .masthead{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:13px;}
+  .brandline{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
+  .stamp{font-family:var(--mono);font-size:.74rem;color:var(--amber);}
+  .lede{margin:16px 0 0;max-width:48em;color:#d9d6e0;font-size:.92rem;}
   .lede b{font-weight:500;color:var(--paper);}
 
-  .switch{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;align-items:center;}
-  .switch span.lbl{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-right:4px;}
-
-  .deck{margin-top:20px;display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:26px;align-items:start;}
-  @media (max-width:880px){.deck{grid-template-columns:1fr;}}
-
-  .stage{position:relative;border:1px solid var(--line);border-radius:6px;
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
-    padding:26px 24px 22px;min-height:490px;display:flex;flex-direction:column;overflow:hidden;}
-  .stage::before{content:'';position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(70% 55% at 86% 6%,rgba(245,165,36,.15),transparent 70%);}
-  .card{position:relative;flex:1;display:flex;flex-direction:column;gap:15px;animation:rise .4s ease both;}
-  @keyframes rise{from{opacity:.35;transform:translateY(7px);}to{opacity:1;transform:none;}}
-  @media (prefers-reduced-motion:reduce){.card{animation:none;}}
-
-  .tagrow{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
-  .eyebrow{font-size:.71rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);}
-  .flag{font-size:.67rem;letter-spacing:.1em;padding:2px 9px;border-radius:100px;border:1px solid currentColor;white-space:nowrap;}
-  .flag.keep{color:var(--dim);}
-  .flag.l1{color:var(--amber);}
-  .flag.l2{color:var(--mint);}
-  .flag.l3{color:var(--rose);}
-  .card h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.34rem,4vw,1.92rem);line-height:1.4;text-wrap:balance;margin:0;}
-  .card p{margin:0;color:#ddd9e4;max-width:34em;font-size:.97rem;}
-  .card p b{font-weight:500;color:var(--paper);}
-  .fine{font-size:.81rem;color:var(--dim);}
-  .bignum{font-family:var(--num);font-weight:700;font-size:clamp(2.6rem,11vw,4.6rem);line-height:.92;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
-  .bignum small{font-family:var(--sans);font-size:.93rem;font-weight:400;letter-spacing:.08em;margin-left:9px;color:var(--dim);}
-  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;}
-  .fact{border:1px solid var(--line);border-radius:100px;padding:5px 13px;font-size:.82rem;color:#e6e2ec;background:var(--veil);}
-  .fact b{font-family:var(--num);font-weight:700;}
-
-  /* guess widget */
-  .guess{display:flex;flex-direction:column;gap:9px;max-width:520px;}
-  .guess-val{font-family:var(--num);font-weight:700;font-size:2.1rem;font-variant-numeric:tabular-nums;color:var(--amber);}
-  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer;}
-  input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:linear-gradient(90deg,var(--violet),var(--rose),var(--amber));}
-  input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:linear-gradient(90deg,#6d63ff,#e8557f,#f5a524);}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--paper);border:0;margin-top:-7px;}
-  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#f2efe9;border:0;}
-  input[type=range]:focus-visible{outline:2px solid var(--amber);outline-offset:4px;}
-  .guess-scale{display:flex;justify-content:space-between;font-size:.72rem;color:var(--dim);font-variant-numeric:tabular-nums;}
-  .verdict{border-left:2px solid var(--amber);padding-left:13px;}
-  .verdict strong{display:block;font-family:var(--serif);font-size:1.2rem;font-weight:600;}
-
-  /* histogram */
-  .hist{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:112px;max-width:540px;}
-  .hist i{display:block;background:#3c4166;border-radius:2px 2px 0 0;position:relative;}
-  .hist i.me{background:linear-gradient(180deg,var(--amber),var(--rose));}
-  .hist i.me::after{content:'你';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.74rem;color:var(--paper);font-family:var(--sans);}
-  .hist i.guess{background:#5a5f8c;outline:1px dashed rgba(255,255,255,.5);}
-  .hist-scale{display:flex;justify-content:space-between;max-width:540px;font-size:.71rem;color:var(--dim);margin-top:5px;font-variant-numeric:tabular-nums;}
-
-  .ruler{margin:2px 0 4px;}
-  .ruler-track{position:relative;height:10px;border-radius:100px;background:linear-gradient(90deg,#2a2f4d,#6d63ff 62%,#e8557f 88%,#f5a524);}
-  .ruler-me{position:absolute;top:-9px;width:2px;height:28px;background:var(--paper);}
-  .ruler-me span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.73rem;}
-  .ruler-gate{position:absolute;top:-4px;width:2px;height:18px;background:var(--mint);}
-  .ruler-gate span{position:absolute;top:18px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.69rem;color:var(--mint);}
-  .ruler-scale{display:flex;justify-content:space-between;margin-top:30px;font-size:.71rem;color:var(--dim);}
-
-  .bars{display:flex;flex-direction:column;gap:9px;max-width:540px;}
-  .bar-row{display:grid;grid-template-columns:120px minmax(0,1fr) 84px;gap:10px;align-items:center;font-size:.85rem;}
-  .bar-row .who{color:var(--dim);}
-  .bar-row.me .who{color:var(--paper);font-weight:500;}
-  .bar-shell{height:13px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;}
-  .bar-fill{height:100%;background:#4a4f78;}
-  .bar-row.me .bar-fill{background:linear-gradient(90deg,var(--rose),var(--amber));}
-  .bar-val{text-align:right;font-family:var(--num);font-weight:700;font-variant-numeric:tabular-nums;}
-
-  /* clock */
-  .clock{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;align-items:end;height:80px;max-width:520px;position:relative;}
-  .clock i{display:block;background:var(--violet);border-radius:1px 1px 0 0;}
-  .clock i.peak{background:var(--amber);}
-  .clock-ref{max-width:520px;height:1px;background:var(--mint);position:relative;margin-top:-1px;}
-  .clock-ref span{position:absolute;right:0;top:-19px;font-size:.7rem;color:var(--mint);}
-  .clock-scale{display:flex;justify-content:space-between;max-width:520px;font-size:.7rem;color:var(--dim);margin-top:6px;font-variant-numeric:tabular-nums;}
-
-  /* collection grid (領域圖鑑) */
-  .dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;max-width:560px;}
-  .dex div{border:1px solid var(--line);border-radius:4px;padding:9px 10px;font-size:.82rem;background:rgba(255,255,255,.03);color:var(--dim);}
-  .dex div.own{border-color:rgba(245,165,36,.55);background:rgba(245,165,36,.12);color:var(--paper);}
-  .dex div.gap{border-style:dashed;border-color:rgba(61,220,151,.5);color:var(--mint);}
-  .dex b{display:block;font-family:var(--num);font-weight:700;font-size:1.05rem;}
-
-  /* course list */
-  .courses{display:flex;flex-direction:column;gap:8px;max-width:520px;}
-  .courses div{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:4px;padding:9px 12px;font-size:.87rem;background:rgba(255,255,255,.03);}
-  .courses span.meta{font-size:.78rem;color:var(--dim);display:block;}
-  .courses em{font-style:normal;font-size:.76rem;letter-spacing:.06em;color:var(--mint);border:1px solid currentColor;border-radius:100px;padding:2px 9px;white-space:nowrap;}
-
-  .yoy{display:flex;flex-direction:column;gap:12px;max-width:480px;}
-  .yoy-row{display:grid;grid-template-columns:70px minmax(0,1fr);gap:11px;align-items:center;}
-  .yoy-row span{font-size:.83rem;color:var(--dim);}
-  .yoy-row.now span{color:var(--paper);}
-  .yoy-bar{height:25px;border-radius:3px;background:rgba(255,255,255,.08);position:relative;}
-  .yoy-bar i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:#4a4f78;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--num);font-weight:700;font-size:.84rem;}
-  .yoy-row.now .yoy-bar i{background:linear-gradient(90deg,var(--violet),var(--mint));color:#0c1020;}
-
-  .tiers{display:grid;gap:8px;}
-  .tier{border-left:2px solid var(--line);padding:1px 0 1px 12px;}
-  .tier b{display:block;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:500;}
-  .tier.mid b{color:var(--violet);}
-  .tier.low b{color:var(--mint);}
-  .tier em{font-style:normal;color:#e6e2ec;font-size:.91rem;}
-
-  .clip{display:flex;gap:15px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:13px;background:var(--veil);max-width:420px;}
-  .clip .av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));flex:none;}
-  .clip div strong{display:block;font-weight:500;}
-  .clip div span{font-size:.81rem;color:var(--dim);}
-
-  /* pk card */
-  .pk{border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:rgba(255,255,255,.04);max-width:480px;display:flex;flex-direction:column;gap:10px;}
-  .pk-row{display:grid;grid-template-columns:1fr 78px 1fr;align-items:center;gap:8px;font-size:.86rem;}
-  .pk-row .l{text-align:right;font-family:var(--num);font-weight:700;font-size:1.05rem;}
-  .pk-row .r{font-family:var(--num);font-weight:700;font-size:1.05rem;color:var(--dim);}
-  .pk-row .k{text-align:center;font-size:.74rem;color:var(--dim);letter-spacing:.08em;}
-  .pk-row.win .l{color:var(--mint);}
-  .opts{display:flex;flex-wrap:wrap;gap:7px;}
-  .opt{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:#ddd9e4;border:1px solid var(--line);border-radius:100px;padding:4px 12px;cursor:pointer;}
-  .opt input{accent-color:var(--amber);}
-  .opts button[disabled]{cursor:default;opacity:.45;}
-  .opts button[aria-pressed="true"][disabled]{opacity:1;}
-
-  /* wall */
-  .wall{display:flex;flex-direction:column;gap:7px;max-width:520px;}
-  .wall div{border-left:2px solid var(--violet);padding:2px 0 2px 11px;font-size:.87rem;}
-  .wall div span{display:block;font-size:.75rem;color:var(--dim);}
-  .wall div.mine{border-color:var(--amber);}
-  .compose{display:flex;gap:8px;max-width:520px;flex-wrap:wrap;}
-  .compose input[type=text]{flex:1;min-width:200px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:100px;padding:8px 15px;color:var(--paper);font-family:inherit;font-size:.88rem;}
-  .compose input[type=text]:focus-visible{outline:2px solid var(--amber);outline-offset:1px;}
-
-  .controls{display:flex;align-items:center;gap:11px;margin-top:18px;flex-wrap:wrap;}
-  button{font-family:inherit;font-size:.87rem;color:var(--paper);background:var(--veil);border:1px solid var(--line);border-radius:100px;padding:7px 16px;cursor:pointer;transition:background .18s,border-color .18s;}
+  .switch{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;align-items:center;}
+  .switch .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:3px;}
+  button{font-family:inherit;font-size:.85rem;color:var(--paper);background:var(--veil);border:1px solid var(--line);border-radius:100px;padding:6px 15px;cursor:pointer;transition:background .18s,border-color .18s;}
   button:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);}
   button:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
   button[aria-pressed="true"]{background:rgba(245,165,36,.18);border-color:var(--amber);}
-  button.primary{background:rgba(245,165,36,.2);border-color:rgba(245,165,36,.6);}
-  .counter{font-family:var(--num);font-weight:700;font-size:.87rem;color:var(--dim);font-variant-numeric:tabular-nums;}
-  .pips{display:flex;gap:4px;margin-left:auto;}
-  .pips i{width:13px;height:3px;border-radius:2px;background:rgba(255,255,255,.18);display:block;}
-  .pips i.on{background:var(--amber);}
 
-  .rail{border:1px solid var(--line);border-radius:6px;padding:17px 15px;background:rgba(255,255,255,.03);}
-  .rail h3{font-family:var(--serif);font-size:.96rem;font-weight:600;margin:0 0 4px;}
-  .rail .hint{font-size:.77rem;color:var(--dim);margin:0 0 11px;line-height:1.6;}
-  .rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;counter-reset:s;}
-  .rail li{counter-increment:s;}
-  .rail li button{display:flex;gap:8px;width:100%;text-align:left;border:0;background:transparent;border-radius:4px;padding:5px 8px;font-size:.83rem;color:var(--dim);align-items:center;}
-  .rail li button::before{content:counter(s);font-family:var(--num);font-weight:700;color:rgba(255,255,255,.35);}
-  .rail li button:hover{background:var(--veil);color:var(--paper);}
-  .rail li button[aria-current="true"]{background:rgba(245,165,36,.14);color:var(--paper);}
-  .rail li button[aria-current="true"]::before{color:var(--amber);}
-  .rail .lv{margin-left:auto;font-size:.7rem;font-family:var(--num);font-weight:700;}
-  .rail .lv.l1{color:var(--amber);}
-  .rail .lv.l2{color:var(--mint);}
-  .rail .lv.l3{color:var(--rose);}
-  .legend{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);font-size:.75rem;color:var(--dim);display:flex;flex-direction:column;gap:3px;}
-  .legend b{font-family:var(--num);}
-  .legend b.l1{color:var(--amber);}
-  .legend b.l2{color:var(--mint);}
-  .legend b.l3{color:var(--rose);}
+  .stagewrap{margin-top:22px;display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:30px;align-items:start;}
+  @media (max-width:840px){.stagewrap{grid-template-columns:1fr;}}
 
-  .spec{margin-top:54px;border-top:1px solid var(--line);padding-top:30px;}
-  .spec h2{font-family:var(--serif);font-size:1.3rem;font-weight:600;margin:0 0 6px;}
-  .spec > p{color:var(--dim);font-size:.89rem;margin:0 0 18px;max-width:52em;}
-  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;}
-  table{border-collapse:collapse;width:100%;min-width:720px;font-size:.85rem;}
-  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top;}
-  th{font-size:.71rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);font-weight:500;background:rgba(255,255,255,.04);}
-  tbody tr:last-child td{border-bottom:0;}
-  td b{font-weight:500;color:var(--paper);}
-  td.l1{color:var(--amber);}td.l2{color:var(--mint);}td.l3{color:var(--rose);}
-  .guard{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:18px;}
-  .guard div{border-top:2px solid var(--rose);padding-top:11px;}
-  .guard h4{margin:0 0 3px;font-size:.89rem;font-weight:500;}
-  .guard p{margin:0;font-size:.82rem;color:var(--dim);}
-  .asks{margin-top:28px;display:grid;gap:7px;}
-  .ask{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.87rem;color:#ddd9e4;}
-  .ask i{font-family:var(--num);font-weight:700;color:var(--amber);font-style:normal;}
-  .foot{margin-top:36px;font-size:.78rem;color:var(--dim);border-top:1px solid var(--line);padding-top:14px;}
+  /* ---- phone ---- */
+  .phone{
+    position:relative;width:100%;max-width:340px;margin:0 auto;
+    aspect-ratio:9/18.5;border-radius:34px;padding:12px;
+    background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+    box-shadow:0 22px 60px rgba(0,0,0,.45);
+  }
+  .screen{
+    position:relative;height:100%;border-radius:24px;overflow:hidden;
+    background:linear-gradient(175deg,#141834 0%,#0c0f1f 55%,#1d1226 100%);
+    display:flex;flex-direction:column;
+  }
+  .screen::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(60% 34% at 84% 4%,rgba(245,165,36,.2),transparent 70%);
+  }
+  .segs{display:flex;gap:3px;padding:12px 14px 0;position:relative;z-index:2;}
+  .segs i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.2);display:block;}
+  .segs i.on{background:var(--amber);}
+  .slide{
+    position:relative;z-index:2;flex:1;padding:16px 20px 18px;
+    display:flex;flex-direction:column;gap:12px;overflow-y:auto;
+    animation:rise .42s cubic-bezier(.2,.7,.3,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.slide{animation:none;}}
+  .slide::-webkit-scrollbar{width:0;}
+
+  .eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);}
+  .slide h2{font-family:var(--serif);font-weight:600;font-size:1.28rem;line-height:1.45;margin:0;text-wrap:balance;}
+  .slide p{margin:0;font-size:.82rem;color:#d3d0dc;line-height:1.68;}
+  .slide p b{font-weight:500;color:var(--paper);}
+  .fine{font-size:.72rem;color:var(--dim);line-height:1.6;}
+  .big{font-family:var(--num);font-weight:700;font-size:3.1rem;line-height:.92;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .big small{font-family:var(--sans);font-size:.78rem;font-weight:400;color:var(--dim);margin-left:7px;letter-spacing:.06em;}
+  .foot-facts{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;}
+  .fact{border:1px solid var(--line);border-radius:100px;padding:3px 11px;font-size:.7rem;color:#e0dde8;background:var(--veil);}
+  .fact b{font-family:var(--num);font-weight:700;}
+
+  .badge{width:56px;height:62px;display:grid;place-items:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);}
+  .badge.bronze{background:linear-gradient(150deg,#d08a52,#8a4f24);color:#2a1508;}
+  .badge.silver{background:linear-gradient(150deg,#e6e9f0,#9aa3b5);color:#22262f;}
+  .badge.platinum{background:linear-gradient(150deg,#f7d98a,#c9a041);color:#2f2408;}
+  .badge.black{background:linear-gradient(150deg,#6d7385,#23262f);color:#e9e7f0;}
+
+  .slider{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer;}
+  .slider::-webkit-slider-runnable-track{height:5px;border-radius:100px;background:linear-gradient(90deg,var(--violet),var(--rose),var(--amber));}
+  .slider::-moz-range-track{height:5px;border-radius:100px;background:linear-gradient(90deg,#6d63ff,#e8557f,#f5a524);}
+  .slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--paper);border:0;margin-top:-6.5px;}
+  .slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#f4f1ec;border:0;}
+  .slider:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+  .sval{font-family:var(--num);font-weight:700;font-size:1.9rem;color:var(--amber);font-variant-numeric:tabular-nums;line-height:1;}
+  .srange{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.62rem;color:var(--dim);}
+  .verdict{border-left:2px solid var(--amber);padding-left:11px;}
+  .verdict strong{display:block;font-family:var(--serif);font-size:1.02rem;font-weight:600;line-height:1.4;margin-bottom:2px;}
+  .verdict span{font-size:.78rem;color:#d3d0dc;}
+
+  .cta{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;}
+  .cta button{font-size:.78rem;padding:7px 16px;}
+  .cta button.go{background:linear-gradient(90deg,rgba(245,165,36,.28),rgba(232,85,127,.28));border-color:rgba(245,165,36,.6);}
+
+  .tiercols{display:flex;gap:4px;align-items:end;height:74px;}
+  .tiercols div{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
+  .tiercols i{width:100%;background:#3a3f63;border-radius:2px 2px 0 0;display:block;}
+  .tiercols div.me i{background:linear-gradient(180deg,var(--amber),var(--rose));}
+  .tiercols span{font-size:.58rem;color:var(--dim);}
+  .tiercols div.me span{color:var(--paper);}
+
+  .rows{display:flex;flex-direction:column;gap:7px;}
+  .row{display:grid;grid-template-columns:70px minmax(0,1fr) 54px;gap:7px;align-items:center;font-size:.72rem;}
+  .row .who{color:var(--dim);}
+  .row.me .who{color:var(--paper);}
+  .row .shell{height:9px;border-radius:2px;background:rgba(255,255,255,.09);overflow:hidden;}
+  .row .fill{height:100%;background:#4a4f78;display:block;}
+  .row.me .fill{background:linear-gradient(90deg,var(--rose),var(--amber));}
+  .row .v{text-align:right;font-family:var(--num);font-weight:700;font-variant-numeric:tabular-nums;}
+
+  .prog{height:9px;border-radius:100px;background:rgba(255,255,255,.1);overflow:hidden;}
+  .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--mint));}
+  .proglab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.62rem;color:var(--dim);}
+
+  .months{display:flex;gap:3px;align-items:end;height:48px;}
+  .months i{flex:1;background:var(--violet);border-radius:1px 1px 0 0;display:block;}
+  .months i.peak{background:var(--amber);}
+  .daypart{display:flex;gap:5px;}
+  .daypart div{flex:1;border:1px solid var(--line);border-radius:4px;padding:7px 4px;text-align:center;font-size:.66rem;color:var(--dim);}
+  .daypart div.on{border-color:var(--amber);background:rgba(245,165,36,.15);color:var(--paper);}
+
+  .dex{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+  .dex div{border:1px solid var(--line);border-radius:3px;padding:6px 3px;text-align:center;font-size:.58rem;color:var(--dim);}
+  .dex div.own{border-color:rgba(245,165,36,.5);background:rgba(245,165,36,.12);color:var(--paper);}
+  .dex div.gap{border-style:dashed;border-color:rgba(61,220,151,.55);color:var(--mint);}
+  .dex b{display:block;font-family:var(--num);font-weight:700;font-size:.86rem;}
+
+  .chips{display:flex;flex-wrap:wrap;gap:5px;}
+  .chips button{font-size:.72rem;padding:5px 12px;}
+
+  .courses{display:flex;flex-direction:column;gap:6px;}
+  .courses div{border:1px solid var(--line);border-radius:4px;padding:7px 9px;font-size:.72rem;display:flex;justify-content:space-between;gap:7px;align-items:center;background:rgba(255,255,255,.03);}
+  .courses .meta{display:block;font-size:.62rem;color:var(--dim);}
+  .courses em{font-style:normal;font-family:var(--mono);font-size:.6rem;color:var(--mint);border:1px solid currentColor;border-radius:100px;padding:1px 7px;white-space:nowrap;}
+
+  .call{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:6px 0;}
+  .call .av{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--amber));}
+  .call .nm{font-family:var(--serif);font-size:1.1rem;font-weight:600;}
+  .call .st{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;color:var(--mint);text-transform:uppercase;}
+
+  /* ---- rail ---- */
+  .rail{display:flex;flex-direction:column;gap:18px;}
+  .navbox{border:1px solid var(--line);border-radius:6px;padding:16px 15px;background:rgba(255,255,255,.03);}
+  .navbox h3{font-family:var(--serif);font-size:.96rem;font-weight:600;margin:0 0 3px;}
+  .navbox .hint{font-size:.76rem;color:var(--dim);margin:0 0 11px;line-height:1.6;}
+  .navbox ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;counter-reset:s;}
+  .navbox li{counter-increment:s;}
+  .navbox li button{display:flex;gap:8px;width:100%;text-align:left;border:0;background:transparent;border-radius:4px;padding:5px 8px;font-size:.82rem;color:var(--dim);align-items:center;}
+  .navbox li button::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.35);}
+  .navbox li button:hover{background:var(--veil);color:var(--paper);}
+  .navbox li button[aria-current="true"]{background:rgba(245,165,36,.14);color:var(--paper);}
+  .navbox li button[aria-current="true"]::before{color:var(--amber);}
+  .navbox li .src{margin-left:auto;font-family:var(--mono);font-size:.62rem;}
+  .src.have{color:var(--mint);}
+  .src.need{color:var(--amber);}
+  .srcbox{border:1px solid var(--line);border-radius:6px;padding:14px 15px;background:rgba(255,255,255,.03);font-size:.78rem;color:var(--dim);line-height:1.65;}
+  .srcbox b{color:var(--paper);font-weight:500;}
+  .srcbox .k{display:inline-block;font-family:var(--mono);font-size:.66rem;padding:1px 7px;border-radius:2px;border:1px solid currentColor;margin-right:5px;}
+  .srcbox .k.have{color:var(--mint);}
+  .srcbox .k.need{color:var(--amber);}
+  .srcbox div + div{margin-top:7px;}
+
+  .keys{font-family:var(--mono);font-size:.7rem;color:var(--dim);text-align:center;margin-top:12px;}
+  .keys b{color:var(--paper);font-weight:400;}
+
+  .foot{margin-top:44px;padding-top:15px;border-top:1px solid var(--line);font-size:.76rem;color:var(--dim);}
 </style>
 
 </head>
 <body>
 <div class="wrap">
   <header class="masthead">
-    <div class="brandline">PPA 2026 年度回顧 · 互動原型</div>
-    <div class="stamp">階級分佈為真實數據 · 個人數字為推算輪廓</div>
+    <div class="brandline">PPA 2026 年度回顧 · 手機直式互動原型</div>
+    <div class="stamp">青銅以上 · 13 張卡</div>
   </header>
-  <p class="lede">五個會員階級的<b>人數、佔比、ARPU、升級與保級門檻</b>取自 2026_PPA_會員分級機制（總會員 1,770,518）。個別會員的時數、老師與領域數字是依各階級 ARPU 推算的代表輪廓，<b>不是真實個人資料</b>。本次於 <b>2026 年底發送</b>，第一批會員效期 2027 年 5 月到期，所以保級卡是提前 5 個月的預警而非事後通知。互動範圍定案為 L1 頁內互動與 L2 弱社交，滑桿與選項都可以實際操作。</p>
+  <p class="lede">wireframe 的 13 張卡做成可操作的樣子。<b>滑桿、猜測、選項都能按</b>，上下鍵或點按鈕切換。右側標示每張卡的資料來源：<b style="color:var(--mint)">現成</b> 是學習軌跡頁已經在跑的欄位，<b style="color:var(--amber)">待補</b> 是需要新開的。</p>
 
-  <div class="switch" role="group" aria-label="切換會員階級" id="tierRow">
+  <div class="switch" role="group" aria-label="切換階級" id="tierRow">
     <span class="lbl">階級</span>
   </div>
-  <div class="switch" role="group" aria-label="切換輪廓" id="profRow"></div>
 
-  <div class="deck">
-    <section class="stage" aria-live="polite">
-      <div class="card" id="card"></div>
-      <div class="controls">
-        <button id="prev" type="button">← 上一張</button>
-        <button id="next" type="button">下一張 →</button>
-        <span class="counter" id="counter"></span>
-        <span class="pips" id="pips" aria-hidden="true"></span>
+  <div class="stagewrap">
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="segs" id="segs" aria-hidden="true"></div>
+          <div class="slide" id="slide" aria-live="polite"></div>
+        </div>
       </div>
-    </section>
+      <p class="keys">← → 或 <b>點右側清單</b> 切換　·　<span id="counter"></span></p>
+    </div>
 
     <aside class="rail">
-      <h3>卡片動線</h3>
-      <p class="hint">先給稱號與肯定，中段用猜測與比較製造落差，排名後面一定緊接得到的下一階。</p>
-      <ol id="nav"></ol>
-      <div class="legend">
-        <span><b class="l1">L1</b> 頁內互動 · 本期</span>
-        <span><b class="l2">L2</b> 弱社交 · 本期</span>
-        <span style="opacity:.6">L3 強社交 · 本期不做</span>
+      <div class="navbox">
+        <h3>13 張卡</h3>
+        <p class="hint">先肯定、再落差、立刻給出口、接著消除孤獨感、最後收在承諾。三個猜測互動分散在 02、08、12。</p>
+        <ol id="nav"></ol>
       </div>
+      <div class="srcbox" id="srcbox"></div>
     </aside>
   </div>
 
-  <section class="spec">
-    <h2>真實門檻與分佈</h2>
-    <p>門檻取自 PPA 會員權益表：<b>升級與保級同門檻，而且是效期內累積，不是終身累積</b>。⚠ 標記的三欄（會員數、佔比、ARPU）來自分級機制表，該表用的是舊門檻級距（5,000／20,000／40,000 終身累積），與現行門檻不一致，需要依現行規則重拉。</p>
-    <div class="tablewrap">
-      <table>
-        <thead>
-          <tr><th>階級</th><th>升級門檻（＝保級門檻）</th><th>會員數 ⚠</th><th>佔比 ⚠</th><th>ARPU ⚠</th><th>升上去拿到什麼</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><b>岩石</b></td><td>—</td><td>1,198,044</td><td class="l3">67.6%</td><td>NT$0</td><td>首購 50 元券、簽到抽獎 90 點</td></tr>
-          <tr><td><b>青銅</b></td><td>完成任一筆付費訂單</td><td>348,002</td><td>19.7%</td><td>NT$2,580</td><td>每月 9 折券、會員日 100 元券</td></tr>
-          <tr><td><b>白銀</b></td><td class="l1">效期內累積 NT$7,500<br>或官網 Plus 年訂閱</td><td>160,852</td><td>9.1%</td><td>NT$9,813</td><td>88 折券、200 元券、點數 1.8 倍</td></tr>
-          <tr><td><b>鉑金</b></td><td class="l1">效期內累積 NT$25,000</td><td>35,357</td><td>2.0%</td><td>NT$27,946</td><td>85 折券、新課 48 小時預購、生日月募資價</td></tr>
-          <tr><td><b>黑鑽</b></td><td class="l1">效期內累積 NT$65,000<br>沒有 Plus 代保級</td><td>28,263</td><td>1.6%</td><td class="l2">NT$81,563</td><td>維持黑鑽權益</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="guard">
-      <div>
-        <h4>岩石是主版本，不是備案</h4>
-        <p>67.6%、將近 120 萬人沒有任何消費紀錄。同事企劃的三個標籤（消費前 10%、點擊前 10%、互動前 30%）加起來覆蓋不到全站 15%。岩石版本要先做完，其他四階級才是加值。</p>
-      </div>
-      <div>
-        <h4>門檻改用階級，不用百分位</h4>
-        <p>「再 12 小時進前 5%」是我編的；「再 2,420 元升白銀，每月多一張 9 折券」是制度裡現成的。後者具體、可達、還附權益，強度差很多。</p>
-      </div>
-      <div>
-        <h4>黑鑽保級卡是最值錢的一張</h4>
-        <p>黑鑽隔年留存率 64%，流失的 36% 約 1 萬人、ARPU 8 萬。年度回顧是保級提醒的天然載體，比單獨發催繳信自然得多。語氣要用「重新點亮」而不是「降級」。</p>
-      </div>
-      <div>
-        <h4>比較基準是階級內</h4>
-        <p>黑鑽 ARPU 81,563 是鉑金的 2.9 倍。對黑鑽說「你贏過 98% 的人」全階級都一樣，沒有資訊量。要比就比階級內與相鄰階級。</p>
-      </div>
-      <div>
-        <h4>岩石階級不出現任何金額</h4>
-        <p>連「猜猜你花多少」都不行。對還沒消費的人談錢或排名，回顧就變成催繳單。切到岩石那兩個輪廓可以看到那一版長什麼樣。</p>
-      </div>
-      <div>
-        <h4>猜測不能連續三張</h4>
-        <p>三個猜測機制分散在花費、排名、領域，中間用肯定與彙總卡隔開。連續猜會變成問卷，用戶直接跳過。</p>
-      </div>
-    </div>
-
-    <div class="asks">
-      <h2>還缺的資料</h2>
-      <div class="ask"><i>1</i><span>學習時數與完成單元的分佈。分級機制只有消費金額，時數完全沒有，所以原型裡所有時數都是推算的。這是最大的缺口。</span></div>
-      <div class="ask"><i>2</i><span>岩石階級的活躍樣貌：120 萬人裡有多少人今年真的看過內容？如果多數是殭屍帳號，這一版的受眾要重新估。</span></div>
-      <div class="ask"><i>3</i><span>各階級的 2025 對應數字，決定同比卡能不能做。</span></div>
-      <div class="ask"><i>4</i><span>黑鑽裡「今年消費未達 10,000」的人數，這是保級卡的實際受眾規模。</span></div>
-      <div class="ask"><i>5</i><span>老師維度：每位老師的學生數與學生內排名是否可算。</span></div>
-      <div class="ask"><i>6</i><span>同階級熱銷排行，用來替代協同過濾。</span></div>
-      <div class="ask"><i>7</i><span>階級表的語義：抽樣資料裡同一個會員 ID 在同一秒同時有鉑金與白銀兩筆，所以這張表看起來是變動歷程而非當前狀態。取「當前階級」的邏輯要先跟工程確認，否則跑批會出錯。</span></div>
-      <div class="ask"><i>8</i><span>階級時間戳有大量 2026-01-28 11:07 的批次灌檔值，不是真實升級日。「你在 X 月升上黑鑽」這類文案只能對批次日之後升級的人顯示，否則整批人看到同一個時間。</span></div>
-      <div class="ask"><i>9</i><span>「效期」是多長？升級與保級同門檻的話，這張卡對每位會員每個效期都會重新出現，效期長度直接決定文案語氣。</span></div>
-      <div class="ask"><i>10</i><span>會員數與 ARPU 要依現行門檻（7,500／25,000／65,000、效期內累積）重拉。舊級距算出來的佔比會讓白銀以上的人數被高估。</span></div>
-      <div class="ask"><i>11</i><span>效期起算點對不上：第一批到期是 2027 年 5 月，但抽樣資料裡最大宗的升級時間是 2026-01-28 的批次灌檔。若效期是升級日起算一年，那批人應該 2027 年 1 月就到期，比 5 月更早。批次那批的效期是另外設定的嗎？這決定保級卡要對誰顯示、倒數要從哪天算。</span></div>
-    </div>
-
-    <p class="foot">階級人數、佔比、ARPU、門檻、留存率取自 2026_PPA_會員分級機制（jameslin，2026/04 更新）。個人層級數字為依 ARPU 推算的代表輪廓，非真實會員資料。卡片架構來源：2025 用戶年度回顧頁面企劃（本次改為 2026 年底發送）。</p>
-  </section>
+  <p class="foot">階級門檻取自 PPA 會員權益表（效期內累積，升級與保級同門檻）。現成欄位取自會員中心學習軌跡頁。個人數字為依各階級 ARPU 推算的代表輪廓，非真實會員資料。岩石階級本次不做。</p>
 </div>
 
 <script>
-  // 階級定義與分佈：取自 2026_PPA_會員分級機制（總會員 1,770,518）
-  // 門檻取自 PPA 會員權益表（升級與保級同門檻、效期內累積消費）
-  // 人數／佔比／ARPU 來自 2026_PPA_會員分級機制，該表用的是舊門檻級距（5,000／20,000／40,000 終身累積），待依現行門檻重拉
   var TIERS = {
-    stone:    { name: '岩石', band: '無消費紀錄',            count: 1198044, share: 67.6, arpu: 0,     beat: null, next: '青銅', nextNeed: null, nextRule: '完成任一筆付費訂單', benefit: '首購 50 元折價券、每日簽到抽獎 90 點' },
-    bronze:   { name: '青銅', band: '完成付費訂單',           count: 348002,  share: 19.7, arpu: 2580,  beat: 68,   next: '白銀', nextNeed: 7500, nextRule: '效期內累積滿 NT$7,500，或於官網訂購 Plus 年訂閱方案完成', benefit: '每月 9 折券、會員日 100 元券、點數 1.5 倍' },
-    silver:   { name: '白銀', band: '效期內累積滿 7,500',     count: 160852,  share: 9.1,  arpu: 9813,  beat: 87,   next: '鉑金', nextNeed: 25000, nextRule: '效期內累積滿 NT$25,000', benefit: '每月 88 折券、會員日 200 元券、點數 1.8 倍、每月解鎖 1 堂全套' },
-    platinum: { name: '鉑金', band: '效期內累積滿 25,000',    count: 35357,   share: 2.0,  arpu: 27946, beat: 96,   next: '黑鑽', nextNeed: 65000, nextRule: '效期內累積滿 NT$65,000', benefit: '每月 85 折券、新課 48 小時預購、生日月募資價回歸、點數 2 倍、每月解鎖 3 堂全套' },
-    black:    { name: '黑鑽', band: '效期內累積滿 65,000',    count: 28263,   share: 1.6,  arpu: 81563, beat: 98,   next: null,   nextNeed: 65000, nextRule: '保級門檻與升級同值：效期內累積滿 NT$65,000。沒有 Plus 代保級的路徑', benefit: '維持黑鑽權益' }
+    bronze:   { key:'bronze',   name:'青銅', cls:'bronze',   count:348002, share:19.7, arpu:2580,  next:'白銀', nextNeed:7500,  benefit:'每月 9 折券、會員日 100 元券、點數 1.5 倍' },
+    silver:   { key:'silver',   name:'白銀', cls:'silver',   count:160852, share:9.1,  arpu:9813,  next:'鉑金', nextNeed:25000, benefit:'每月 88 折券、會員日 200 元券、點數 1.8 倍' },
+    platinum: { key:'platinum', name:'鉑金', cls:'platinum', count:35357,  share:2.0,  arpu:27946, next:'黑鑽', nextNeed:65000, benefit:'每月 85 折券、新課 48 小時預購、生日月募資價回歸' },
+    black:    { key:'black',    name:'黑鑽', cls:'black',    count:28263,  share:1.6,  arpu:81563, next:null,   nextNeed:65000, benefit:'維持黑鑽權益' }
   };
+  var ORDER = ['bronze','silver','platinum','black'];
 
   var P = {
-    'stone-a': {
-      tier: 'stone', tierNote: '典型輪廓 · 佔岩石 78%',
-      title: '2026，你的 PPA 頭銜是：剛上路的人', sub: '你已經走進來了，這比什麼都難',
-      persona: '打游擊型', days: 11, peakHour: 22, peakLabel: '19:00–22:59',
-      spend: 0, spendMax: 5000, spendBin: 0, showSpend: false,
-      metric: '完成單元', hours: 2,
-      pct: null, rank: null, pool: null,
-      yoy: [{ y: '2025', v: 0 }, { y: '2026', v: 2, now: true }],
-      yoyLine: '去年你沒看完任何一個單元，今年 2 個。從 0 到 1 是最難的那一步。',
-      teacher: '林長揚', teacherHours: 1, teacherPct: null, teacherStudents: '5,240',
-      unbought: [
-        { n: '簡報結構入門', m: '22 分鐘 · 最短的一堂', tag: '推薦' },
-        { n: '職場溝通基本功', m: '31 分鐘 · 新手完課率 88%', tag: '好評' }
-      ],
-      dex: [
-        { n: '簡報溝通', c: 1, own: true }, { n: '職涯發展', c: 0, gap: true },
-        { n: '興趣生活', c: 0 }, { n: '語言學習', c: 0 },
-        { n: '投資理財', c: 0 }, { n: '商業思維', c: 0 },
-        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你打開了第一格。剛開始的人第二格通常會補「職涯發展」，那裡有最多 30 分鐘內看完的課。',
-      twinCount: '48,200', twinCourse: '職場溝通基本功',
-      mates: '1,840', mateCourse: '簡報結構入門', sameNight: '12,600',
-      classmateNext: [{ n: '職場溝通基本功', m: '31 分鐘 · 同班 62% 的人接著上這堂', tag: '未上' }, { n: '時間管理入門', m: '44 分鐘 · 同班 38%', tag: '未上' }],
-      cta: '從收藏清單挑 1 堂，1 月看完第一單元'
+    bronze: {
+      tier:'bronze', persona:'白天學習派', daypart:1,
+      spend:2580, spendMax:8000, cumulative:3100,
+      contents:18, days:64, courses:2, saved:420,
+      pct:52, rank:'274,600',
+      months:[2,1,0,3,2,1,4,2,0,1,3,2], peakMonth:6,
+      topField:'職涯發展',
+      dex:[{n:'職涯發展',c:2,own:true},{n:'簡報溝通',c:1,own:true},{n:'投資理財',c:0,gap:true},{n:'語言學習',c:0},
+           {n:'商業思維',c:0},{n:'數位工具',c:0},{n:'興趣生活',c:0},{n:'設計美學',c:0}],
+      teacher:'楊斯棓', teacherContents:7, teacherPct:38, teacherStudents:'3,106',
+      unbought:[{n:'閱讀的技術',m:'3 小時 20 分 · 你追蹤的老師',tag:'未上'},{n:'筆記系統建構',m:'1 小時 52 分 · 完課率 81%',tag:'好評'}],
+      mates:'8,900', mateCourse:'履歷健檢實作',
+      classmateNext:[{n:'職涯定位工作坊',m:'同班 64% 接著上',tag:'未上'},{n:'時間管理入門',m:'同班 41%',tag:'未上'}],
+      cta:'把只剩 1 堂就完課的那門收掉'
     },
-    'stone-b': {
-      tier: 'stone', tierNote: '領過免費課但未消費 · 26.1 萬人',
-      title: '2026，你的 PPA 頭銜是：試過水溫的人', sub: '你知道這裡有什麼，只是還沒挑到那一堂',
-      persona: '臨時抱佛腳派', days: 34, peakHour: 12, peakLabel: '11:00–14:59',
-      spend: 0, spendMax: 5000, spendBin: 0, showSpend: false,
-      metric: '完成單元', hours: 7,
-      pct: null, rank: null, pool: null,
-      yoy: [{ y: '2025', v: 3 }, { y: '2026', v: 7, now: true }],
-      yoyLine: '比去年多看完 4 個單元。你用的都是免費資源，但你確實在前進。',
-      teacher: '郭哲佑', teacherHours: 3, teacherPct: null, teacherStudents: '2,418',
-      unbought: [
-        { n: '個人理財第一課', m: '1 小時 12 分 · 首購 50 元券可用', tag: '可折抵' },
-        { n: '履歷健檢實作', m: '48 分鐘 · 同階級熱門第 1', tag: '未上' }
-      ],
-      dex: [
-        { n: '投資理財', c: 2, own: true }, { n: '職涯發展', c: 1, own: true },
-        { n: '商業思維', c: 0, gap: true }, { n: '簡報溝通', c: 0 },
-        { n: '語言學習', c: 0 }, { n: '興趣生活', c: 0 },
-        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '兩格都是免費內容解鎖的。你的方向很明確，就在理財和職涯之間。',
-      twinCount: '26,100', twinCourse: '個人理財第一課',
-      mates: '5,600', mateCourse: '個人理財第一課', sameNight: '9,300',
-      classmateNext: [{ n: '記帳到資產配置', m: '1 小時 28 分 · 同班 57% 接著上', tag: '未上' }, { n: '履歷健檢實作', m: '48 分鐘 · 同班 41%', tag: '未上' }],
-      cta: '用註冊禮的 50 元券，挑一堂 300 元以內的課'
+    silver: {
+      tier:'silver', persona:'白天學習派', daypart:1,
+      spend:9813, spendMax:30000, cumulative:23200,
+      contents:47, days:154, courses:3, saved:2480,
+      pct:78, rank:'125,800',
+      months:[3,4,2,5,4,3,6,5,2,4,5,4], peakMonth:6,
+      topField:'投資理財',
+      dex:[{n:'投資理財',c:3,own:true},{n:'職涯發展',c:2,own:true},{n:'簡報溝通',c:2,own:true},{n:'語言學習',c:1,own:true},
+           {n:'數位工具',c:0,gap:true},{n:'商業思維',c:0},{n:'興趣生活',c:0},{n:'設計美學',c:0}],
+      teacher:'楊斯棓', teacherContents:19, teacherPct:11, teacherStudents:'3,106',
+      unbought:[{n:'演講表達入門',m:'2 小時 05 分 · 同階級熱門第 1',tag:'未上'},{n:'閱讀的技術',m:'3 小時 20 分 · 你追蹤的老師',tag:'未上'},{n:'寫作變現實戰',m:'4 小時 30 分 · 12 月新上架',tag:'新課'}],
+      mates:'26,180', mateCourse:'演講表達入門',
+      classmateNext:[{n:'演講表達入門',m:'同班 68% 接著上',tag:'未上'},{n:'寫作變現實戰',m:'同班 44%',tag:'新課'}],
+      cta:'把只剩 2 堂就完課的那 3 門收掉'
     },
-    'bronze-a': {
-      tier: 'bronze', tierNote: '典型輪廓 · 等於青銅 ARPU NT$2,580',
-      title: '2026，你的 PPA 頭銜是：出手過的人', sub: '你為自己按下了第一次結帳',
-      persona: '半夜焦慮派', days: 68, peakHour: 23, peakLabel: '23:00–01:59',
-      spend: 2580, spendMax: 5000, spendBin: 3, showSpend: true,
-      metric: '學習時數', hours: 14,
-      pct: 68, rank: '566,400', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 900 }, { y: '2026', v: 2580, now: true }],
-      yoyLine: '比去年多投資了 187%。你從試用者變成了付費學習的人。',
-      teacher: '楊斯棓', teacherHours: 6, teacherPct: 38, teacherStudents: '3,106',
-      unbought: [
-        { n: '閱讀的技術', m: '3 小時 20 分 · 你追蹤的老師', tag: '未上' },
-        { n: '筆記系統建構', m: '1 小時 52 分 · 完課率 81%', tag: '好評' }
-      ],
-      dex: [
-        { n: '職涯發展', c: 1, own: true }, { n: '簡報溝通', c: 1, own: true },
-        { n: '商業思維', c: 0, gap: true }, { n: '投資理財', c: 0 },
-        { n: '語言學習', c: 0 }, { n: '興趣生活', c: 0 },
-        { n: '數位工具', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 2 格，兩格都跟工作有關。看來你想解決的是很實際的問題。',
-      twinCount: '34,800', twinCourse: '職涯定位工作坊',
-      mates: '8,900', mateCourse: '履歷健檢實作', sameNight: '3,180',
-      classmateNext: [{ n: '筆記系統建構', m: '1 小時 52 分 · 同班 64% 接著上', tag: '未上' }, { n: '閱讀的技術', m: '3 小時 20 分 · 同班 45%', tag: '未上' }],
-      cta: '把只剩 1 堂就完課的那門收掉'
+    platinum: {
+      tier:'platinum', persona:'半夜苦讀派', daypart:3,
+      spend:27946, spendMax:80000, cumulative:58400,
+      contents:96, days:187, courses:9, saved:6120,
+      pct:94, rank:'34,300',
+      months:[7,9,12,8,6,7,11,9,5,8,10,4], peakMonth:2,
+      topField:'職涯發展',
+      dex:[{n:'職涯發展',c:6,own:true},{n:'投資理財',c:4,own:true},{n:'商業思維',c:3,own:true},{n:'簡報溝通',c:1,own:true},
+           {n:'數位工具',c:0,gap:true},{n:'語言學習',c:0},{n:'興趣生活',c:0},{n:'設計美學',c:0}],
+      teacher:'郭哲佑', teacherContents:31, teacherPct:6, teacherStudents:'2,418',
+      unbought:[{n:'併購案拆解',m:'5 小時 06 分 · NT$2,480',tag:'可升級'},{n:'公司估值實戰',m:'4 小時 12 分 · 你追蹤的老師',tag:'未上'},{n:'財報地雷排查',m:'2 小時 48 分 · 同階級熱門第 2',tag:'未上'}],
+      mates:'18,420', mateCourse:'財務建模實戰',
+      classmateNext:[{n:'併購案拆解',m:'同班 63% 接著上',tag:'未上'},{n:'產業趨勢年會',m:'同班 39%',tag:'未上'}],
+      cta:'再 6,600 元就升黑鑽，新課能比早鳥再便宜 100–200'
     },
-    'bronze-b': {
-      tier: 'bronze', tierNote: '接近升級 · 差 NT$400 到白銀',
-      title: '2026，你的 PPA 頭銜是：差一步的人', sub: '你離下一個階級只剩一堂課的距離',
-      persona: '穩定通勤派', days: 96, peakHour: 8, peakLabel: '06:00–10:59',
-      spend: 4600, spendMax: 5000, spendBin: 9, showSpend: true,
-      metric: '學習時數', hours: 31,
-      pct: 74, rank: '460,300', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 2100 }, { y: '2026', v: 4600, now: true }],
-      yoyLine: '比去年多投資了 119%，而且你的完課率也一起上去了。',
-      teacher: '郭哲佑', teacherHours: 11, teacherPct: 24, teacherStudents: '2,418',
-      unbought: [
-        { n: '財報地雷排查', m: '2 小時 48 分 · NT$1,280', tag: '可升級' },
-        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' }
-      ],
-      dex: [
-        { n: '投資理財', c: 2, own: true }, { n: '職涯發展', c: 1, own: true },
-        { n: '商業思維', c: 1, own: true }, { n: '數位工具', c: 0, gap: true },
-        { n: '簡報溝通', c: 0 }, { n: '語言學習', c: 0 },
-        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 3 格。和你消費水準相近的人，第四格最常補「數位工具」。',
-      twinCount: '34,800', twinCourse: 'AI 工作流實戰',
-      mates: '12,400', mateCourse: '財報地雷排查', sameNight: '1,240',
-      classmateNext: [{ n: '財報地雷排查', m: '2 小時 48 分 · 同班 71% 接著上', tag: '可升級' }, { n: 'AI 工作流實戰', m: '3 小時 10 分 · 同班 48%', tag: '未上' }],
-      cta: '再一堂就升白銀，每月多一張 9 折券'
-    },
-    'silver-a': {
-      tier: 'silver', tierNote: '典型輪廓 · 等於白銀 ARPU NT$9,813',
-      title: '2026，你的 PPA 頭銜是：認真的那個人', sub: '你已經把學習變成固定支出',
-      persona: '穩定通勤派', days: 142, peakHour: 8, peakLabel: '06:00–10:59',
-      spend: 9813, spendMax: 20000, spendBin: 4, showSpend: true,
-      metric: '學習時數', hours: 62,
-      pct: 87, rank: '230,200', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 6200 }, { y: '2026', v: 9813, now: true }],
-      yoyLine: '比去年多投資了 58%。你不是突然變有錢，是把錢換了方向。',
-      teacher: '楊斯棓', teacherHours: 19, teacherPct: 11, teacherStudents: '3,106',
-      unbought: [
-        { n: '演講表達入門', m: '2 小時 05 分 · 同階級熱門第 1', tag: '未上' },
-        { n: '閱讀的技術', m: '3 小時 20 分 · 你追蹤的老師', tag: '未上' },
-        { n: '寫作變現實戰', m: '4 小時 30 分 · 12 月新上架', tag: '新課' }
-      ],
-      dex: [
-        { n: '語言學習', c: 3, own: true }, { n: '職涯發展', c: 2, own: true },
-        { n: '簡報溝通', c: 2, own: true }, { n: '投資理財', c: 1, own: true },
-        { n: '數位工具', c: 0, gap: true }, { n: '商業思維', c: 0 },
-        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 4 格，廣度在白銀階級裡算前段。同階級的人第五格最常補「數位工具」。',
-      twinCount: '16,000', twinCourse: 'Notion 知識庫建構',
-      mates: '26,180', mateCourse: '演講表達入門', sameNight: '2,470',
-      classmateNext: [{ n: '演講表達入門', m: '2 小時 05 分 · 同班 68% 接著上', tag: '未上' }, { n: '寫作變現實戰', m: '4 小時 30 分 · 同班 44%', tag: '新課' }],
-      cta: '把只剩 2 堂就完課的那 3 門收掉'
-    },
-    'silver-b': {
-      tier: 'silver', tierNote: '接近升級 · 差 NT$1,800 到鉑金',
-      title: '2026，你的 PPA 頭銜是：快要換階級的人', sub: '鉑金的門就在前面',
-      persona: '半夜焦慮派', days: 178, peakHour: 23, peakLabel: '23:00–01:59',
-      spend: 18200, spendMax: 20000, spendBin: 9, showSpend: true,
-      metric: '學習時數', hours: 88,
-      pct: 91, rank: '159,300', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 11400 }, { y: '2026', v: 18200, now: true }],
-      yoyLine: '比去年多投資了 60%。這是連續第二年成長。',
-      teacher: '郭哲佑', teacherHours: 24, teacherPct: 9, teacherStudents: '2,418',
-      unbought: [
-        { n: '併購案拆解', m: '5 小時 06 分 · NT$2,480', tag: '可升級' },
-        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' },
-        { n: '財報地雷排查', m: '2 小時 48 分 · 同階級熱門第 2', tag: '未上' }
-      ],
-      dex: [
-        { n: '投資理財', c: 4, own: true }, { n: '商業思維', c: 3, own: true },
-        { n: '職涯發展', c: 2, own: true }, { n: '簡報溝通', c: 1, own: true },
-        { n: '數位工具', c: 0, gap: true }, { n: '語言學習', c: 0 },
-        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 4 格，最重倉的是投資理財。看起來你不只投資股票，也在加倉自己。',
-      twinCount: '16,000', twinCourse: 'AI 工作流實戰',
-      mates: '26,180', mateCourse: '財報地雷排查', sameNight: '3,180',
-      classmateNext: [{ n: '併購案拆解', m: '5 小時 06 分 · 同班 59% 接著上', tag: '可升級' }, { n: '公司估值實戰', m: '4 小時 12 分 · 同班 52%', tag: '未上' }],
-      cta: '再 1,800 元就升鉑金，每月券從 9 折變 88 折'
-    },
-    'platinum-a': {
-      tier: 'platinum', tierNote: '典型輪廓 · 等於鉑金 ARPU NT$27,946',
-      title: '2026，你的 PPA 頭銜是：知識投資家', sub: '成為自己腦袋最大的股東',
-      persona: '半夜焦慮派', days: 187, peakHour: 23, peakLabel: '23:00–01:59',
-      spend: 27946, spendMax: 40000, spendBin: 4, showSpend: true,
-      metric: '學習時數', hours: 96,
-      pct: 96, rank: '70,800', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 19400 }, { y: '2026', v: 27946, now: true }],
-      yoyLine: '比去年多投資了 44%。你不是突然變有錢，是把錢換了方向。',
-      teacher: '郭哲佑', teacherHours: 31, teacherPct: 6, teacherStudents: '2,418',
-      unbought: [
-        { n: '併購案拆解', m: '5 小時 06 分 · NT$2,480', tag: '可升級' },
-        { n: '公司估值實戰', m: '4 小時 12 分 · 你追蹤的老師', tag: '未上' },
-        { n: '財報地雷排查', m: '2 小時 48 分 · 同階級熱門第 2', tag: '未上' }
-      ],
-      dex: [
-        { n: '職涯發展', c: 6, own: true }, { n: '投資理財', c: 4, own: true },
-        { n: '商業思維', c: 3, own: true }, { n: '簡報溝通', c: 1, own: true },
-        { n: '數位工具', c: 0, gap: true }, { n: '語言學習', c: 0 },
-        { n: '設計美學', c: 0 }, { n: '興趣生活', c: 0 }
-      ],
-      dexLine: '你解鎖了 8 格中的 4 格，最重倉的是職涯發展。同階級的人多半也補了「數位工具」。',
-      twinCount: '3,500', twinCourse: 'AI 工作流實戰',
-      mates: '18,420', mateCourse: '財務建模實戰', sameNight: '3,180',
-      classmateNext: [{ n: '併購案拆解', m: '5 小時 06 分 · 同班 63% 接著上', tag: '未上' }, { n: '產業趨勢年會', m: '6 小時 · 同班 39%', tag: '未上' }],
-      cta: '再 12,054 元就升黑鑽，新課能比早鳥再便宜 100–200'
-    },
-    'black-a': {
-      tier: 'black', tierNote: '典型輪廓 · 等於黑鑽 ARPU NT$81,563',
-      title: '2026，你的 PPA 頭銜是：平台的股東', sub: '全站 1.6% 的人走到這裡',
-      persona: '半夜焦慮派', days: 246, peakHour: 23, peakLabel: '23:00–01:59',
-      spend: 81563, spendMax: 120000, spendBin: 9, showSpend: true,
-      metric: '學習時數', hours: 214,
-      pct: 98, rank: '28,300', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 62800 }, { y: '2026', v: 81563, now: true }],
-      yoyLine: '比去年多投資了 30%。你在黑鑽裡也是前段班。',
-      teacher: '郭哲佑', teacherHours: 58, teacherPct: 1, teacherStudents: '2,418',
-      unbought: [
-        { n: '併購案拆解', m: '5 小時 06 分 · 你有 48 小時預購權', tag: '預購' },
-        { n: '公司估值實戰', m: '4 小時 12 分 · 生日月可用募資價', tag: '未上' },
-        { n: '產業趨勢年會', m: '6 小時 · 黑鑽獨家講座優先權', tag: '獨家' }
-      ],
-      dex: [
-        { n: '職涯發展', c: 11, own: true }, { n: '投資理財', c: 9, own: true },
-        { n: '商業思維', c: 7, own: true }, { n: '數位工具', c: 5, own: true },
-        { n: '簡報溝通', c: 4, own: true }, { n: '語言學習', c: 2, own: true },
-        { n: '興趣生活', c: 1, own: true }, { n: '設計美學', c: 0, gap: true }
-      ],
-      dexLine: '你解鎖了 8 格中的 7 格。站上只有極少數人收集到這個程度，最後一格是設計美學。',
-      twinCount: '2,800', twinCourse: '產業趨勢年會',
-      mates: '31,600', mateCourse: '財務建模實戰', sameNight: '3,180',
-      classmateNext: [{ n: '產業趨勢年會', m: '6 小時 · 同班 58% 接著上', tag: '獨家' }, { n: '設計思考導論', m: '2 小時 20 分 · 你唯一沒解鎖的領域', tag: '未上' }],
-      cta: '維持 Plus 訂閱，黑鑽身份永不降級'
-    },
-    'black-b': {
-      tier: 'black', tierNote: '保級風險 · 12 個月消費未達 10,000',
-      title: '2026，你的 PPA 頭銜是：黑鑽，但要小心', sub: '你的標章還亮著，只是今年安靜了一點',
-      persona: '打游擊型', days: 41, peakHour: 21, peakLabel: '19:00–22:59',
-      spend: 46200, spendMax: 120000, spendBin: 6, showSpend: true,
-      metric: '學習時數', hours: 27,
-      pct: 98, rank: '28,300', pool: '1,770,518',
-      yoy: [{ y: '2025', v: 38400 }, { y: '2026', v: 46200, now: true }],
-      yoyLine: '終身累積 46,200，但今年只消費 7,800——離保級門檻還差 2,200。',
-      teacher: '楊斯棓', teacherHours: 9, teacherPct: 22, teacherStudents: '3,106',
-      unbought: [
-        { n: '閱讀的技術', m: '3 小時 20 分 · NT$2,280', tag: '可保級' },
-        { n: '寫作變現實戰', m: '4 小時 30 分 · 你有 48 小時預購權', tag: '預購' }
-      ],
-      dex: [
-        { n: '職涯發展', c: 7, own: true }, { n: '投資理財', c: 5, own: true },
-        { n: '簡報溝通', c: 3, own: true }, { n: '語言學習', c: 2, own: true },
-        { n: '商業思維', c: 1, own: true }, { n: '數位工具', c: 0, gap: true },
-        { n: '興趣生活', c: 0 }, { n: '設計美學', c: 0 }
-      ],
-      dexLine: '你解鎖了 5 格，都是前幾年累積的。今年只動了其中一格。',
-      twinCount: '2,800', twinCourse: '閱讀的技術',
-      mates: '31,600', mateCourse: '閱讀的技術', sameNight: '2,470',
-      classmateNext: [{ n: '閱讀的技術', m: '3 小時 20 分 · 同班 66% 接著上', tag: '可保級' }, { n: '寫作變現實戰', m: '4 小時 30 分 · 同班 43%', tag: '預購' }],
-      cta: '再 2,200 元或維持 Plus 訂閱，就能保住黑鑽'
+    black: {
+      tier:'black', persona:'半夜苦讀派', daypart:3,
+      spend:46200, spendMax:100000, cumulative:46200,
+      contents:58, days:118, courses:14, saved:9840,
+      pct:97, rank:'17,200',
+      months:[9,11,7,6,4,5,3,4,2,3,2,2], peakMonth:1,
+      topField:'職涯發展',
+      dex:[{n:'職涯發展',c:7,own:true},{n:'投資理財',c:5,own:true},{n:'簡報溝通',c:3,own:true},{n:'語言學習',c:2,own:true},
+           {n:'商業思維',c:1,own:true},{n:'數位工具',c:0,gap:true},{n:'興趣生活',c:0},{n:'設計美學',c:0}],
+      teacher:'郭哲佑', teacherContents:44, teacherPct:2, teacherStudents:'2,418',
+      unbought:[{n:'閱讀的技術',m:'3 小時 20 分 · NT$2,280',tag:'可保級'},{n:'產業趨勢年會',m:'6 小時 · 黑鑽獨家優先權',tag:'獨家'},{n:'寫作變現實戰',m:'4 小時 30 分 · 你有 48 小時預購權',tag:'預購'}],
+      mates:'31,600', mateCourse:'財務建模實戰',
+      classmateNext:[{n:'閱讀的技術',m:'同班 66% 接著上',tag:'可保級'},{n:'併購案拆解',m:'同班 52%',tag:'未上'}],
+      cta:'再 18,800 元，黑鑽就續到下一個效期'
     }
   };
 
-  var TIER_ORDER = ['stone', 'bronze', 'silver', 'platinum', 'black'];
-  var PROFILES = {
-    stone: ['stone-a', 'stone-b'],
-    bronze: ['bronze-a', 'bronze-b'],
-    silver: ['silver-a', 'silver-b'],
-    platinum: ['platinum-a'],
-    black: ['black-a', 'black-b']
-  };
+  var DAYPARTS = ['清晨', '白天', '傍晚', '深夜'];
+  var MONTH_NAMES = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  function nf(n){ return n.toLocaleString('en-US'); }
+  function nf(n){ return Math.round(n).toLocaleString('en-US'); }
 
-  function head(eyebrow, lv){
-    var f = lv ? '<span class="flag ' + lv + '">' + lv.toUpperCase() + ' ' +
-      (lv === 'l1' ? '頁內互動' : '弱社交') + '</span>'
-      : '<span class="flag keep">沿用企劃書</span>';
-    return '<div class="tagrow"><span class="eyebrow">' + eyebrow + '</span>' + f + '</div>';
-  }
-
-  // 真實階級分佈長條圖（佔比取自分級機制表）
-  function tierChart(meTier, guessTier){
-    var max = 67.6, s = '';
-    TIER_ORDER.forEach(function(k){
+  function tierCols(meKey){
+    var max = 19.7, s = '';
+    ORDER.forEach(function(k){
       var t = TIERS[k];
-      var cls = k === meTier ? 'me' : (k === guessTier ? 'guess' : '');
-      s += '<i class="' + cls + '" style="height:' + Math.max(3, Math.round(t.share / max * 100)) + '%"></i>';
+      s += '<div class="' + (k === meKey ? 'me' : '') + '">' +
+        '<i style="height:' + Math.max(8, Math.round(t.share / max * 62)) + 'px"></i>' +
+        '<span>' + t.name + '</span></div>';
     });
-    return '<div class="hist" style="grid-template-columns:repeat(5,1fr)" aria-hidden="true">' + s + '</div>' +
-      '<div class="hist-scale">' + TIER_ORDER.map(function(k){
-        return '<span>' + TIERS[k].name + ' ' + TIERS[k].share + '%</span>';
-      }).join('') + '</div>';
+    return '<div class="tiercols" aria-hidden="true">' + s + '</div>';
   }
 
-  function clock(peak, refLabel){
-    var s = '', base = [4,3,2,2,3,6,14,26,34,30,22,26,34,30,24,22,26,34,44,56,64,72,58,32];
-    for (var h = 0; h < 24; h++){
-      var v = h === peak ? 88 : base[h];
-      s += '<i class="' + (h === peak ? 'peak' : '') + '" style="height:' + v + '%"></i>';
-    }
-    return '<div class="clock" aria-hidden="true">' + s + '</div>' +
-      '<div class="clock-ref"><span>' + refLabel + '</span></div>' +
-      '<div class="clock-scale"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>';
-  }
-
-  function tierPeers(d, t){
-    var rows = [
-      { who: '你', v: d.spend, me: true },
-      { who: t.name + '平均', v: t.arpu }
-    ];
-    var idx = TIER_ORDER.indexOf(d.tier);
-    if (idx > 0) rows.push({ who: TIERS[TIER_ORDER[idx - 1]].name + '平均', v: TIERS[TIER_ORDER[idx - 1]].arpu });
-    if (idx < TIER_ORDER.length - 1) rows.push({ who: TIERS[TIER_ORDER[idx + 1]].name + '平均', v: TIERS[TIER_ORDER[idx + 1]].arpu });
+  function peerRows(d, t){
+    var idx = ORDER.indexOf(d.tier);
+    var rows = [{ who:'你', v:d.spend, me:true }, { who:t.name + '平均', v:t.arpu }];
+    if (idx > 0) rows.push({ who:TIERS[ORDER[idx-1]].name + '平均', v:TIERS[ORDER[idx-1]].arpu });
+    if (idx < ORDER.length - 1) rows.push({ who:TIERS[ORDER[idx+1]].name + '平均', v:TIERS[ORDER[idx+1]].arpu });
     var max = 0;
     rows.forEach(function(r){ if (r.v > max) max = r.v; });
-    var s = '';
-    rows.forEach(function(r){
-      s += '<div class="bar-row' + (r.me ? ' me' : '') + '">' +
-        '<span class="who">' + r.who + '</span>' +
-        '<span class="bar-shell"><span class="bar-fill" style="width:' + Math.max(2, Math.round(r.v / max * 100)) + '%"></span></span>' +
-        '<span class="bar-val">' + nf(r.v) + '</span></div>';
-    });
-    return '<div class="bars">' + s + '</div>' +
-      '<p class="fine">比較基準用階級內與相鄰階級，不用全站。黑鑽 ARPU 是鉑金的 2.9 倍，全站平均對他們毫無意義。</p>';
+    return '<div class="rows">' + rows.map(function(r){
+      return '<div class="row' + (r.me ? ' me' : '') + '"><span class="who">' + r.who + '</span>' +
+        '<span class="shell"><span class="fill" style="width:' + Math.max(3, Math.round(r.v / max * 100)) + '%"></span></span>' +
+        '<span class="v">' + nf(r.v) + '</span></div>';
+    }).join('') + '</div>';
   }
 
-  function yoyBlock(rows, line){
+  function monthChart(d){
     var max = 0;
-    rows.forEach(function(r){ if (r.v > max) max = r.v; });
-    var s = '';
-    rows.forEach(function(r){
-      s += '<div class="yoy-row' + (r.now ? ' now' : '') + '"><span>' + r.y + '</span>' +
-        '<span class="yoy-bar"><i style="width:' + Math.max(14, Math.round(r.v / Math.max(max, 1) * 100)) + '%">' + nf(r.v) + '</i></span></div>';
-    });
-    return '<div class="yoy">' + s + '</div><p>' + line + '</p>';
+    d.months.forEach(function(v){ if (v > max) max = v; });
+    return '<div class="months" aria-hidden="true">' + d.months.map(function(v, i){
+      return '<i class="' + (i === d.peakMonth ? 'peak' : '') + '" style="height:' + Math.max(8, Math.round(v / max * 46)) + 'px"></i>';
+    }).join('') + '</div>' +
+    '<p class="fine">' + MONTH_NAMES[d.peakMonth] + ' 月是你最猛的一個月。</p>';
+  }
+
+  function dexGrid(d){
+    return '<div class="dex">' + d.dex.map(function(x){
+      return '<div class="' + (x.own ? 'own' : x.gap ? 'gap' : '') + '"><b>' + (x.own ? x.c : x.gap ? '?' : '—') + '</b>' + esc(x.n) + '</div>';
+    }).join('') + '</div>';
+  }
+
+  function courseList(items){
+    return '<div class="courses">' + items.map(function(c){
+      return '<div><span>' + esc(c.n) + '<span class="meta">' + esc(c.m) + '</span></span><em>' + esc(c.tag) + '</em></div>';
+    }).join('') + '</div>';
   }
 
   function scenes(d){
-    var t = TIERS[d.tier], L = [];
+    var t = TIERS[d.tier];
+    var L = [];
 
-    L.push({ nav: '開場稱號', lv: null, html:
-      head('卡 1 · 開場稱號', null) +
-      '<h2>' + d.title + '</h2><p>' + d.sub + '</p>' +
-      '<p class="fine">你的存在，讓演算法以為你是全職學生。</p>' +
-      '<div class="facts"><span class="fact">' + t.name + ' · ' + t.band + '</span><span class="fact">上站 <b>' + d.days + '</b> 天</span><span class="fact">' + d.persona + '</span></div>' });
+    L.push({ nav:'開場稱號', src:'have', srcNote:'<span class="k have">現成</span>階級、學習天數、學習時段、內容數量', html:
+      '<span class="eyebrow">2026 年度回顧</span>' +
+      '<div class="badge ' + t.cls + '">' + t.name + '</div>' +
+      '<h2>2026，你的頭銜是<br>' + t.name + ' · ' + d.persona + '</h2>' +
+      '<p>上站 <b>' + d.days + ' 天</b>，看完 <b>' + d.contents + ' 篇</b>內容。你的存在，讓演算法以為你是全職學生。</p>' +
+      '<div class="foot-facts"><span class="fact">購課 <b>' + d.courses + '</b> 門</span><span class="fact">' + DAYPARTS[d.daypart] + '學習</span></div>' });
 
-    if (d.showSpend){
-      L.push({ nav: '猜猜你花多少', lv: 'l1', mech: 'guessSpend', html:
-        head('花費 · 猜了再揭曉', 'l1') +
-        '<h2>先別看數字。<br>猜猜你今年在 PPA 花了多少</h2>' +
-        '<div class="guess">' +
-          '<span class="guess-val" id="gv">NT$ 0</span>' +
-          '<input type="range" id="gs" min="0" max="' + d.spendMax + '" step="100" value="' + Math.round(d.spendMax * 0.25) + '" aria-label="猜測金額" />' +
-          '<div class="guess-scale"><span>0</span><span>NT$ ' + nf(d.spendMax) + '</span></div>' +
-          '<div><button class="primary" id="gb" type="button">揭曉</button></div>' +
-        '</div>' +
-        '<div id="gr"></div>' +
-        '<p class="fine">猜錯產生的落差，比被動看到數字有感得多。岩石階級（全站 67.6%）不出現這張卡。</p>' });
+    L.push({ nav:'猜猜你花多少', src:'need', mech:'guessSpend', srcNote:'<span class="k need">待補</span>今年消費金額', html:
+      '<span class="eyebrow">先別看數字</span>' +
+      '<h2>猜猜你今年<br>在 PPA 花了多少</h2>' +
+      '<div class="sval" id="gv">NT$ 0</div>' +
+      '<input class="slider" type="range" id="gs" min="0" max="' + d.spendMax + '" step="100" value="' + Math.round(d.spendMax * 0.3) + '" aria-label="猜測金額" />' +
+      '<div class="srange"><span>0</span><span>' + nf(d.spendMax) + '</span></div>' +
+      '<div id="gr"></div>' +
+      '<div class="cta"><button class="go" id="gb" type="button">揭曉</button></div>' });
 
-      L.push({ nav: '你在哪個階級', lv: 'l2', html:
-        head('花費 · 五階級分佈', 'l2') +
-        '<h2>全站 177 萬人<br>你在 ' + t.name + '，前 ' + (100 - (t.beat || 0)) + '%</h2>' +
-        tierChart(d.tier, null) +
-        '<p>' + t.name + '有 <b>' + nf(t.count) + ' 人</b>，佔全站 ' + t.share + '%。' +
-        (t.beat ? '你的終身累積消費贏過全站 <b>' + t.beat + '%</b> 的會員。' : '') + '</p>' +
-        '<p class="fine">真實分佈，取自 2026_PPA_會員分級機制。左邊那根就是 67.6% 的岩石階級——這也是為什麼岩石要有自己的版本。</p>' });
+    L.push({ nav:'你在哪個階級', src:'need', srcNote:'<span class="k have">現成</span>階級　<span class="k need">待補</span>依現行門檻重拉的分佈', html:
+      '<span class="eyebrow">全站分佈</span>' +
+      '<h2>全站 177 萬人<br>你在' + t.name + '</h2>' +
+      tierCols(d.tier) +
+      '<p>' + t.name + '有 <b>' + nf(t.count) + ' 人</b>，佔全站 ' + t.share + '%。</p>' +
+      '<p class="fine">這裡只顯示你在哪一格，不顯示「你贏過幾 % 的人」——花費不做用戶間排名。</p>' });
 
-      L.push({ nav: '階級內比較', lv: 'l2', html:
-        head('花費 · 階級內與相鄰階級', 'l2') +
-        '<h2>' + t.name + '裡的人<br>平均花 NT$ ' + nf(t.arpu) + '</h2>' +
-        tierPeers(d, t) });
+    L.push({ nav:'階級內比較', src:'need', srcNote:'<span class="k need">待補</span>今年消費金額、各階級 ARPU', html:
+      '<span class="eyebrow">同階級對照</span>' +
+      '<h2>' + t.name + '裡的人<br>平均花 NT$' + nf(t.arpu) + '</h2>' +
+      peerRows(d, t) +
+      '<p class="fine">比較對象是階級內與相鄰階級，不是全站。黑鑽 ARPU 是鉑金的 2.9 倍，全站平均對他們沒有資訊量。</p>' });
 
-      L.push({ nav: '花費換算 + 同比', lv: null, html:
-        head('花費 · 價值換算與同比', null) +
-        '<div class="bignum">' + nf(d.spend) + '<small>元</small></div>' +
-        yoyBlock(d.yoy, d.yoyLine) +
-        '<p class="fine">相當於少買了 ' + Math.round(d.spend / 800) + ' 件衣服。如果後悔，現在還來得及把學到的東西拿去賺回來。</p>' });
+    L.push({ nav:'你省下的', src:'have', srcNote:'<span class="k have">現成</span>聰明消費省的金額', html:
+      '<span class="eyebrow">聰明消費</span>' +
+      '<h2>' + t.name + '身份<br>幫你省下</h2>' +
+      '<div class="big">' + nf(d.saved) + '<small>元</small></div>' +
+      '<p>折價券、點數回饋、會員日優惠加總。這些錢沒有離開你，只是換成了課。</p>' +
+      '<p class="fine">學習軌跡頁已有此欄位。正向的金錢敘事，放在猜測卡之後當緩衝。</p>' });
+
+    L.push({ nav:'你今年看了多少', src:'have', srcNote:'<span class="k have">現成</span>內容數量、學習天數　<span class="k need">待補</span>月分佈', html:
+      '<span class="eyebrow">你的累積</span>' +
+      '<div class="big">' + d.contents + '<small>篇內容</small></div>' +
+      '<h2>在 ' + d.days + ' 天裡</h2>' +
+      '<p>平均每 <b>' + (d.days / d.contents).toFixed(1) + ' 天</b>，你就會打開一次 PPA。以這個頻率來看，我們不算普通朋友。</p>' +
+      monthChart(d) });
+
+    L.push({ nav:'學習人格', src:'have', srcNote:'<span class="k have">現成</span>學習時段（粗分類）　<span class="k need">待補</span>小時級分佈', html:
+      '<span class="eyebrow">你的學習人格</span>' +
+      '<h2>你是典型的<br>' + d.persona + '</h2>' +
+      '<div class="daypart">' + DAYPARTS.map(function(x, i){
+        return '<div class="' + (i === d.daypart ? 'on' : '') + '">' + x + '</div>';
+      }).join('') + '</div>' +
+      '<p>' + (d.daypart === 3 ? '大家睡著以後，你還在讀書。很抱歉，你的睡眠被學習打敗了。' : '別人午休在滑外送，你在滑新單元。便當很快就吃完，課程還看不完。') + '</p>' +
+      '<div class="cta"><button type="button">分享這張</button><button type="button" data-next="1">下一張</button></div>' });
+
+    L.push({ nav:'賭一把排名', src:'need', mech:'guessRank', pct:d.pct, rank:d.rank, srcNote:'<span class="k have">現成</span>內容數量　<span class="k need">待補</span>內容數量的百分位分佈', html:
+      '<span class="eyebrow">再猜一題</span>' +
+      '<h2>你覺得自己看的內容量<br>贏過站上多少人</h2>' +
+      '<div class="sval" id="rv">50%</div>' +
+      '<input class="slider" type="range" id="rs" min="0" max="99" step="1" value="50" aria-label="猜測百分位" />' +
+      '<div class="srange"><span>0%</span><span>99%</span></div>' +
+      '<div id="rr"></div>' +
+      '<div class="cta"><button class="go" id="rb" type="button">揭曉排名</button></div>' });
+
+    if (t.next){
+      var need = Math.max(0, t.nextNeed - d.cumulative);
+      L.push({ nav:'升級門檻', src:'need', srcNote:'<span class="k have">現成</span>階級　<span class="k need">待補</span>效期內累積消費', html:
+        '<span class="eyebrow">下一階</span>' +
+        '<h2>' + (need > 0 ? '再 NT$' + nf(need) + '<br>你就升' + t.next : '你已達' + t.next + '門檻') + '</h2>' +
+        '<div class="prog"><i style="width:' + Math.min(100, Math.round(d.cumulative / t.nextNeed * 100)) + '%"></i></div>' +
+        '<div class="proglab"><span>' + nf(d.cumulative) + '</span><span>' + nf(t.nextNeed) + '</span></div>' +
+        '<p>升上' + t.next + '會拿到：<b>' + TIERS[ORDER[ORDER.indexOf(d.tier) + 1]].benefit + '</b></p>' +
+        '<p class="fine">門檻是效期內累積，不是終身累積，而且升級與保級同值。</p>' +
+        '<div class="cta"><button class="go" type="button">看適合的課</button></div>' });
     } else {
-      L.push({ nav: '你的第一步', lv: null, html:
-        head('岩石階級 · 不談錢', null) +
-        '<h2>今年你來了 ' + d.days + ' 天</h2>' +
-        '<p>岩石階級佔全站 <b>67.6%</b>，將近 120 萬人。這一版完全不出現消費金額、不出現排名、不出現階級比較。</p>' +
-        yoyBlock(d.yoy, d.yoyLine) +
-        '<p class="fine">對還沒消費的人談錢或排名，回顧就變成催繳單。這是整個設計的底線。</p>' });
+      var gap = Math.max(0, 65000 - d.cumulative);
+      L.push({ nav:'保級提醒', src:'need', srcNote:'<span class="k have">現成</span>階級　<span class="k need">待補</span>效期內累積消費', html:
+        '<span class="eyebrow">效期到 2027 年 5 月</span>' +
+        '<h2>' + (gap > 0 ? '再 NT$' + nf(gap) + '<br>黑鑽就續到下一期' : '你的黑鑽<br>已經續到下一期') + '</h2>' +
+        '<div class="prog"><i style="width:' + Math.min(100, Math.round(d.cumulative / 65000 * 100)) + '%"></i></div>' +
+        '<div class="proglab"><span>' + nf(d.cumulative) + '</span><span>65,000</span></div>' +
+        '<p>距離效期結束還有 <b>5 個月</b>，還來得及。黑鑽沒有訂閱代保級的路徑，只能靠消費。</p>' +
+        '<p class="fine">提前五個月預警而不是事後通知。制度今年才上線，還沒有人被降級過，語氣不能用「你即將失去」。</p>' +
+        '<div class="cta"><button class="go" type="button">看適合的課</button></div>' });
     }
 
-    L.push({ nav: '學習時段', lv: 'l2', html:
-      head('學習時間 · 時段對照', 'l2') +
-      '<h2>你是典型的「' + d.persona + '」</h2>' +
-      clock(d.peakHour, t.name + '平均') +
-      '<p>你的學習幾乎都發生在 ' + d.peakLabel + '，綠線是同階級的人的平均。</p>' });
-
-    if (d.pct !== null){
-      L.push({ nav: '賭一把排名', lv: 'l1', mech: 'guessRank', pct: d.pct, rank: d.rank, pool: d.pool, html:
-        head('學習時間 · 賭一把排名', 'l1') +
-        '<h2>你覺得自己的學習量<br>贏過站上多少人</h2>' +
-        '<div class="guess">' +
-          '<span class="guess-val" id="rv">50%</span>' +
-          '<input type="range" id="rs" min="0" max="99" step="1" value="50" aria-label="猜測百分位" />' +
-          '<div class="guess-scale"><span>0%</span><span>99%</span></div>' +
-          '<div><button class="primary" id="rb" type="button">揭曉排名</button></div>' +
-        '</div>' +
-        '<div id="rr"></div>' });
-    }
-
-    // 門檻卡改用真實階級升級／保級門檻
-    if (!d.showSpend){
-      L.push({ nav: '下一步', lv: null, html:
-        head('門檻 · 岩石階級不談金額', null) +
-        '<h2>下一步不是花錢，<br>是看完一堂</h2>' +
-        '<p>' + d.cta + '。註冊禮的 50 元折價券還在，挑一堂 300 元以內的課就用得上。</p>' +
-        '<div class="tiers">' +
-          '<div class="tier low"><b>這一版拿掉什麼</b><em>消費金額、階級排名、升級門檻金額，全部不出現</em></div>' +
-          '<div class="tier mid"><b>留下什麼</b><em>上站天數、完成單元、去年的自己、老師、領域圖鑑</em></div>' +
-          '<div class="tier"><b>為什麼</b><em>岩石佔 67.6%。對還沒消費的人談錢，回顧就變成催繳單</em></div>' +
-        '</div>' });
-    } else if (t.next){
-      var nt = TIERS[Object.keys(TIERS).filter(function(k){ return TIERS[k].name === t.next; })[0]];
-      var need = t.nextNeed ? t.nextNeed - d.spend : null;
-      L.push({ nav: '升級門檻', lv: null, html:
-        head('門檻 · 真實階級升級', null) +
-        '<h2>' + (need === null ? '買第一堂課，<br>你就從岩石變青銅'
-                 : need > 0 ? '再 NT$ ' + nf(need) + '<br>你就升' + t.next
-                 : '你已達' + t.next + '門檻') + '</h2>' +
-        '<p>升上' + t.next + '之後你會拿到：<b>' + nt.benefit + '</b></p>' +
-        '<p class="fine">門檻規則：' + t.nextRule + '</p>' +
-        '<div class="tiers">' +
-          '<div class="tier"><b>為什麼不用百分位</b><em>「再 12 小時進前 5%」是抽象的，階級門檻是制度裡現成的，還附帶實質權益</em></div>' +
-          '<div class="tier mid"><b>注意：效期內累積，不是終身</b><em>白銀 7,500 / 鉑金 25,000 / 黑鑽 65,000，而且升級與保級同門檻，所以這張卡對每個人每年都會重新出現</em></div>' +
-          '<div class="tier low"><b>岩石階級看到</b><em>不顯示任何金額，只給「用註冊禮 50 元券挑一堂」</em></div>' +
-        '</div>' });
-    } else {
-      L.push({ nav: '保級提醒', lv: null, html:
-        head('門檻 · 黑鑽保級（提前 5 個月預警）', null) +
-        '<h2>' + (d.spend < 65000 ? '你的效期到 2027 年 5 月<br>目前還差 NT$ ' + nf(65000 - d.spend) : '你的黑鑽<br>已經續到下一個效期') + '</h2>' +
-        '<p>黑鑽保級門檻與升級同值：<b>效期內累積滿 NT$65,000</b>。' +
-        (d.spend < 65000 ? '你目前 ' + nf(d.spend) + '，距離效期結束還有 5 個月。' : '你目前 ' + nf(d.spend) + '，已經達標。') + '</p>' +
-        '<div class="tiers">' +
-          '<div class="tier"><b>時機是這張卡的關鍵</b><em>2026 年底發回顧，第一批效期 2027 年 5 月才到，等於提前 5 個月預警，來得及補</em></div>' +
-          '<div class="tier mid"><b>現在沒有人被降級過</b><em>制度 2026 年上線，第一個效期還沒走完，所以語氣要用「還來得及」，不能用「你即將失去」——用戶對降級還沒有實感，恐嚇只會顯得莫名其妙</em></div>' +
-          '<div class="tier low"><b>沒有 Plus 代保級</b><em>只有青銅升白銀可以用 Plus 年訂閱替代，黑鑽保級只能靠消費</em></div>' +
-        '</div>' });
-    }
-
-    L.push({ nav: '同班同學', lv: 'l2', html:
-      head('學習時間 · 你不是一個人', 'l2') +
+    L.push({ nav:'同班同學', src:'need', srcNote:'<span class="k need">待補</span>同課程人數、同班後續選課', html:
+      '<span class="eyebrow">你不是一個人</span>' +
       '<h2>今年和你同班的<br>有 ' + d.mates + ' 人</h2>' +
-      '<p>其中《' + esc(d.mateCourse) + '》是你們最多人重疊的一堂。你最常學習的那個時段，平均還有 <b>' + d.sameNight + ' 人</b>和你一起在線上。</p>' +
-      '<p><b>和你同班的人，接下來還上了這些——你還沒上：</b></p>' +
-      '<div class="courses">' + d.classmateNext.map(function(c){
-        return '<div><span>' + esc(c.n) + '<span class="meta">' + esc(c.m) + '</span></span><em>' + esc(c.tag) + '</em></div>';
+      '<p>《' + esc(d.mateCourse) + '》是你們最多人重疊的一堂。同班的人接下來還上了這些，你還沒上：</p>' +
+      courseList(d.classmateNext) +
+      '<p class="fine">壓力之後接同行感。推薦範圍從「同階級熱銷」縮到「同班同學」，更精準也更有說服力。</p>' });
+
+    L.push({ nav:'你的老師', src:'need', srcNote:'<span class="k need">待補</span>最常看的老師、學生內排名、未購課程', html:
+      '<span class="eyebrow">來電中</span>' +
+      '<div class="call"><span class="av" aria-hidden="true"></span><span class="nm">' + d.teacher + '</span><span class="st">Incoming</span></div>' +
+      '<p>他的內容你看了 <b>' + d.teacherContents + ' 篇</b>，在他 ' + d.teacherStudents + ' 位學生中排 <b>前 ' + d.teacherPct + '%</b>。看來他講的話，比你主管還有說服力。</p>' +
+      '<p class="fine">只能按接通，播完才進下一張。30 位老師 × 3 支 = 90 支影片的套版自動化要另外評估。</p>' +
+      '<div class="cta"><button class="go" type="button">接通</button></div>' });
+
+    L.push({ nav:'老師的其他課', src:'need', srcNote:'<span class="k need">待補</span>該老師未購課程清單', html:
+      '<span class="eyebrow">' + d.teacher + '</span>' +
+      '<h2>他還有 ' + d.unbought.length + ' 堂課<br>你還沒上</h2>' +
+      courseList(d.unbought) +
+      '<p class="fine">榮耀感接缺口，這張卡的轉換會是全頁最高的一張。' +
+      (t.next ? '標「可升級」的那堂金額剛好跨過下一階門檻。' : '標「預購」的用到黑鑽的 48 小時預購權，讓權益在回顧裡被看見。') + '</p>' });
+
+    L.push({ nav:'猜主戰場', src:'have', mech:'guessDex', top:d.topField, topCount:d.dex[0].c, srcNote:'<span class="k have">現成</span>最常學的領域　<span class="k need">待補</span>各子分類分佈', html:
+      '<span class="eyebrow">最後一題</span>' +
+      '<h2>猜猜你今年<br>投入最多的領域</h2>' +
+      '<div class="chips" id="dg">' + d.dex.slice(0, 4).map(function(x){
+        return '<button type="button" data-n="' + esc(x.n) + '">' + esc(x.n) + '</button>';
       }).join('') + '</div>' +
-      '<p class="fine">比「同階級熱銷」精準得多：同班是具體的共同經驗，不是抽象的消費級距。實作上就是把協同過濾的範圍從階級縮到同課程。</p>' });
-
-    L.push({ nav: '你的老師', lv: 'l2', html:
-      head('追蹤老師 · 學生中的位置', 'l2') +
-      '<h2>2026 聽說你最信 ' + d.teacher + '</h2>' +
-      '<p>他的課你看了 <b>' + d.teacherHours + ' 小時</b>' +
-      (d.teacherPct !== null ? '，在他 ' + d.teacherStudents + ' 位學生中你排 <b>前 ' + d.teacherPct + '%</b>' : '，他有 ' + d.teacherStudents + ' 位學生') +
-      '。看來他講的話，比你主管還有說服力。</p>' +
-      '<div class="clip"><span class="av" aria-hidden="true"></span><div><strong>' + d.teacher + ' 來電</strong><span>接通後播放老師的年度 Clips</span></div></div>' +
-      '<p class="fine">老師端也做一版回顧，讓他看到自己的 Top 學生。這是 L2、沒有隱私問題，而且老師會主動分享。</p>' });
-
-    L.push({ nav: '老師的其他課', lv: 'l2', html:
-      head('追蹤老師 · 你還沒上的', 'l2') +
-      '<h2>' + d.teacher + '還有 ' + d.unbought.length + ' 堂課<br>你還沒上</h2>' +
-      '<div class="courses">' + d.unbought.map(function(c){
-        return '<div><span>' + esc(c.n) + '<span class="meta">' + esc(c.m) + '</span></span><em>' + esc(c.tag) + '</em></div>';
-      }).join('') + '</div>' +
-      '<p class="fine">' + (t.next ? '標「可升級」的那堂是刻意挑的：金額剛好跨過下一階門檻。' : '標「預購」的用到黑鑽的 48 小時預購權，讓權益在回顧頁裡被看見。') + '</p>' });
-
-    L.push({ nav: '猜你的主戰場', lv: 'l1', mech: 'guessDex', top: d.dex[0].n, topCount: d.dex[0].c, html:
-      head('買課領域 · 猜了再揭曉', 'l1') +
-      '<h2>再猜一題。<br>你今年投入最多的領域是哪一個</h2>' +
-      '<div class="opts" id="dg">' +
-        d.dex.slice(0, 4).map(function(x){
-          return '<button type="button" data-n="' + esc(x.n) + '">' + esc(x.n) + '</button>';
-        }).join('') +
-      '</div>' +
       '<div id="dr"></div>' +
-      '<p class="fine">猜測機制的第三次使用，刻意放在圖鑑前面：先讓人押注，下一張揭曉才有張力。</p>' });
+      '<p class="fine">揭曉後接下一張的領域圖鑑。先押注，揭曉才有張力。</p>' });
 
-    L.push({ nav: '領域圖鑑', lv: 'l1', html:
-      head('買課領域 · 解鎖圖鑑', 'l1') +
-      '<h2>你今年解鎖了幾格</h2>' +
-      '<div class="dex">' + d.dex.map(function(x){
-        return '<div class="' + (x.own ? 'own' : x.gap ? 'gap' : '') + '"><b>' + (x.own ? x.c : x.gap ? '?' : '—') + '</b>' + esc(x.n) + '</div>';
-      }).join('') + '</div>' +
-      '<p>' + d.dexLine + '</p>' });
+    L.push({ nav:'領域圖鑑', src:'need', srcNote:'<span class="k have">現成</span>最常學的領域　<span class="k need">待補</span>各子分類分佈', html:
+      '<span class="eyebrow">你的圖鑑</span>' +
+      '<h2>八格解鎖了 ' + d.dex.filter(function(x){ return x.own; }).length + ' 格</h2>' +
+      dexGrid(d) +
+      '<p>虛線那格是你的缺口。和你同階級的人，多半也補了這一格。</p>' });
 
-    L.push({ nav: '同階級也在學', lv: 'l2', html:
-      head('買課領域 · 同階級也在學', 'l2') +
-      '<h2>和你同階級的 ' + d.twinCount + ' 人<br>最近都在上這堂</h2>' +
-      '<div class="courses"><div><span>' + esc(d.twinCourse) + '<span class="meta">' + t.name + '階級本季購買第 1 名</span></span><em>推薦</em></div></div>' +
-      '<p>協同過濾包裝成社交：不是系統推薦你，是跟你同階級的人已經在學了。</p>' +
-      '<p class="fine">沒有現成模型的話，第一版退成同階級熱銷排行，文案照樣成立。</p>' });
-
-    L.push({ nav: '收尾 CTA', lv: null, html:
-      head('卡 10 · 收尾與 CTA', null) +
-      '<h2>幫你設好第一個 2027 任務</h2>' +
-      '<p>' + d.cta + '。</p>' +
-      '<div class="facts"><span class="fact">立刻挑一堂</span><span class="fact">看年末策展排行榜</span></div>' });
+    L.push({ nav:'2027 承諾', src:'have', srcNote:'<span class="k have">現成</span>最常學的領域　<span class="k need">待補</span>推薦清單', html:
+      '<span class="eyebrow">2027</span>' +
+      '<h2>幫你設好<br>第一個 2027 任務</h2>' +
+      '<p>' + d.cta + '。我們依你的領域缺口和同班同學的後續，挑好了三堂。</p>' +
+      courseList(d.classmateNext.concat([{ n:'設計思考導論', m:'補上你唯一沒解鎖的那格', tag:'推薦' }])) +
+      '<div class="cta"><button class="go" type="button">立刻挑一堂</button><button type="button">看年末排行榜</button></div>' });
 
     return L;
   }
 
-  var card = document.getElementById('card');
+  var slide = document.getElementById('slide');
+  var segs = document.getElementById('segs');
   var nav = document.getElementById('nav');
-  var pips = document.getElementById('pips');
   var counter = document.getElementById('counter');
+  var srcbox = document.getElementById('srcbox');
   var tierRow = document.getElementById('tierRow');
-  var profRow = document.getElementById('profRow');
-  var S = [], i = 0, curKey = 'platinum-a', cur = P['platinum-a'], curTier = 'platinum';
+  var S = [], i = 0, cur = P.silver, curTier = 'silver';
 
   function initScene(s){
     if (s.mech === 'guessSpend'){
       var gs = document.getElementById('gs'), gv = document.getElementById('gv');
       var show = function(){ gv.textContent = 'NT$ ' + nf(+gs.value); };
-      gs.addEventListener('input', show);
-      show();
+      gs.addEventListener('input', show); show();
       document.getElementById('gb').addEventListener('click', function(){
-        var guess = +gs.value, real = cur.spend;
-        var diff = Math.round(Math.abs(real - guess) / Math.max(real, 1) * 100);
-        var word = guess < real ? '你猜低了' : '你猜高了';
+        var g = +gs.value, real = cur.spend;
+        var diff = Math.round(Math.abs(real - g) / Math.max(real, 1) * 100);
         document.getElementById('gr').innerHTML =
-          '<div class="verdict"><strong>實際是 NT$ ' + nf(real) + '</strong>' +
-          (diff === 0 ? '你對自己的投入掌握得很清楚。' : word + ' ' + diff + '%。' +
-            (guess < real ? '你花掉的比你以為的更多——但那些都還在你身上。' : '你比自己想像的更節制。')) +
-          '</div>' + tierChart(cur.tier, null);
+          '<div class="verdict"><strong>實際是 NT$' + nf(real) + '</strong><span>' +
+          (diff === 0 ? '你對自己的投入掌握得很清楚。'
+            : (g < real ? '你猜低了 ' + diff + '%。你花掉的比你以為的更多——但那些都還在你身上。'
+                        : '你猜高了 ' + diff + '%。你比自己想像的更節制。')) +
+          '</span></div>';
       });
     }
     if (s.mech === 'guessRank'){
@@ -851,11 +508,10 @@
       document.getElementById('rb').addEventListener('click', function(){
         var g = +rs.value, real = s.pct;
         document.getElementById('rr').innerHTML =
-          '<div class="verdict"><strong>你其實贏過全站 ' + real + '% 的會員</strong>' +
-          (g < real ? '你猜 ' + g + '%，低估了自己 ' + (real - g) + ' 個百分點。' : g > real ? '你猜 ' + g + '%，比實際高了 ' + (g - real) + ' 個百分點。' : '你完全猜中了。') +
-          '</div>' +
-          '<p><b>' + s.pool + ' 位會員裡，你大約排第 ' + s.rank + ' 名。</b></p>' +
-          '<p class="fine">放心，這種打敗別人的方式很健康。</p>';
+          '<div class="verdict"><strong>你贏過 ' + real + '% 的會員</strong><span>' +
+          (g < real ? '你猜 ' + g + '%，低估了自己 ' + (real - g) + ' 個百分點。'
+            : g > real ? '你猜 ' + g + '%，比實際高了 ' + (g - real) + ' 個百分點。' : '你完全猜中了。') +
+          ' 57.2 萬位青銅以上會員裡，你排第 ' + s.rank + ' 名。放心，這種打敗別人的方式很健康。</span></div>';
       });
     }
     if (s.mech === 'guessDex'){
@@ -870,86 +526,78 @@
             o.disabled = true;
           });
           document.getElementById('dr').innerHTML =
-            '<div class="verdict"><strong>' + (right ? '猜對了，是「' + esc(s.top) + '」' : '其實是「' + esc(s.top) + '」') + '</strong>' +
+            '<div class="verdict"><strong>' + (right ? '猜對了，是「' + esc(s.top) + '」' : '其實是「' + esc(s.top) + '」') + '</strong><span>' +
             (right ? '你很清楚自己在往哪裡走，這一格你累積了 ' + s.topCount + ' 堂。'
                    : '你以為是「' + esc(g) + '」，但你的錢其實花在「' + esc(s.top) + '」上，共 ' + s.topCount + ' 堂。實際選擇比印象更集中。') +
-            '</div>';
+            '</span></div>';
         });
       });
     }
-  }
-
-  function buildProfileRow(){
-    profRow.innerHTML = '';
-    var lbl = document.createElement('span');
-    lbl.className = 'lbl';
-    lbl.textContent = '輪廓';
-    profRow.appendChild(lbl);
-    PROFILES[curTier].forEach(function(k){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = P[k].tierNote;
-      b.setAttribute('aria-pressed', k === curKey ? 'true' : 'false');
-      b.addEventListener('click', function(){ i = 0; load(k); });
-      profRow.appendChild(b);
-    });
+    var nb = slide.querySelector('[data-next]');
+    if (nb) nb.addEventListener('click', function(){ go(i + 1); });
   }
 
   function load(k){
-    curKey = k;
+    curTier = k;
     cur = P[k];
-    curTier = cur.tier;
     Array.prototype.forEach.call(tierRow.querySelectorAll('button'), function(b){
-      b.setAttribute('aria-pressed', b.getAttribute('data-t') === curTier ? 'true' : 'false');
+      b.setAttribute('aria-pressed', b.getAttribute('data-t') === k ? 'true' : 'false');
     });
-    buildProfileRow();
     S = scenes(cur);
     nav.innerHTML = '';
-    pips.innerHTML = '';
+    segs.innerHTML = '';
     S.forEach(function(s, n){
       var li = document.createElement('li');
       var b = document.createElement('button');
       b.type = 'button';
-      b.innerHTML = '<span>' + s.nav + '</span>' + (s.lv ? '<span class="lv ' + s.lv + '">' + s.lv.toUpperCase() + '</span>' : '');
+      b.innerHTML = '<span>' + s.nav + '</span><span class="src ' + s.src + '">' + (s.src === 'have' ? '現成' : '待補') + '</span>';
       b.addEventListener('click', function(){ go(n); });
       li.appendChild(b);
       nav.appendChild(li);
-      pips.appendChild(document.createElement('i'));
+      segs.appendChild(document.createElement('i'));
     });
     go(Math.min(i, S.length - 1));
   }
 
   function go(n){
     i = (n + S.length) % S.length;
-    card.innerHTML = S[i].html;
+    slide.innerHTML = S[i].html;
     counter.textContent = (i + 1) + ' / ' + S.length;
     Array.prototype.forEach.call(nav.querySelectorAll('li > button'), function(b, m){
       b.setAttribute('aria-current', m === i ? 'true' : 'false');
     });
-    Array.prototype.forEach.call(pips.children, function(p, m){
-      p.className = m === i ? 'on' : '';
+    Array.prototype.forEach.call(segs.children, function(p, m){
+      p.className = m <= i ? 'on' : '';
     });
+    srcbox.innerHTML = '<div><b>第 ' + (i + 1) + ' 張 · ' + S[i].nav + '</b></div><div>' + S[i].srcNote + '</div>';
     initScene(S[i]);
   }
 
-  TIER_ORDER.forEach(function(k){
+  ORDER.forEach(function(k){
     var b = document.createElement('button');
     b.type = 'button';
     b.setAttribute('data-t', k);
     b.textContent = TIERS[k].name + ' ' + TIERS[k].share + '%';
-    b.addEventListener('click', function(){ i = 0; load(PROFILES[k][0]); });
+    b.addEventListener('click', function(){ i = 0; load(k); });
     tierRow.appendChild(b);
   });
 
-  document.getElementById('next').addEventListener('click', function(){ go(i + 1); });
-  document.getElementById('prev').addEventListener('click', function(){ go(i - 1); });
   document.addEventListener('keydown', function(e){
     if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
-    if (e.key === 'ArrowRight') go(i + 1);
-    if (e.key === 'ArrowLeft') go(i - 1);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(i - 1);
   });
 
-  load('platinum-a');
+  var sy = null;
+  slide.addEventListener('touchstart', function(e){ sy = e.touches[0].clientY; }, { passive:true });
+  slide.addEventListener('touchend', function(e){
+    if (sy === null) return;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dy) > 60) go(dy < 0 ? i + 1 : i - 1);
+    sy = null;
+  }, { passive:true });
+
+  load('silver');
 </script>
 
 </body>
